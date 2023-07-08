@@ -1,11 +1,11 @@
 .header {
   background: #202020;
+  padding: 0 70px;
 }
 
 .navbar__ul {
   list-style-type: none;
-
-  margin: 0 70px;
+  margin: 0;
   padding: 18px 0;
   display: flex;
   align-items: center;
@@ -40,6 +40,17 @@
     }
     .navbar__link_to_root {
       display: flex;
+    }
+    .header {
+      padding: 0 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header {
+      padding: 0 14px;
     }
 }
 

@@ -3,6 +3,8 @@ import './Header.css';
 import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
+import Burger from '../Burger/Burger';
+
 interface HeaderProps {
   isAuthorized: boolean;
 }
@@ -71,6 +73,7 @@ export default function Header({ isAuthorized }: HeaderProps) {
           )}
         </ul>
       </nav>
+      <Burger openPopup={() => {}}/>
     </header>
   );
 }
