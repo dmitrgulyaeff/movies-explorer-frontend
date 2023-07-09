@@ -7,6 +7,10 @@
   border: none;
 }
 
+.burger:hover .burger__slice {
+  background-color: #3DDC84;
+}
+
 .burger__menu {
   display: flex;
   flex-direction: column;
@@ -19,7 +23,7 @@
   background-color: #FFF;
   width: 28px;
   height: 3px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 @media screen and (max-width: 320px) {
