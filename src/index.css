@@ -4,6 +4,8 @@
 
 body {
   font-family: Inter;
+  background-color: #202020;
+  min-width: 320px;
 }
 
 a {
