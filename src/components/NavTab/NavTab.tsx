@@ -1,8 +1,21 @@
 import './NavTab.css';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { NavLink } from 'react-router-dom';
 
 export default function NavTab() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash){
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   return (
     <section className="navtab">
       <h1 className="navtab__topic">
