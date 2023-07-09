@@ -4,12 +4,13 @@ import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 import Burger from '../Burger/Burger';
+import { AuthorizedContext } from '../../Contexts';
+import { useContext } from 'react';
 
-interface HeaderProps {
-  isAuthorized: boolean;
-}
 
-export default function Header({ isAuthorized }: HeaderProps) {
+export default function Header() {
+  const {isAuthorized} = useContext(AuthorizedContext)
+
   const { pathname } = useLocation();
 
   const savedFilmsStylesClass = classNames(
@@ -73,7 +74,7 @@ export default function Header({ isAuthorized }: HeaderProps) {
           )}
         </ul>
       </nav>
-      <Burger openPopup={() => {}}/>
+      <Burger/>
     </header>
   );
 }

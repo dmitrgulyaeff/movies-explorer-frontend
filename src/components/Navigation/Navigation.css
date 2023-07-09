@@ -20,9 +20,14 @@
 }
 
 .aside {
+  transform: translateX(20%);
   background-color: #202020;
   width: min(100%, 520px);
   height: 100%;
+  transition: transform 250ms;
+}
+.aside_opened{
+  transform: translateX(0);
 }
 
 .aside__nav{
@@ -110,5 +115,11 @@
   .aside__nav{
     height: calc(100% - 114px - 46px);
     margin: 114px 0 46px 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .popup {
+    display: none;
   }
 }

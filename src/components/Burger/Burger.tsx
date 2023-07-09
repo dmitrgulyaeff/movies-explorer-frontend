@@ -1,14 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { PopupContext } from '../../Contexts';
 import './Burger.css';
 
 import classNames from 'classnames';
 
-interface BurgerProps {
-  openPopup: (x: boolean) => void;
-}
 
-export default function Burger({ openPopup }: BurgerProps) {
-  const [isActive, setActive] = useState(false);
+
+export default function Burger() {
+  const {isPopupOpened: isActive, setPopupOpened: setActive} = useContext(PopupContext);
 
   const burgerStylesClass = classNames('burger__menu', {burger__menu_active: isActive});
   const firstStylesClass = classNames('burger__slice burger__slice_pos_first', {burger__slice_pos_first_active: isActive});
@@ -18,7 +17,6 @@ export default function Burger({ openPopup }: BurgerProps) {
 
   const burgerHandler = () => {
     setActive(!isActive);
-    openPopup(!isActive);
   }
 
   return (
