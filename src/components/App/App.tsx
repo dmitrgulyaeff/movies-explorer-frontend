@@ -5,6 +5,7 @@ import Navigation from '../Navigation/Navigation'
 import { useState } from 'react'
 import { Route, Routes } from 'react-router'
 import Main from '../Main/Main'
+import Movies from '../Movies/Movies'
 import Footer from '../Footer/Footer'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Main/>}/>
+          <Route path='/movies' element={<Movies/>}/>
         </Routes>
         <Footer />
       </AuthorizedContext.Provider>
