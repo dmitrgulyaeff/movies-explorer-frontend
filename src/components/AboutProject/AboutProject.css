@@ -86,7 +86,7 @@
   grid-area: description-second;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .project {
     padding: 90px 50px;
   }

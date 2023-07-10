@@ -62,6 +62,9 @@
   font-weight: 500;
   line-height: normal;
 }
+.student__github-link:hover {
+  color: #3DDC84;;
+}
 
 .student__resume-avatar {
   grid-area: avatar;
@@ -72,7 +75,7 @@
   border-radius: 10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .student {
     padding: 90px 50px;
   }
@@ -101,7 +104,7 @@
 
 @media screen and (max-width: 500px) {
   .student {
-    padding: 90px 50px;
+    padding: 70px 14px;
   }
 
   .student__resume {
