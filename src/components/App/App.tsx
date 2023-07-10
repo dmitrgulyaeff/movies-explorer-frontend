@@ -5,6 +5,7 @@ import Navigation from '../Navigation/Navigation'
 import { useState } from 'react'
 import { Route, Routes } from 'react-router'
 import Main from '../Main/Main'
+import Footer from '../Footer/Footer'
 
 export default function App() {
   const [isPopupOpened, setPopupOpened] = useState(false); 
@@ -17,6 +18,7 @@ export default function App() {
         <Routes>
           <Route path='/' element={<Main/>}/>
         </Routes>
+        <Footer />
       </AuthorizedContext.Provider>
     </PopupContext.Provider>
   )
