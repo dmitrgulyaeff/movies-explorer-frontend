@@ -1,5 +1,5 @@
 .project {
-  margin: 110px 70px;
+  padding: 110px 70px;
 }
 .project__topic {
   margin: 0;
@@ -88,7 +88,7 @@
 
 @media screen and (max-width: 768px) {
   .project {
-    margin: 90px 50px;
+    padding: 90px 50px;
   }
   .project__descriptions {
     column-gap: 30px;
@@ -104,7 +104,7 @@
 
 @media screen and (max-width: 500px) {
   .project {
-    margin: 70px 18px;
+    padding: 70px 18px;
   }
 
   .project__line {
