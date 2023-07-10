@@ -9,7 +9,7 @@
   padding: 18px 0;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .navbar__li_to_profile {
