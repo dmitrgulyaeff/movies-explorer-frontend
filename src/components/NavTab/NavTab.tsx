@@ -1,20 +1,20 @@
 import './NavTab.css';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useContext } from 'react';
+import { PathnameContext } from '../../Contexts';
 
 import { NavLink } from 'react-router-dom';
 
 export default function NavTab() {
-  const location = useLocation();
+  const { hash } = useContext(PathnameContext);
 
   useEffect(() => {
-    if (location.hash){
-      const element = document.querySelector(location.hash);
+    if (hash) {
+      const element = document.querySelector(hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
-  }, [location]);
+  }, [hash]);
 
   return (
     <section className="navtab">

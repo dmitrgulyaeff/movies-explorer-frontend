@@ -23,8 +23,13 @@ interface CurrentUserContextType {
   user?: User;
 }
 
+interface PathnameContextType {
+  pathname: string,
+  hash: string
+}
 
 export const PopupContext = createContext<PopupContextType>({} as PopupContextType);
 export const AuthorizedContext = createContext<AuthorizedContextType>({} as AuthorizedContextType);
 export const MoviesContext = createContext<MoviesContextType>({} as MoviesContextType);
 export const CurrentUserContext = createContext<CurrentUserContextType>({} as CurrentUserContextType);
+export const PathnameContext = createContext<PathnameContextType>({} as PathnameContextType)

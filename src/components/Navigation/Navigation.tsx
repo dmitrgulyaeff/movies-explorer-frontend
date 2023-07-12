@@ -1,7 +1,7 @@
 import './Navigation.css';
-import { PopupContext, AuthorizedContext } from '../../Contexts';
+import { PopupContext, AuthorizedContext, PathnameContext } from '../../Contexts';
 import { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 interface NavigationProps {}
@@ -10,7 +10,7 @@ export default function Navigation(props: NavigationProps) {
   const {isPopupOpened, setPopupOpened } = useContext(PopupContext);
   const {isAuthorized } = useContext(AuthorizedContext);
   
-  const { pathname } = useLocation();
+  const { pathname } = useContext(PathnameContext);
 
   const rootStylesClass = classNames('aside__nav-link', {'aside__nav-link_active' : pathname === '/'})
   const moviesStylesClass = classNames('aside__nav-link', {'aside__nav-link_active' : pathname === '/movies'})

@@ -1,17 +1,16 @@
 import './Header.css';
-
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import Burger from '../Burger/Burger';
-import { AuthorizedContext } from '../../Contexts';
+import { AuthorizedContext, PathnameContext } from '../../Contexts';
 import { useContext } from 'react';
 
 
 export default function Header() {
   const {isAuthorized} = useContext(AuthorizedContext)
 
-  const { pathname } = useLocation();
+  const { pathname } = useContext(PathnameContext);
 
   const savedFilmsStylesClass = classNames(
     'navbar__link navbar__link_to_movies',

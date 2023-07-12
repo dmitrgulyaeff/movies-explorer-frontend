@@ -1,8 +1,10 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { PathnameContext } from '../../Contexts';
+import { useContext } from 'react';
 import './Footer.css';
 
 export default function Footer() {
-  const { pathname } = useLocation();
+  const { pathname } = useContext(PathnameContext);
   const allowedPaths: string[] = ['/', '/movies', '/saved-movies'];
 
   if (!allowedPaths.includes(pathname)) {

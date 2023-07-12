@@ -1,16 +1,19 @@
 import './App.css';
-import { PopupContext, AuthorizedContext, MoviesContext, CurrentUserContext } from '../../Contexts';
+import { PopupContext, AuthorizedContext, MoviesContext, CurrentUserContext, PathnameContext } from '../../Contexts';
 import { Movie } from '../../utils/types';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Footer from '../Footer/Footer';
 import mainApi from '../../utils/MainApi';
 
 export default function App() {
+  const { pathname, hash } = useLocation();
+
   const [isPopupOpened, setPopupOpened] = useState(false);
   const [isAuthorized, setAuthorized] = useState<boolean>();
   const [yaMovies, setYaMovies] = useState<Movie[]>();
@@ -40,6 +43,7 @@ export default function App() {
       <AuthorizedContext.Provider value={{ isAuthorized, setAuthorized }}>
         <MoviesContext.Provider value={{yaMovies, setYaMovies, savedMovies, setSavedMovies}}>
           <CurrentUserContext.Provider value={currentUser}>
+            <PathnameContext.Provider value={{pathname, hash}}>
             <Navigation />
             <Header />
             <Routes>
@@ -47,6 +51,7 @@ export default function App() {
               <Route path="/movies" element={<Movies />} />
             </Routes>
             <Footer />
+            </PathnameContext.Provider>
           </CurrentUserContext.Provider>
         </MoviesContext.Provider>
       </AuthorizedContext.Provider>
