@@ -49,6 +49,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/movies" element={<Movies />} />
+              <Route path="/saved-movies" element={<Movies />} />
             </Routes>
             <Footer />
             </PathnameContext.Provider>

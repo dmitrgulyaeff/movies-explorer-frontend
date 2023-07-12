@@ -2,7 +2,11 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useContext, useEffect } from 'react';
-import { MoviesContext, CurrentUserContext } from '../../Contexts';
+import {
+  MoviesContext,
+  CurrentUserContext,
+  PathnameContext,
+} from '../../Contexts';
 import fetchYaMovies from '../../utils/fetchYaMovies';
 import fetchSavedMovies from '../../utils/fetchSavedMovies';
 
@@ -10,31 +14,35 @@ export default function Movies() {
   const { savedMovies, setSavedMovies, setYaMovies } =
     useContext(MoviesContext);
   const { user } = useContext(CurrentUserContext);
+  const { pathname } = useContext(PathnameContext);
 
   useEffect(() => {
+    async function setSavedDataMovies() {
+      const dataSavedMovies = await fetchSavedMovies();
+      if (!dataSavedMovies) {
+        //TODO: «Ничего не найдено» ошибка получения сохраненных
+        setSavedMovies([]);
+        return;
+      }
+      setSavedMovies(dataSavedMovies);
+    }
+
     async function setNormalizedYaMovies() {
       if (user) {
-        let convertedMovies;
-        let dataSavedMovies;
-
         if (!savedMovies) {
-          [convertedMovies, dataSavedMovies] = await Promise.all([
-            fetchYaMovies(),
-            fetchSavedMovies(),
-          ]);
-        } else {
-          convertedMovies = await fetchYaMovies();
-          dataSavedMovies = savedMovies;
+          setSavedDataMovies()
+          return
         }
 
-        if (!convertedMovies || !dataSavedMovies) {
-          //TODO: «Ничего не найдено»
+        const convertedMovies = await fetchYaMovies();
+        if (!convertedMovies) {
+          //TODO: «Ничего не найдено» ошибка получения от Яндекса
           setYaMovies([]);
           return;
         }
 
         const idSavedMovies = new Set(
-          dataSavedMovies.map((m) => {
+          savedMovies.map((m) => {
             if (m.owner._id === user._id) {
               return m.movieId;
             }
@@ -52,11 +60,15 @@ export default function Movies() {
       }
     }
 
-    setNormalizedYaMovies();
-  }, [savedMovies, setSavedMovies, setYaMovies, user]);
+    if (pathname === '/movies') {
+      setNormalizedYaMovies();
+    } else if (pathname === '/saved-movies' && !savedMovies) {
+      setSavedDataMovies();
+    }
+  }, [pathname, savedMovies, setSavedMovies, setYaMovies, user]);
 
   return (
-    <main className="main_route_movies">
+    <main className="main__movies">
       <SearchForm />
       <MoviesCardList />
     </main>

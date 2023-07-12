@@ -1,15 +1,15 @@
-.main_route_movies {
+.main__movies {
   padding: 0 70px;
 }
 
 @media screen and (max-width: 900px) {
-  .main_route_movies {
+  .main__movies {
     padding: 0 30px;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .main_route_movies {
+  .main__movies {
     padding: 0 10px;
   }
 }
