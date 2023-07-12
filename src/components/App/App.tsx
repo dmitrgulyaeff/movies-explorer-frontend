@@ -1,6 +1,6 @@
 import './App.css';
 import { PopupContext, AuthorizedContext, MoviesContext, CurrentUserContext } from '../../Contexts';
-import { MovieMyApi, MovieYaApi, User } from '../../utils/types';
+import { Movie } from '../../utils/types';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import { useState, useEffect } from 'react';
@@ -13,8 +13,8 @@ import mainApi from '../../utils/MainApi';
 export default function App() {
   const [isPopupOpened, setPopupOpened] = useState(false);
   const [isAuthorized, setAuthorized] = useState<boolean>();
-  const [yaMovies, setYaMovies] = useState<MovieYaApi[]>();
-  const [savedMovies, setSavedMovies] = useState<MovieMyApi[]>();
+  const [yaMovies, setYaMovies] = useState<Movie[]>();
+  const [savedMovies, setSavedMovies] = useState<Movie[]>();
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {

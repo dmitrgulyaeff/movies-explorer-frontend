@@ -1,16 +1,18 @@
-export interface MovieMyApi {
+export interface Movie {
   country: string;
   director: string;
   duration: number;
   year: string;
   description: string;
-  image: string;
   trailerLink: string;
-  thumbnail: string;
-  owner: { _id: string };
-  movieId: number;
   nameRU: string;
   nameEN: string;
+  
+  image: string;
+  thumbnail: string;
+  movieId: number;
+  
+  owner: { _id: string };
 }
 
 export interface MovieYaApi {
@@ -19,17 +21,24 @@ export interface MovieYaApi {
   duration: number;
   year: string;
   description: string;
-  image: {
-    url: string;
-  };
   trailerLink: string;
-  thumbnail: { image: { formats: { thumbnail: { url: string } } } };
-  id: number;
   nameRU: string;
   nameEN: string;
+  
+  image: {
+    url: string,
+    formats: { thumbnail: { url: string } }
+  };
+  id: number;
 }
 
 export interface User {
+  _id: string;
+  email: string;
+  name: string;
+}
+
+export interface UserRegistration {
   email: string;
   password: string;
   name: string;

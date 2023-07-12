@@ -1,5 +1,5 @@
 import { baseUrlMyApi } from "./constants";
-import { User, UserAuthorization, UserUpdate } from "./types";
+import { UserRegistration, UserAuthorization, UserUpdate } from "./types";
 
 interface Movie {
   country: string;
@@ -22,7 +22,7 @@ class MainApi {
     this.baseUrl = url;
   }
 
-  async signup(user: User): Promise<Response> {
+  async signup(user: UserRegistration): Promise<Response> {
     const response = await fetch(`${this.baseUrl}/signup`, {
       method: 'POST',
       headers: {

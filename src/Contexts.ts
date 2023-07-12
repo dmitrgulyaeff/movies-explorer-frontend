@@ -1,6 +1,6 @@
 import {createContext } from 'react';
 import { User } from './utils/types';
-import { MovieMyApi, MovieYaApi } from './utils/types';
+import { Movie } from './utils/types';
 interface PopupContextType {
   isPopupOpened: boolean;
   setPopupOpened: (x: boolean) => void;
@@ -13,10 +13,10 @@ interface AuthorizedContextType {
 
 
 interface MoviesContextType {
-  savedMovies: MovieMyApi[] | undefined;
-  yaMovies: MovieYaApi[] | undefined;
-  setYaMovies: (x: MovieYaApi[]) => void;
-  setSavedMovies: (x: MovieMyApi[]) => void;
+  savedMovies: Movie[] | undefined;
+  yaMovies: Movie[] | undefined;
+  setYaMovies: (x: Movie[]) => void;
+  setSavedMovies: (x: Movie[]) => void;
 }
 
 interface CurrentUserContextType {
