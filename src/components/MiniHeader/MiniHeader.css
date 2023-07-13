@@ -1,0 +1,20 @@
+.mini-head {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.mini-head__logo {
+  width: 38px;
+  aspect-ratio: 1;
+}
+
+.mini-head__topic {
+  margin: 0;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
