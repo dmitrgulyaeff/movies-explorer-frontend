@@ -1,0 +1,84 @@
+.form {
+  flex-grow: 1;
+  margin: 40px 0 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.form__input {
+
+}
+
+.form__input-name {
+  margin: 0;
+  color: #8B8B8B;
+  font-size: 10px;
+  line-height: normal;
+}
+
+.form__input-input {
+  width: 100%;
+  margin: 5px 0 0;
+  padding: 0 0 10px;
+  outline: 0;
+  border: none;
+  border-bottom: solid 1px #424242;
+  background-color: transparent;
+}
+
+.form__input-input,  .form__input-input::placeholder {
+  color: #FFF;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.form__input-input:focus-visible {
+  border-bottom: solid 1px #4285F4;
+}
+
+.form__input-input__failed {
+  color: #EE3465;
+  border-bottom: solid 1px #EE3465;
+}
+
+.form__input-input__failed:focus-visible {
+  border-bottom: solid 1px #EE3465;
+}
+
+.form__input-error {
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.form__btn-submit {
+  border: none;
+  padding: 0;
+  margin: auto 0 0;
+
+  width: 100%;
+  height: 45px;
+
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  border-radius: 3px;
+  background: #4285F4;
+}
+
+.form__btn-submit:not(:disabled):hover {
+  cursor: pointer;
+  background: #4271f4;
+}
+
+.form__btn-submit:disabled {
+  background: #9bb9e9;
+}
+
