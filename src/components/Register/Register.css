@@ -1,0 +1,9 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 396px;
+  height: 100vh;
+  padding: 70px 0;
+  margin: 0 auto;
+}
