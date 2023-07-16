@@ -3,11 +3,10 @@
   margin: 40px 0 0;
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
 }
 
 .form__input {
-
+  margin-bottom: 24px;
 }
 
 .form__input-name {
@@ -25,6 +24,9 @@
   border: none;
   border-bottom: solid 1px #424242;
   background-color: transparent;
+}
+.form__input-input::-ms-reveal {
+  filter: invert(100%);
 }
 
 .form__input-input,  .form__input-input::placeholder {
@@ -82,3 +84,25 @@
   background: #9bb9e9;
 }
 
+.form__redirect-offer {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 6px;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.form__redirect-offer_el_question {
+  margin: 0;
+  color: #8B8B8B;
+}
+
+.form__redirect-offer_el_link{
+  color: #4285F4
+}

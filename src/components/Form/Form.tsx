@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import './Form.css';
 import { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 interface FormProps {
   children: JSX.Element[];
@@ -109,11 +110,27 @@ Form.Input = function FormInput({
 interface FormSubmitBottomProps {
   text: string;
 }
+
 Form.SubmitBottom = function SubmitBottom({ text }: FormSubmitBottomProps) {
   const { isValid } = useContext(FormContext);
   return (
     <button className="form__btn-submit" type="submit" disabled={!isValid}>
       {text}
     </button>
+  );
+};
+
+interface RedirectOfferProps {
+  offerText: string;
+  linkText: string;
+  linkTo: string;
+}
+
+Form.RedirectOffer  = function RedirectOffer({ offerText, linkText, linkTo }: RedirectOfferProps) {
+  return (
+    <div className="form__redirect-offer">
+      <p className='form__redirect-offer_el_question'>{offerText}</p>
+      <Link className='form__redirect-offer_el_link' to={linkTo}>{linkText}</Link>
+    </div>
   );
 };
