@@ -10,6 +10,7 @@ interface FormProps {
 }
 
 interface FormContextType {
+  error: string;
   isValid: boolean;
   formState: object;
   setFormState: (state: object) => void;
@@ -17,6 +18,7 @@ interface FormContextType {
   setValidState: (state: object) => void;
 }
 const FormContext = React.createContext<FormContextType>({
+  error: '',
   isValid: false,
   formState: {},
   setFormState: () => {},
@@ -25,6 +27,7 @@ const FormContext = React.createContext<FormContextType>({
 });
 
 export default function Form({ children, onSubmit }: FormProps) {
+  const [error, setError] = useState('');
   const [formState, setFormState] = useState<object>({});
   const [validState, setValidState] = useState<object>({});
   const [isValid, setIsValid] = useState(false);
@@ -34,16 +37,22 @@ export default function Form({ children, onSubmit }: FormProps) {
     setIsValid(isValid);
   }, [children.length, validState]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isValid) {
-      onSubmit(formState);
+      try {
+        await onSubmit(formState);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(String(err.message))
+        }
+      }
     }
   };
 
   return (
     <FormContext.Provider
-      value={{ formState, setFormState, validState, setValidState, isValid }}
+      value={{ error, formState, setFormState, validState, setValidState, isValid }}
     >
       <form className="form" onSubmit={handleSubmit}>
         {children}
@@ -59,6 +68,7 @@ interface FormInputProps {
   minLength: number;
   maxLength: number;
   required: boolean;
+  autoComplete? : string;
 }
 
 Form.Input = function FormInput({
@@ -68,6 +78,7 @@ Form.Input = function FormInput({
   minLength,
   maxLength,
   required,
+  autoComplete
 }: FormInputProps) {
   const { formState, setFormState, validState, setValidState } =
     React.useContext(FormContext);
@@ -101,6 +112,7 @@ Form.Input = function FormInput({
         required={required}
         minLength={minLength}
         maxLength={maxLength}
+        autoComplete={autoComplete}
       />
       <p className="form__input-error">{error}</p>
     </div>
@@ -118,6 +130,10 @@ Form.SubmitBottom = function SubmitBottom({ text }: FormSubmitBottomProps) {
       {text}
     </button>
   );
+};
+Form.ResponseError  = function ResponseError() {
+  const { error } = useContext(FormContext);
+    return (<p className="form__response-error">{error}</p> )
 };
 
 interface RedirectOfferProps {
