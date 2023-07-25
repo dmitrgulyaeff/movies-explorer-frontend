@@ -1,5 +1,12 @@
 import './App.css';
-import { PopupContext, AuthorizedContext, MoviesContext, CurrentUserContext, PathnameContext } from '../../Contexts';
+import {
+  PopupContext,
+  AuthorizedContext,
+  MoviesContext,
+  CurrentUserContext,
+  PathnameContext,
+  TokenContext,
+} from '../../Contexts';
 import { Movie } from '../../utils/types';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
@@ -17,49 +24,57 @@ export default function App() {
   const { pathname, hash } = useLocation();
 
   const [isPopupOpened, setPopupOpened] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [isAuthorized, setAuthorized] = useState<boolean>(false);
   const [yaMovies, setYaMovies] = useState<Movie[]>();
   const [savedMovies, setSavedMovies] = useState<Movie[]>();
   const [currentUser, setCurrentUser] = useState({});
 
-  useEffect(() => {
-    async function checkAuthorization () {
-      if (!isAuthorized) { 
-        // одним запросом два зайца, проверяю токен + получаю инфу о пользователе
-        const response = await mainApi.getUser();
-        if (response.ok) {
-          setAuthorized(true);
-          const responseData = await response.json();
-          setCurrentUser({user: responseData})
-        } else {
-          setAuthorized(false);
-        }
-      }
+  async function checkAuthorization(token: string) {
+    await localStorage.setItem('token', token);
+    // одним запросом два зайца, проверяю токен + получаю инфу о пользователе
+    const response = await mainApi.getUser();
+    if (response.ok) {
+      setAuthorized(true);
+      const responseData = await response.json();
+      setCurrentUser({ user: responseData });
+    } else {
+      setAuthorized(false);
     }
-    checkAuthorization()
-  }, [isAuthorized])
+  }
 
+  useEffect(() => {
+    if (token) {
+      checkAuthorization(token);
+    } else {
+      setAuthorized(false);
+    }
+  }, [token]);
 
   return (
-    <PopupContext.Provider value={{ isPopupOpened, setPopupOpened }}>
-      <AuthorizedContext.Provider value={{ isAuthorized, setAuthorized }}>
-        <MoviesContext.Provider value={{yaMovies, setYaMovies, savedMovies, setSavedMovies}}>
-          <CurrentUserContext.Provider value={currentUser}>
-            <PathnameContext.Provider value={{pathname, hash}}>
-              <Navigation />
-              <Header />
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/movies" element={<Movies />} />
-                <Route path="/saved-movies" element={<Movies />} />
-                <Route path="/signup" element={<Register />} />
-                <Route path="/signin" element={<Login />} />
-              </Routes>
-              <Footer />
-            </PathnameContext.Provider>
-          </CurrentUserContext.Provider>
-        </MoviesContext.Provider>
-      </AuthorizedContext.Provider>
-    </PopupContext.Provider>
+    <TokenContext.Provider value={{ setToken }}>
+      <PopupContext.Provider value={{ isPopupOpened, setPopupOpened }}>
+        <AuthorizedContext.Provider value={{ isAuthorized, setAuthorized }}>
+          <MoviesContext.Provider
+            value={{ yaMovies, setYaMovies, savedMovies, setSavedMovies }}
+          >
+            <CurrentUserContext.Provider value={currentUser}>
+              <PathnameContext.Provider value={{ pathname, hash }}>
+                <Navigation />
+                <Header />
+                <Routes>
+                  <Route path="/" element={<Main />} />
+                  <Route path="/movies" element={<Movies />} />
+                  <Route path="/saved-movies" element={<Movies />} />
+                  <Route path="/signup" element={<Register />} />
+                  <Route path="/signin" element={<Login />} />
+                </Routes>
+                <Footer />
+              </PathnameContext.Provider>
+            </CurrentUserContext.Provider>
+          </MoviesContext.Provider>
+        </AuthorizedContext.Provider>
+      </PopupContext.Provider>
+    </TokenContext.Provider>
   );
 }

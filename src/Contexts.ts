@@ -11,6 +11,11 @@ interface AuthorizedContextType {
   setAuthorized: (x: boolean) => void;
 }
 
+interface TokenContextType {
+  // token: string | null;
+  setToken: (x: string) => void;
+}
+
 
 interface MoviesContextType {
   savedMovies: Movie[] | undefined;
@@ -33,3 +38,4 @@ export const AuthorizedContext = createContext<AuthorizedContextType>({} as Auth
 export const MoviesContext = createContext<MoviesContextType>({} as MoviesContextType);
 export const CurrentUserContext = createContext<CurrentUserContextType>({} as CurrentUserContextType);
 export const PathnameContext = createContext<PathnameContextType>({} as PathnameContextType)
+export const TokenContext = createContext<TokenContextType>({} as TokenContextType)

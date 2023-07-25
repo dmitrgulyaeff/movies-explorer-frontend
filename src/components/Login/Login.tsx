@@ -2,12 +2,14 @@ import './Login.css';
 import MiniHeader from '../MiniHeader/MiniHeader';
 import Form from '../Form/Form';
 import mainApi from '../../utils/MainApi';
+import { TokenContext } from '../../Contexts';
 import { UserAuthorization } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 
 export default function Login() {
   const navigation = useNavigate();
-
+  const { setToken } = useContext(TokenContext)
   return (
     <main className="login">
       <MiniHeader hello="Рады видеть!" />
@@ -18,7 +20,7 @@ export default function Login() {
           const data = await response.json();
           if (response.ok) {
             const { token } = data;
-            await localStorage.setItem('token', token);
+            await setToken(token);
             navigation('/movies')
           } else {
             const { message } = data;
