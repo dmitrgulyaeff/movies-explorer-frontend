@@ -17,7 +17,7 @@ export default function App() {
   const { pathname, hash } = useLocation();
 
   const [isPopupOpened, setPopupOpened] = useState(false);
-  const [isAuthorized, setAuthorized] = useState<boolean>();
+  const [isAuthorized, setAuthorized] = useState<boolean>(false);
   const [yaMovies, setYaMovies] = useState<Movie[]>();
   const [savedMovies, setSavedMovies] = useState<Movie[]>();
   const [currentUser, setCurrentUser] = useState({});
@@ -46,16 +46,16 @@ export default function App() {
         <MoviesContext.Provider value={{yaMovies, setYaMovies, savedMovies, setSavedMovies}}>
           <CurrentUserContext.Provider value={currentUser}>
             <PathnameContext.Provider value={{pathname, hash}}>
-            <Navigation />
-            <Header />
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/movies" element={<Movies />} />
-              <Route path="/saved-movies" element={<Movies />} />
-              <Route path="/signup" element={<Register />} />
-              <Route path="/signin" element={<Login />} />
-            </Routes>
-            <Footer />
+              <Navigation />
+              <Header />
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/movies" element={<Movies />} />
+                <Route path="/saved-movies" element={<Movies />} />
+                <Route path="/signup" element={<Register />} />
+                <Route path="/signin" element={<Login />} />
+              </Routes>
+              <Footer />
             </PathnameContext.Provider>
           </CurrentUserContext.Provider>
         </MoviesContext.Provider>
