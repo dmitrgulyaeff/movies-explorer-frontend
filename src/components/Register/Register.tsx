@@ -67,6 +67,7 @@ export default function Register() {
           maxLength={30}
           required={true}
         />
+        <Form.ResponseError />
         <Form.SubmitBottom text="Зарегистрироваться" />
         <Form.RedirectOffer
           offerText="Уже зарегистрированы?"
