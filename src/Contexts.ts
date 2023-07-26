@@ -25,7 +25,8 @@ interface MoviesContextType {
 }
 
 interface CurrentUserContextType {
-  user?: User;
+  currentUser: User;
+  setCurrentUser: (x: User) => void;
 }
 
 interface PathnameContextType {

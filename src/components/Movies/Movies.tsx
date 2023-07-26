@@ -13,7 +13,7 @@ import fetchSavedMovies from '../../utils/fetchSavedMovies';
 export default function Movies() {
   const { savedMovies, setSavedMovies, setYaMovies } =
     useContext(MoviesContext);
-  const { user } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const { pathname } = useContext(PathnameContext);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Movies() {
     }
 
     async function setNormalizedYaMovies() {
-      if (user) {
+      if (currentUser) {
         if (!savedMovies) {
           setSavedDataMovies()
           return
@@ -43,7 +43,7 @@ export default function Movies() {
 
         const idSavedMovies = new Set(
           savedMovies.map((m) => {
-            if (m.owner._id === user._id) {
+            if (m.owner._id === currentUser._id) {
               return m.movieId;
             }
             return undefined;
@@ -52,7 +52,7 @@ export default function Movies() {
 
         const yaMoviesWithLikes = convertedMovies.map((movie) => {
           if (idSavedMovies.has(movie.movieId)) {
-            movie.owner._id = user._id;
+            movie.owner._id = currentUser._id;
           }
           return movie;
         });
@@ -65,7 +65,7 @@ export default function Movies() {
     } else if (pathname === '/saved-movies' && !savedMovies) {
       setSavedDataMovies();
     }
-  }, [pathname, savedMovies, setSavedMovies, setYaMovies, user]);
+  }, [pathname, savedMovies, setSavedMovies, setYaMovies, currentUser]);
 
   return (
     <main className="main__movies">

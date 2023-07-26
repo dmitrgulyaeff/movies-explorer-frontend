@@ -9,14 +9,14 @@ import { useContext } from 'react';
 export default function MoviesCardList() {
   const { savedMovies, yaMovies } = useContext(MoviesContext);
   const { pathname } = useContext(PathnameContext);
-  const { user } = useContext(CurrentUserContext)
+  const { currentUser } = useContext(CurrentUserContext)
 
   return (
     <section className='movies'>
       {pathname === '/movies' &&
-        (yaMovies ? yaMovies.map((movie) => MoviesCard({movie, user, pathname})) : <Preloader />)}
+        (yaMovies ? yaMovies.map((movie) => MoviesCard({movie, user: currentUser, pathname})) : <Preloader />)}
       {pathname === '/saved-movies' &&
-        (savedMovies ? savedMovies.map((movie) => MoviesCard({movie, user, pathname})) : <Preloader />)}
+        (savedMovies ? savedMovies.map((movie) => MoviesCard({movie, user: currentUser, pathname})) : <Preloader />)}
     </section>
   );
 }

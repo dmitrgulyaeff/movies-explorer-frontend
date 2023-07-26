@@ -7,7 +7,7 @@ import {
   PathnameContext,
   TokenContext,
 } from '../../Contexts';
-import { Movie } from '../../utils/types';
+import { Movie, User } from '../../utils/types';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import { useState, useEffect } from 'react';
@@ -28,7 +28,7 @@ export default function App() {
   const [isAuthorized, setAuthorized] = useState<boolean>(false);
   const [yaMovies, setYaMovies] = useState<Movie[]>();
   const [savedMovies, setSavedMovies] = useState<Movie[]>();
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState<User>({'_id': '', 'email': '', 'name': ''});
 
   async function checkAuthorization(token: string) {
     await localStorage.setItem('token', token);
@@ -36,8 +36,8 @@ export default function App() {
     const response = await mainApi.getUser();
     if (response.ok) {
       setAuthorized(true);
-      const responseData = await response.json();
-      setCurrentUser({ user: responseData });
+      const responseData = await response.json() as User;
+      setCurrentUser({ ...responseData });
     } else {
       setAuthorized(false);
     }
@@ -58,7 +58,7 @@ export default function App() {
           <MoviesContext.Provider
             value={{ yaMovies, setYaMovies, savedMovies, setSavedMovies }}
           >
-            <CurrentUserContext.Provider value={currentUser}>
+            <CurrentUserContext.Provider value={{currentUser, setCurrentUser}}>
               <PathnameContext.Provider value={{ pathname, hash }}>
                 <Navigation />
                 <Header />
