@@ -3,13 +3,16 @@
   background-color: #222;
   filter: drop-shadow(0px 16px 24px rgba(0, 0, 0, 0.05));
   grid-template-columns: 1fr min-content;
-  grid-template-areas: 'image image'
+  grid-template-areas: 'link link'
   'name like'
   'duration like';
 }
 
+.movie__link {
+  grid-area: link;
+}
+
 .movie__image {
-  grid-area: image;
   width: 100%;
   aspect-ratio: 1.8;
 }
