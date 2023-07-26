@@ -20,8 +20,10 @@ export default function Login() {
           const data = await response.json();
           if (response.ok) {
             const { token } = data;
-            await setToken(token);
-            navigation('/movies')
+            setToken(token);
+            setTimeout(() => {
+              navigation('/movies')
+            }, 0)
           } else {
             const { message } = data;
             if (message) {
