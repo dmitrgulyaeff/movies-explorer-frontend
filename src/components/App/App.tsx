@@ -19,6 +19,7 @@ import Footer from '../Footer/Footer';
 import mainApi from '../../utils/MainApi';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 
 export default function App() {
   const { pathname, hash } = useLocation();
@@ -30,6 +31,15 @@ export default function App() {
   const [savedMovies, setSavedMovies] = useState<Movie[]>();
   const [currentUser, setCurrentUser] = useState<User>({'_id': '', 'email': '', 'name': ''});
 
+  const resetStates = () => {
+    setPopupOpened(false);
+    setToken(localStorage.getItem('token'));
+    setAuthorized(false);
+    setYaMovies(undefined);
+    setSavedMovies(undefined);
+    setCurrentUser({'_id': '', 'email': '', 'name': ''});
+  }
+
   async function checkAuthorization(token: string) {
     await localStorage.setItem('token', token);
     // одним запросом два зайца, проверяю токен + получаю инфу о пользователе
@@ -37,7 +47,7 @@ export default function App() {
     if (response.ok) {
       setAuthorized(true);
       const responseData = await response.json() as User;
-      setCurrentUser({ ...responseData });
+      setCurrentUser(responseData);
     } else {
       setAuthorized(false);
     }
@@ -68,6 +78,7 @@ export default function App() {
                   <Route path="/saved-movies" element={<Movies />} />
                   <Route path="/signup" element={<Register />} />
                   <Route path="/signin" element={<Login />} />
+                  <Route path="/profile" element={<Profile  resetStates={resetStates} />} />
                 </Routes>
                 <Footer />
               </PathnameContext.Provider>

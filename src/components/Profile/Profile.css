@@ -1,0 +1,123 @@
+.profile {
+  height: calc(100vh - 74px);
+  box-sizing: border-box;
+  padding: 70px 0;
+  margin: 0 auto;
+
+  max-width: 410px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile__topic {
+  margin: 0;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.profile__button-exit {
+  margin-top: 16px;
+  color: #EE3465;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  font-size: 13px;
+  line-height: normal;
+  font-weight: 500;
+}
+
+.profile__button-exit:hover {
+  cursor: pointer;
+  color: #a6143b;
+}
+
+.profile__form {
+  margin-top: 123px;
+  
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.profile__form-input {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-areas: "label input"
+  "error error";
+}
+.profile__form-input-name, 
+.profile__form-input-input {
+  margin: 0;
+  white-space: nowrap;
+
+  padding-right: 10px;
+
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: normal;
+}
+.profile__form-input-name {
+  grid-area: label;
+}
+
+.profile__form-input-input {
+  grid-area: input;
+  border: none;
+  border-bottom: solid 1px rgba(66, 133, 244, 0.6);
+  box-sizing: border-box;
+  padding: 0;
+  background-color: transparent;
+  text-align: right;
+  outline: none;
+}
+.profile__form-input:last-of-type {
+  margin-bottom: auto;
+}
+.profile__form-input-input:disabled {
+  border-bottom: solid 1px transparent;
+}
+.profile__form-input-input__failed {
+  color: #EE3465;
+  border-bottom: solid 1px #EE3465;
+}
+
+.profile__form-input-error {
+  grid-area: error;
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  line-height: normal;
+}
+
+
+.profile__form-btn{
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #FFF;
+  text-align: center;
+  font-size: 13px;
+  line-height: normal;
+}
+
+.profile__form-btn:disabled{
+  color: grey;
+}
+
+.profile__form-btn:disabled:hover{
+  cursor: default;
+  color: grey;
+}
+
+.profile__form-btn:hover{
+  cursor: pointer;
+  color: #3DDC84;
+}
