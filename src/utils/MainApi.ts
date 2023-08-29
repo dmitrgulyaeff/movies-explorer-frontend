@@ -1,19 +1,5 @@
 import { baseUrlMyApi } from "./constants";
-import { UserRegistration, UserAuthorization, UserUpdate } from "./types";
-
-interface Movie {
-  country: string;
-  director: string;
-  duration: number;
-  year: number;
-  description: string;
-  image: string;
-  trailer: string;
-  nameRU: string;
-  nameEN: string;
-  thumbnail: string;
-  movieId: number;
-}
+import { UserRegistration, UserAuthorization, UserUpdate, Movie } from "./types";
 
 class MainApi {
   private baseUrl: string;

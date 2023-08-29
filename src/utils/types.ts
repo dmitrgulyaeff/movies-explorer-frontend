@@ -15,6 +15,10 @@ export interface Movie {
   owner: { _id: string };
 }
 
+export interface MovieBd extends Movie {
+  _id: string;
+}
+
 export interface MovieYaApi {
   country: string;
   director: string;

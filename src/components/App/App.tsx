@@ -7,7 +7,7 @@ import {
   PathnameContext,
   TokenContext,
 } from '../../Contexts';
-import { Movie, User } from '../../utils/types';
+import { Movie, MovieBd, User } from '../../utils/types';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import { useState, useEffect } from 'react';
@@ -27,16 +27,16 @@ export default function App() {
   const [isPopupOpened, setPopupOpened] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [isAuthorized, setAuthorized] = useState<boolean>(false);
-  const [yaMovies, setYaMovies] = useState<Movie[]>();
-  const [savedMovies, setSavedMovies] = useState<Movie[]>();
+  const [yaMovies, setYaMovies] = useState<Movie[]>([]);
+  const [savedMovies, setSavedMovies] = useState<MovieBd[]>([]);
   const [currentUser, setCurrentUser] = useState<User>({'_id': '', 'email': '', 'name': ''});
 
   const resetStates = () => {
     setPopupOpened(false);
     setToken(localStorage.getItem('token'));
     setAuthorized(false);
-    setYaMovies(undefined);
-    setSavedMovies(undefined);
+    setYaMovies([]);
+    setSavedMovies([]);
     setCurrentUser({'_id': '', 'email': '', 'name': ''});
   }
 
