@@ -1,5 +1,10 @@
-import { baseUrlMyApi } from "./constants";
-import { UserRegistration, UserAuthorization, UserUpdate, Movie, createMovie } from "./types";
+import { baseUrlMyApi } from './constants';
+import {
+  UserRegistration,
+  UserAuthorization,
+  UserUpdate,
+  createMovie,
+} from './types';
 
 class MainApi {
   private baseUrl: string;
@@ -8,94 +13,56 @@ class MainApi {
     this.baseUrl = url;
   }
 
-  async signup(user: UserRegistration): Promise<Response> {
-    const response = await fetch(`${this.baseUrl}/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
+  private async sendRequest(url: string, method: string, body?: object) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    const options: RequestInit = {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    };
+
+    const response = await fetch(`${this.baseUrl}${url}`, options);
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
 
     return response;
   }
 
-  async signin(user: UserAuthorization): Promise<Response> {
-    const response = await fetch(`${this.baseUrl}/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-
-    return response;
+  async signup(user: UserRegistration) {
+    return this.sendRequest('/signup', 'POST', user);
   }
 
-  async getUser(): Promise<Response> {
-    const response = await fetch(`${this.baseUrl}/users/me`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-
-    return response;
+  async signin(user: UserAuthorization) {
+    return this.sendRequest('/signin', 'POST', user);
   }
 
-  async updateUser(user: UserUpdate): Promise<Response> {
-    const response = await fetch(`${this.baseUrl}/users/me`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
-      body: JSON.stringify(user),
-    });
-
-    return response;
+  async getUser() {
+    return this.sendRequest('/users/me', 'GET');
   }
 
-  async getMovies(): Promise<Response> {
-    const response = await fetch(`${this.baseUrl}/movies`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-
-    return response;
+  async updateUser(user: UserUpdate) {
+    return this.sendRequest('/users/me', 'PATCH', user);
   }
 
-  async createMovie(movie: createMovie): Promise<Response> {
-    const response = await fetch(`${this.baseUrl}/movies`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
-      body: JSON.stringify(movie),
-    });
-
-    return response;
+  async getMovies() {
+    return this.sendRequest('/movies', 'GET');
   }
 
-  async deleteMovie(movieId: string): Promise<Response> {
-    const response = await fetch(`${this.baseUrl}/movies/${movieId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
+  async createMovie(movie: createMovie) {
+    return this.sendRequest('/movies', 'POST', movie);
+  }
 
-    return response;
+  async deleteMovie(movieId: string) {
+    return this.sendRequest(`/movies/${movieId}`, 'DELETE');
   }
 }
-const mainApi = new MainApi(
-  baseUrlMyApi
-);
+
+const mainApi = new MainApi(baseUrlMyApi);
 
 export default mainApi;
