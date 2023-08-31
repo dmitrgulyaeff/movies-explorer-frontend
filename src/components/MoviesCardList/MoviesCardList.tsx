@@ -73,8 +73,9 @@ export default function MoviesCardList() {
     });
   };
 
+  //TODO: rename
   const Movie = (movie: Movie) => {
-    const isLiked = currentUser._id === movie.owner;
+    const isLiked = !!movie?.owner;
     const handleLike = isLiked ? dislikeCard : likeCard;
     return MoviesCard({ movie, handleLike, isLiked, pathname });
   };

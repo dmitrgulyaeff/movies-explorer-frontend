@@ -16,11 +16,12 @@ export interface createMovie extends baseMovie {
 }
 
 export interface Movie extends createMovie{
-  owner: string;
+  owner?: string;
 }
 
 export interface MovieBd extends Movie {
   _id: string;
+  owner: string;
 }
 
 export interface MovieYaApi extends baseMovie { 
