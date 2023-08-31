@@ -1,13 +1,13 @@
 import './MoviesCard.css';
 
-import { Movie } from '../../utils/types';
+import { WebMovie } from '../../utils/types';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 interface MoviesCardProps {
-  movie: Movie;
+  movie: WebMovie;
   isLiked: boolean;
-  handleLike: (movie: Movie) => void;
+  handleLike: (movie: WebMovie) => void;
   pathname: string;
 }
 

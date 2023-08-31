@@ -9,7 +9,7 @@ import {
   CurrentUserContext,
 } from '../../Contexts';
 import { useContext } from 'react';
-import { Movie, MovieBd } from '../../utils/types';
+import { WebMovie, BdMovie } from '../../utils/types';
 import mainApi from '../../utils/MainApi';
 
 export default function MoviesCardList() {
@@ -18,7 +18,7 @@ export default function MoviesCardList() {
     useContext(MoviesContext);
   const { pathname } = useContext(PathnameContext);
 
-  const dislikeCard = async (movie: Movie) => {
+  const dislikeCard = async (movie: WebMovie) => {
     if (savedMovies) {
       const savedMovie = savedMovies.find(
         (movieBd) => movieBd.movieId === movie.movieId
@@ -27,12 +27,12 @@ export default function MoviesCardList() {
         const response = await mainApi.deleteMovie(savedMovie._id.toString());
         if (response.ok) {
           const data = await response.json();
-          const { _id, movieId } = data as MovieBd;
+          const { _id, movieId } = data as BdMovie;
           const newSavedMovies = savedMovies.filter(
             (sMovie) => sMovie._id !== _id
           );
           setSavedMovies(newSavedMovies);
-          setYaMovies((prevState: Movie[] | undefined) => {
+          setYaMovies((prevState: WebMovie[] | undefined) => {
             if (prevState !== undefined) {
               const updatedYaMovie = prevState.find(
                 (movie) => movie.movieId === movieId
@@ -48,19 +48,19 @@ export default function MoviesCardList() {
     }
   };
 
-  const likeCard = async (movie: Movie) => {
+  const likeCard = async (movie: WebMovie) => {
     const { owner, ...crMovie } = movie;
     const response = await mainApi.createMovie(crMovie);
-    const data = (await response.json()) as MovieBd;
+    const data = (await response.json()) as BdMovie;
     // TODO: исправить типы MovieBd owner: { _id: string };
     // data.owner = {_id: JSON.stringify(data.owner).split('').filter(char => char !== `"`).join('')};
-    await setSavedMovies((prevState: MovieBd[] | undefined) => {
+    await setSavedMovies((prevState: BdMovie[] | undefined) => {
       if (prevState !== undefined) {
         return [...prevState, data];
       }
     });
 
-    setYaMovies((prevState: Movie[] | undefined) => {
+    setYaMovies((prevState: WebMovie[] | undefined) => {
       if (prevState !== undefined) {
         const updatedYaMovie = prevState.find(
           (movie) => movie.movieId === data.movieId
@@ -74,7 +74,7 @@ export default function MoviesCardList() {
   };
 
   //TODO: rename
-  const Movie = (movie: Movie) => {
+  const Movie = (movie: WebMovie) => {
     const isLiked = !!movie?.owner;
     const handleLike = isLiked ? dislikeCard : likeCard;
     return MoviesCard({ movie, handleLike, isLiked, pathname });

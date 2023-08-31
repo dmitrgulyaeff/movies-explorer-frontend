@@ -1,7 +1,7 @@
-import { MovieYaApi, Movie } from './types';
+import { YaApiMovie, WebMovie } from './types';
 import { baseUrlYaApi } from './constants';
 
-export default function convertMovie(movie: MovieYaApi): Movie {
+export default function convertMovie(movie: YaApiMovie): WebMovie {
   return {
     country: movie.country,
     director: movie.director,

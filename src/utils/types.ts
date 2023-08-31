@@ -15,16 +15,16 @@ export interface createMovie extends baseMovie {
   movieId: number;
 }
 
-export interface Movie extends createMovie{
+export interface WebMovie extends createMovie{
   owner?: string;
 }
 
-export interface MovieBd extends Movie {
+export interface BdMovie extends WebMovie {
   _id: string;
   owner: string;
 }
 
-export interface MovieYaApi extends baseMovie { 
+export interface YaApiMovie extends baseMovie { 
   image: {
     url: string,
     formats: { thumbnail: { url: string } }
