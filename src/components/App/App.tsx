@@ -27,8 +27,8 @@ export default function App() {
   const [isPopupOpened, setPopupOpened] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [isAuthorized, setAuthorized] = useState<boolean>(false);
-  const [yaMovies, setYaMovies] = useState<Movie[]>([]);
-  const [savedMovies, setSavedMovies] = useState<MovieBd[]>([]);
+  const [yaMovies, setYaMovies] = useState<Movie[]>();
+  const [savedMovies, setSavedMovies] = useState<MovieBd[]>();
   const [currentUser, setCurrentUser] = useState<User>({'_id': '', 'email': '', 'name': ''});
 
   const resetStates = () => {

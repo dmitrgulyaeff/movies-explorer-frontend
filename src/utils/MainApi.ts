@@ -1,5 +1,5 @@
 import { baseUrlMyApi } from "./constants";
-import { UserRegistration, UserAuthorization, UserUpdate, Movie } from "./types";
+import { UserRegistration, UserAuthorization, UserUpdate, Movie, createMovie } from "./types";
 
 class MainApi {
   private baseUrl: string;
@@ -69,7 +69,7 @@ class MainApi {
     return response;
   }
 
-  async createMovie(movie: Movie): Promise<Response> {
+  async createMovie(movie: createMovie): Promise<Response> {
     const response = await fetch(`${this.baseUrl}/movies`, {
       method: 'POST',
       headers: {

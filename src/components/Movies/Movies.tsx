@@ -11,32 +11,22 @@ import fetchYaMovies from '../../utils/fetchYaMovies';
 import fetchSavedMovies from '../../utils/fetchSavedMovies';
 
 export default function Movies() {
-  const { savedMovies, setSavedMovies, setYaMovies } =
+  const { savedMovies, setSavedMovies, yaMovies, setYaMovies } =
     useContext(MoviesContext);
   const { currentUser } = useContext(CurrentUserContext);
   const { pathname } = useContext(PathnameContext);
 
   useEffect(() => {
-    async function setSavedDataMovies() {
-      const dataSavedMovies = await fetchSavedMovies();
-      if (!dataSavedMovies) {
-        //TODO: «Ничего не найдено» ошибка получения сохраненных
-        setSavedMovies([]);
-        return;
-      }
-      setSavedMovies(dataSavedMovies);
-    }
-
     async function setNormalizedYaMovies() {
       if (currentUser) {
         if (!savedMovies) {
-          setSavedDataMovies()
-          return
+          await setSavedDataMovies();
+          return;
         }
 
         const convertedMovies = await fetchYaMovies();
         if (!convertedMovies) {
-          //TODO: «Ничего не найдено» ошибка получения от Яндекса
+          // TODO: «Ничего не найдено» ошибка получения от Яндекса
           setYaMovies([]);
           return;
         }
@@ -60,12 +50,33 @@ export default function Movies() {
       }
     }
 
-    if (pathname === '/movies') {
-      setNormalizedYaMovies();
-    } else if (pathname === '/saved-movies' && !savedMovies) {
-      setSavedDataMovies();
+    async function setSavedDataMovies() {
+      const dataSavedMovies = await fetchSavedMovies();
+      if (!dataSavedMovies) {
+        // TODO: «Ничего не найдено» ошибка получения сохраненных
+        setSavedMovies([]);
+        return;
+      }
+      setSavedMovies(dataSavedMovies);
     }
-  }, [pathname, savedMovies, setSavedMovies, setYaMovies, currentUser]);
+
+    async function fetchData() {
+      if (pathname === '/movies' && !yaMovies) {
+        await setNormalizedYaMovies();
+      } else if (pathname === '/saved-movies' && !savedMovies) {
+        await setSavedDataMovies();
+      }
+    }
+
+    fetchData();
+  }, [
+    pathname,
+    savedMovies,
+    setSavedMovies,
+    setYaMovies,
+    currentUser,
+    yaMovies,
+  ]);
 
   return (
     <main className="main__movies">

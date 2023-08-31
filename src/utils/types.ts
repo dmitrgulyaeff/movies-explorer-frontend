@@ -15,6 +15,21 @@ export interface Movie {
   owner: { _id: string };
 }
 
+export interface createMovie {
+  country: string;
+  director: string;
+  duration: number;
+  year: string;
+  description: string;
+  trailerLink: string;
+  nameRU: string;
+  nameEN: string;
+  
+  image: string;
+  thumbnail: string;
+  movieId: number;
+}
+
 export interface MovieBd extends Movie {
   _id: string;
 }

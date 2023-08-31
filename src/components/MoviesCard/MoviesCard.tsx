@@ -1,13 +1,13 @@
 import './MoviesCard.css';
 
-import { User } from '../../utils/types';
 import { Movie } from '../../utils/types';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 interface MoviesCardProps {
   movie: Movie;
-  user?: User;
+  isLiked: boolean;
+  handleLike: (movie: Movie) => void;
   pathname: string;
 }
 
@@ -17,15 +17,15 @@ const minutesToString = (minutes: number) => {
   return `${!!hh ? hh + 'ч' : ''}${mm + 'м'}`;
 };
 
-export default function MoviesCard({ movie, user, pathname }: MoviesCardProps) {
-  const { image, nameRU, duration, movieId, owner, trailerLink } = movie;
+export default function MoviesCard({ movie, isLiked, handleLike, pathname }: MoviesCardProps) {
+  const { image, nameRU, duration, movieId, trailerLink } = movie;
   const btnClass = classNames(
     { 'movie__btn-like': pathname === '/movies' },
     {
       'movie__btn-like_active':
-        user && pathname === '/movies' && user._id === owner._id,
+        pathname === '/movies' && isLiked,
     },
-    { 'movie__btn-cross': user && pathname === '/saved-movies' }
+    { 'movie__btn-cross': pathname === '/saved-movies' }
   );
 
   return (
@@ -35,7 +35,7 @@ export default function MoviesCard({ movie, user, pathname }: MoviesCardProps) {
       </Link>
       <h4 className="movie__name">{nameRU}</h4>
       <p className="movie__duration">{minutesToString(duration)}</p>
-      <button className={btnClass} />
+      <button className={btnClass} onClick={() => handleLike(movie)}/>
     </article>
   );
 }

@@ -1,6 +1,6 @@
-import {createContext } from 'react';
+import { createContext } from 'react';
 import { User } from './utils/types';
-import { Movie } from './utils/types';
+import { Movie, MovieBd } from './utils/types';
 interface PopupContextType {
   isPopupOpened: boolean;
   setPopupOpened: (x: boolean) => void;
@@ -17,19 +17,20 @@ interface TokenContextType {
 }
 
 
-interface MoviesContextType {
-  savedMovies: Movie[] | undefined;
+export interface MoviesContextType {
+  savedMovies: MovieBd[] | undefined;
   yaMovies: Movie[] | undefined;
-  setYaMovies: (x: Movie[]) => void;
-  setSavedMovies: (x: Movie[]) => void;
+  setYaMovies: React.Dispatch<React.SetStateAction<Movie[] | undefined>>;
+  setSavedMovies: React.Dispatch<React.SetStateAction<MovieBd[] | undefined>>
+  ;
 }
 
-interface CurrentUserContextType {
+export interface CurrentUserContextType {
   currentUser: User;
   setCurrentUser: (x: User) => void;
 }
 
-interface PathnameContextType {
+export interface PathnameContextType {
   pathname: string,
   hash: string
 }
