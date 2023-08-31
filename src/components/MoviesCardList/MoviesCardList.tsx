@@ -38,7 +38,7 @@ export default function MoviesCardList() {
                 (movie) => movie.movieId === movieId
               );
               if (updatedYaMovie) {
-                updatedYaMovie.owner._id = '';
+                updatedYaMovie.owner = '';
                 return prevState;
               }
             }
@@ -53,7 +53,7 @@ export default function MoviesCardList() {
     const response = await mainApi.createMovie(crMovie);
     const data = (await response.json()) as MovieBd;
     // TODO: исправить типы MovieBd owner: { _id: string };
-    data.owner = {_id: JSON.stringify(data.owner).split('').filter(char => char !== `"`).join('')};
+    // data.owner = {_id: JSON.stringify(data.owner).split('').filter(char => char !== `"`).join('')};
     await setSavedMovies((prevState: MovieBd[] | undefined) => {
       if (prevState !== undefined) {
         return [...prevState, data];
@@ -66,7 +66,7 @@ export default function MoviesCardList() {
           (movie) => movie.movieId === data.movieId
         );
         if (updatedYaMovie) {
-          updatedYaMovie.owner._id = currentUser._id;
+          updatedYaMovie.owner = currentUser._id;
           return prevState;
         }
       }
@@ -74,7 +74,7 @@ export default function MoviesCardList() {
   };
 
   const Movie = (movie: Movie) => {
-    const isLiked = currentUser._id === movie.owner._id;
+    const isLiked = currentUser._id === movie.owner;
     const handleLike = isLiked ? dislikeCard : likeCard;
     return MoviesCard({ movie, handleLike, isLiked, pathname });
   };

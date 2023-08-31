@@ -33,7 +33,7 @@ export default function Movies() {
 
         const idSavedMovies = new Set(
           savedMovies.map((m) => {
-            if (m.owner._id === currentUser._id) {
+            if (m.owner === currentUser._id) {
               return m.movieId;
             }
             return undefined;
@@ -42,7 +42,7 @@ export default function Movies() {
 
         const yaMoviesWithLikes = convertedMovies.map((movie) => {
           if (idSavedMovies.has(movie.movieId)) {
-            movie.owner._id = currentUser._id;
+            movie.owner = currentUser._id;
           }
           return movie;
         });

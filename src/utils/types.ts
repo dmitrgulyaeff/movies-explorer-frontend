@@ -1,4 +1,4 @@
-export interface Movie {
+interface baseMovie {
   country: string;
   director: string;
   duration: number;
@@ -7,43 +7,23 @@ export interface Movie {
   trailerLink: string;
   nameRU: string;
   nameEN: string;
-  
-  image: string;
-  thumbnail: string;
-  movieId: number;
-  
-  owner: { _id: string };
 }
 
-export interface createMovie {
-  country: string;
-  director: string;
-  duration: number;
-  year: string;
-  description: string;
-  trailerLink: string;
-  nameRU: string;
-  nameEN: string;
-  
+export interface createMovie extends baseMovie {
   image: string;
   thumbnail: string;
   movieId: number;
+}
+
+export interface Movie extends createMovie{
+  owner: string;
 }
 
 export interface MovieBd extends Movie {
   _id: string;
 }
 
-export interface MovieYaApi {
-  country: string;
-  director: string;
-  duration: number;
-  year: string;
-  description: string;
-  trailerLink: string;
-  nameRU: string;
-  nameEN: string;
-  
+export interface MovieYaApi extends baseMovie { 
   image: {
     url: string,
     formats: { thumbnail: { url: string } }

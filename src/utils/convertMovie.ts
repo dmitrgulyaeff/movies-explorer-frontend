@@ -14,6 +14,6 @@ export default function convertMovie(movie: MovieYaApi): Movie {
     image: baseUrlYaApi + movie.image.url,
     thumbnail: baseUrlYaApi + movie.image.formats.thumbnail.url,
     movieId: movie.id,
-    owner: { _id: '' },
+    owner: '',
   };
 }
