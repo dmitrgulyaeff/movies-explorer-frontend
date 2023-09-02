@@ -53,3 +53,8 @@ export interface UserUpdate {
   email: string;
   name: string;
 }
+
+export interface Filter {
+  showOnlyShortFilms: boolean;
+  name: string; 
+}

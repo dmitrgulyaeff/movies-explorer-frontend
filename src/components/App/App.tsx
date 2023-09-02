@@ -6,8 +6,9 @@ import {
   CurrentUserContext,
   PathnameContext,
   TokenContext,
+  FilterContext,
 } from '../../Contexts';
-import { WebMovie, BdMovie, User } from '../../utils/types';
+import { WebMovie, BdMovie, User, Filter } from '../../utils/types';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import { useState, useEffect } from 'react';
@@ -29,7 +30,15 @@ export default function App() {
   const [isAuthorized, setAuthorized] = useState<boolean>(false);
   const [yaMovies, setYaMovies] = useState<WebMovie[]>();
   const [savedMovies, setSavedMovies] = useState<BdMovie[]>();
-  const [currentUser, setCurrentUser] = useState<User>({'_id': '', 'email': '', 'name': ''});
+  const [currentUser, setCurrentUser] = useState<User>({
+    _id: '',
+    email: '',
+    name: '',
+  });
+  const [filter, setFilter] = useState<Filter>({
+    showOnlyShortFilms: localStorage.getItem('showOnlyShortFilms') === 'true',
+    name: localStorage.getItem('name') || '',
+  });
 
   const resetStates = () => {
     setPopupOpened(false);
@@ -46,7 +55,7 @@ export default function App() {
     const response = await mainApi.getUser();
     if (response.ok) {
       setAuthorized(true);
-      const responseData = await response.json() as User;
+      const responseData = (await response.json()) as User;
       setCurrentUser(responseData);
     } else {
       setAuthorized(false);
@@ -61,6 +70,14 @@ export default function App() {
     }
   }, [token]);
 
+  useEffect(() => {
+    localStorage.setItem('name', filter['name']);
+    localStorage.setItem(
+      'showOnlyShortFilms',
+      filter['showOnlyShortFilms'].toString()
+    );
+  }, [filter]);
+
   return (
     <TokenContext.Provider value={{ setToken }}>
       <PopupContext.Provider value={{ isPopupOpened, setPopupOpened }}>
@@ -68,19 +85,26 @@ export default function App() {
           <MoviesContext.Provider
             value={{ yaMovies, setYaMovies, savedMovies, setSavedMovies }}
           >
-            <CurrentUserContext.Provider value={{currentUser, setCurrentUser}}>
+            <CurrentUserContext.Provider
+              value={{ currentUser, setCurrentUser }}
+            >
               <PathnameContext.Provider value={{ pathname, hash }}>
-                <Navigation />
-                <Header />
-                <Routes>
-                  <Route path="/" element={<Main />} />
-                  <Route path="/movies" element={<Movies />} />
-                  <Route path="/saved-movies" element={<Movies />} />
-                  <Route path="/signup" element={<Register />} />
-                  <Route path="/signin" element={<Login />} />
-                  <Route path="/profile" element={<Profile  resetStates={resetStates} />} />
-                </Routes>
-                <Footer />
+                <FilterContext.Provider value={{ filter, setFilter }}>
+                  <Navigation />
+                  <Header />
+                  <Routes>
+                    <Route path="/" element={<Main />} />
+                    <Route path="/movies" element={<Movies />} />
+                    <Route path="/saved-movies" element={<Movies />} />
+                    <Route path="/signup" element={<Register />} />
+                    <Route path="/signin" element={<Login />} />
+                    <Route
+                      path="/profile"
+                      element={<Profile resetStates={resetStates} />}
+                    />
+                  </Routes>
+                  <Footer />
+                </FilterContext.Provider>
               </PathnameContext.Provider>
             </CurrentUserContext.Provider>
           </MoviesContext.Provider>

@@ -7,16 +7,19 @@ import {
   MoviesContext,
   PathnameContext,
   CurrentUserContext,
+  FilterContext,
 } from '../../Contexts';
 import { useContext } from 'react';
 import { WebMovie, BdMovie } from '../../utils/types';
 import mainApi from '../../utils/MainApi';
+import filterMovie from '../../utils/filterMovie';
 
 export default function MoviesCardList() {
   const { currentUser } = useContext(CurrentUserContext);
   const { savedMovies, setSavedMovies, yaMovies, setYaMovies } =
     useContext(MoviesContext);
   const { pathname } = useContext(PathnameContext);
+  const { filter } = useContext(FilterContext);
 
   const dislikeCard = async (movie: WebMovie) => {
     if (savedMovies) {
@@ -77,7 +80,9 @@ export default function MoviesCardList() {
   const Movie = (movie: WebMovie) => {
     const isLiked = !!movie?.owner;
     const handleLike = isLiked ? dislikeCard : likeCard;
-    return MoviesCard({ movie, handleLike, isLiked, pathname });
+    if (filterMovie(filter, movie)) {
+      return MoviesCard({ movie, handleLike, isLiked, pathname });
+    }
   };
 
   return (

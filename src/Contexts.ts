@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { User } from './utils/types';
+import { User, Filter } from './utils/types';
 import { WebMovie, BdMovie } from './utils/types';
 interface PopupContextType {
   isPopupOpened: boolean;
@@ -35,9 +35,16 @@ export interface PathnameContextType {
   hash: string
 }
 
+interface FilterContextType {
+  filter: Filter;
+  setFilter: React.Dispatch<React.SetStateAction<Filter>>
+} 
+
+
 export const PopupContext = createContext<PopupContextType>({} as PopupContextType);
 export const AuthorizedContext = createContext<AuthorizedContextType>({} as AuthorizedContextType);
 export const MoviesContext = createContext<MoviesContextType>({} as MoviesContextType);
 export const CurrentUserContext = createContext<CurrentUserContextType>({} as CurrentUserContextType);
 export const PathnameContext = createContext<PathnameContextType>({} as PathnameContextType)
 export const TokenContext = createContext<TokenContextType>({} as TokenContextType)
+export const FilterContext = createContext<FilterContextType>({} as FilterContextType)
