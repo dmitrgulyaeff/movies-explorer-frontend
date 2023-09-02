@@ -35,10 +35,10 @@ export default function App() {
     setPopupOpened(false);
     setToken(localStorage.getItem('token'));
     setAuthorized(false);
-    setYaMovies([]);
-    setSavedMovies([]);
-    setCurrentUser({'_id': '', 'email': '', 'name': ''});
-  }
+    setYaMovies(undefined);
+    setSavedMovies(undefined);
+    setCurrentUser({ _id: '', email: '', name: '' });
+  };
 
   async function checkAuthorization(token: string) {
     await localStorage.setItem('token', token);
