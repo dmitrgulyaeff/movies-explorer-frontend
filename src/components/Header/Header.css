@@ -17,9 +17,7 @@
 }
 
 .navbar__li_to_root {
-  margin-right: auto;
-}
-.navbar__li_to_root {
+  width: 100px;
   margin-right: auto;
 }
 
@@ -88,7 +86,9 @@
 }
 
 .navbar__link_to_profile {
+  box-sizing: border-box;
   margin-left: auto;
+  width: 100px;
 
   border-radius: 20px;
   background: #313131;
