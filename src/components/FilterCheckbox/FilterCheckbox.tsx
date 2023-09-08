@@ -1,4 +1,4 @@
-import './Toggle.css'
+import './FilterCheckbox.css'
 import classNames from 'classnames'
 
 
@@ -8,7 +8,7 @@ interface ToggleProps {
   toggle: () => void
 }
 
-export default function Toggle({enabled, toggle, className} : ToggleProps) {
+export default function FilterCheckbox({enabled, toggle, className} : ToggleProps) {
   
     return (
       <div className={classNames('toggle', {'toggle_active': enabled}) + ` ${className}`} onClick={toggle}>

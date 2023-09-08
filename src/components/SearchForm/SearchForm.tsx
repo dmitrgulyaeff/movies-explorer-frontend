@@ -1,6 +1,6 @@
 import './SearchForm.css';
 import { ReactComponent as Loupe } from '../../images/icons/loupe.svg';
-import Toggle from '../Toggle/Toggle';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useState, ChangeEvent, useContext, FormEvent, useEffect } from 'react';
 import { FilterContext } from '../../Contexts';
 
@@ -45,7 +45,7 @@ export default function SearchForm() {
         </button>
       </form>
       <div className="search__line" />
-      <Toggle
+      <FilterCheckbox
         className="search__toggle"
         enabled={showOnlyShortFilms}
         toggle={() => setShowShortFilms(!showOnlyShortFilms)}
