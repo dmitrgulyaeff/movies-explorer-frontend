@@ -55,8 +55,6 @@ export default function MoviesCardList() {
     const { owner, ...crMovie } = movie;
     const response = await mainApi.createMovie(crMovie);
     const data = (await response.json()) as BdMovie;
-    // TODO: исправить типы MovieBd owner: { _id: string };
-    // data.owner = {_id: JSON.stringify(data.owner).split('').filter(char => char !== `"`).join('')};
     await setSavedMovies((prevState: BdMovie[] | undefined) => {
       if (prevState !== undefined) {
         return [...prevState, data];
@@ -76,8 +74,7 @@ export default function MoviesCardList() {
     });
   };
 
-  //TODO: rename
-  const Movie = (movie: WebMovie) => {
+  const createMovieHelper = (movie: WebMovie) => {
     const isLiked = !!movie?.owner;
     const handleLike = isLiked ? dislikeCard : likeCard;
     if (filterMovie(filter, movie)) {
@@ -88,9 +85,9 @@ export default function MoviesCardList() {
   return (
     <section className="movies">
       {pathname === '/movies' &&
-        (yaMovies ? yaMovies.map(Movie) : <Preloader />)}
+        (yaMovies ? yaMovies.map(createMovieHelper) : <Preloader />)}
       {pathname === '/saved-movies' &&
-        (savedMovies ? savedMovies.map(Movie) : <Preloader />)}
+        (savedMovies ? savedMovies.map(createMovieHelper) : <Preloader />)}
     </section>
   );
 }
