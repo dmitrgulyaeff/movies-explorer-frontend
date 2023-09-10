@@ -7,6 +7,7 @@ import {
   FilterContext,
   PathnameContext,
 } from '../../Contexts';
+import classNames from 'classnames';
 
 export default function SearchForm() {
   const { clickFrom, setClickFrom } = useContext(ButtonClickContext);
@@ -16,6 +17,7 @@ export default function SearchForm() {
     filter.showOnlyShortFilms
   );
   const [name, setNameRU] = useState(filter.name || '');
+  const [validForm, setValidForm] = useState(true);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNameRU(event.target.value);
@@ -24,19 +26,29 @@ export default function SearchForm() {
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    // get Data
-    if (!clickFrom) {
-      setClickFrom(pathname);
-    }
-
-    // filter
-    if (name.length !== 0) {
-      setFilter({ ...filter, name });
+    if (name === '') {
+      setValidForm(false);
     } else {
-      setFilter({ ...filter, name: '' });
+      // get Data
+      if (!clickFrom) {
+        setClickFrom(pathname);
+      }
+
+      // filter
+      if (name.length !== 0) {
+        setFilter({ ...filter, name });
+      } else {
+        setFilter({ ...filter, name: '' });
+      }
     }
   };
-
+  useEffect(() => {
+    if (name || validForm) {
+      setValidForm(true);
+    } else {
+      setValidForm(false);
+    }
+  }, [name, validForm]);
   useEffect(() => {
     if (filter.showOnlyShortFilms !== showOnlyShortFilms) {
       setFilter({ ...filter, showOnlyShortFilms: showOnlyShortFilms });
@@ -45,27 +57,47 @@ export default function SearchForm() {
 
   return (
     // TODO: form.action ??
-    <section className="search">
+    <section
+      className={classNames('search', {
+        search_invalid: !validForm,
+      })}
+    >
       <form className="search__form" action="" onSubmit={onSubmit}>
         <Loupe className="search__loupe-icon" />
         <input
-          className="search__input"
+          className={classNames('search__input', {
+            search__input_invalid: !validForm,
+          })}
           type="text"
-          placeholder="Фильм"
+          placeholder={validForm ? 'Фильм' : 'Нужно ввести ключевое слово'}
           value={name}
           onChange={handleInputChange}
-        />
-        <button className="search__button" type="submit" title="поиск">
+        ></input>
+        <button
+          className={classNames('search__button', {
+            search__button_invalid: !validForm,
+          })}
+          type="submit"
+          title="поиск"
+        >
           <Loupe />
         </button>
       </form>
       <div className="search__line" />
       <FilterCheckbox
-        className="search__toggle"
+        className={classNames('search__toggle', {
+          search__toggle_invalid: !validForm,
+        })}
         enabled={showOnlyShortFilms}
         toggle={() => setShowShortFilms(!showOnlyShortFilms)}
       />
-      <p className="search__shortfilms-text">Короткометражки</p>
+      <p
+        className={classNames('search__shortfilms-text', {
+          'search__shortfilms-text_invalid': !validForm,
+        })}
+      >
+        Короткометражки
+      </p>
     </section>
   );
 }
