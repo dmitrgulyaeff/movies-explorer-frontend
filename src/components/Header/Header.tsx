@@ -12,10 +12,16 @@ export default function Header() {
 
   const { pathname } = useContext(PathnameContext);
   const allowedPaths: string[] = ['/', '/movies', '/saved-movies', '/profile'];
+  const protectedPaths = ['/movies', '/saved-movies', '/profile'];
 
   if (!allowedPaths.includes(pathname)) {
     return null; 
   }
+
+  if (protectedPaths.includes(pathname) && !isAuthorized) {
+    return null; 
+  }
+
 
   const savedFilmsStylesClass = classNames(
     'navbar__link navbar__link_to_movies',

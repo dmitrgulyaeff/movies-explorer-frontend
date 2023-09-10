@@ -1,14 +1,20 @@
 import { NavLink } from 'react-router-dom';
-import { PathnameContext } from '../../Contexts';
+import { AuthorizedContext, PathnameContext } from '../../Contexts';
 import { useContext } from 'react';
 import './Footer.css';
 
 export default function Footer() {
+  const { isAuthorized } = useContext(AuthorizedContext);
   const { pathname } = useContext(PathnameContext);
   const allowedPaths: string[] = ['/', '/movies', '/saved-movies'];
+  const protectedPaths = ['/movies', '/saved-movies', '/profile'];
 
   if (!allowedPaths.includes(pathname)) {
-    return null; 
+    return null;
+  }
+
+  if (protectedPaths.includes(pathname) && !isAuthorized) {
+    return null;
   }
 
   return (
@@ -32,5 +38,5 @@ export default function Footer() {
         </ul>
       </nav>
     </footer>
-  )
+  );
 }
