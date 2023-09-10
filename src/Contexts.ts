@@ -45,6 +45,10 @@ interface ResponsesMoviesContextType {
   setApiMoviesResponses: React.Dispatch<React.SetStateAction<ApiMoviesResponses>>;
 }
 
+interface ButtonClickContextType {
+  clickFrom: string,
+  setClickFrom: React.Dispatch<React.SetStateAction<string>>
+}
 
 export const PopupContext = createContext<PopupContextType>({} as PopupContextType);
 export const AuthorizedContext = createContext<AuthorizedContextType>({} as AuthorizedContextType);
@@ -54,3 +58,4 @@ export const PathnameContext = createContext<PathnameContextType>({} as Pathname
 export const TokenContext = createContext<TokenContextType>({} as TokenContextType)
 export const FilterContext = createContext<FilterContextType>({} as FilterContextType)
 export const ResponsesMoviesContext = createContext<ResponsesMoviesContextType>({} as ResponsesMoviesContextType)
+export const ButtonClickContext = createContext<ButtonClickContextType>({} as ButtonClickContextType)

@@ -2,11 +2,19 @@ import './SearchForm.css';
 import { ReactComponent as Loupe } from '../../images/icons/loupe.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useState, ChangeEvent, useContext, FormEvent, useEffect } from 'react';
-import { FilterContext } from '../../Contexts';
+import {
+  ButtonClickContext,
+  FilterContext,
+  PathnameContext,
+} from '../../Contexts';
 
 export default function SearchForm() {
+  const { clickFrom, setClickFrom } = useContext(ButtonClickContext);
+  const { pathname } = useContext(PathnameContext);
   const { filter, setFilter } = useContext(FilterContext);
-  const [showOnlyShortFilms, setShowShortFilms] = useState(filter.showOnlyShortFilms);
+  const [showOnlyShortFilms, setShowShortFilms] = useState(
+    filter.showOnlyShortFilms
+  );
   const [name, setNameRU] = useState(filter.name || '');
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -15,16 +23,23 @@ export default function SearchForm() {
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
+
+    // get Data
+    if (!clickFrom) {
+      setClickFrom(pathname);
+    }
+
+    // filter
     if (name.length !== 0) {
-      setFilter({...filter, name});
+      setFilter({ ...filter, name });
     } else {
-      setFilter({...filter, name : ''});
+      setFilter({ ...filter, name: '' });
     }
   };
 
   useEffect(() => {
     if (filter.showOnlyShortFilms !== showOnlyShortFilms) {
-      setFilter({ ...filter, showOnlyShortFilms: showOnlyShortFilms});
+      setFilter({ ...filter, showOnlyShortFilms: showOnlyShortFilms });
     }
   }, [filter, setFilter, showOnlyShortFilms]);
 

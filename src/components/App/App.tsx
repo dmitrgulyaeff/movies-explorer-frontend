@@ -8,6 +8,7 @@ import {
   TokenContext,
   FilterContext,
   ResponsesMoviesContext,
+  ButtonClickContext,
 } from '../../Contexts';
 import {
   WebMovie,
@@ -48,6 +49,8 @@ export default function App() {
   });
   const [apiMoviesResponses, setApiMoviesResponses] =
     useState<ApiMoviesResponses>({ main: undefined, ya: undefined });
+
+  const [clickFrom, setClickFrom] = useState<string>('');
 
   const resetStates = () => {
     setPopupOpened(false);
@@ -102,20 +105,24 @@ export default function App() {
                   <ResponsesMoviesContext.Provider
                     value={{ apiMoviesResponses, setApiMoviesResponses }}
                   >
-                    <Navigation />
-                    <Header />
-                    <Routes>
-                      <Route path="/" element={<Main />} />
-                      <Route path="/movies" element={<Movies />} />
-                      <Route path="/saved-movies" element={<Movies />} />
-                      <Route path="/signup" element={<Register />} />
-                      <Route path="/signin" element={<Login />} />
-                      <Route
-                        path="/profile"
-                        element={<Profile resetStates={resetStates} />}
-                      />
-                    </Routes>
-                    <Footer />
+                    <ButtonClickContext.Provider
+                      value={{ clickFrom, setClickFrom }}
+                    >
+                      <Navigation />
+                      <Header />
+                      <Routes>
+                        <Route path="/" element={<Main />} />
+                        <Route path="/movies" element={<Movies />} />
+                        <Route path="/saved-movies" element={<Movies />} />
+                        <Route path="/signup" element={<Register />} />
+                        <Route path="/signin" element={<Login />} />
+                        <Route
+                          path="/profile"
+                          element={<Profile resetStates={resetStates} />}
+                        />
+                      </Routes>
+                      <Footer />
+                    </ButtonClickContext.Provider>
                   </ResponsesMoviesContext.Provider>
                 </FilterContext.Provider>
               </PathnameContext.Provider>

@@ -5,6 +5,7 @@ import useSavedMovies from '../../hooks/useSavedDataMovies';
 import useNormalizedYaMovies from '../../hooks/useNormalizedYaMovies';
 import { useContext } from 'react';
 import {
+  ButtonClickContext,
   MoviesContext,
   PathnameContext,
   ResponsesMoviesContext,
@@ -13,6 +14,7 @@ import Preloader from '../Preloader/Preloader';
 import { WebMovie } from '../../utils/types';
 
 export default function Movies() {
+  const { clickFrom } = useContext(ButtonClickContext);
   const { pathname } = useContext(PathnameContext);
   const { savedMovies, yaMovies } = useContext(MoviesContext);
   const { apiMoviesResponses } = useContext(ResponsesMoviesContext);
@@ -29,8 +31,10 @@ export default function Movies() {
     movies: WebMovie[] | undefined,
     responseSuccess: boolean | undefined
   ) => {
-    // TODO: возвращать "поиска не было"
     // Поиска не было
+    if (!clickFrom && responseSuccess === undefined){
+      return <Msg>Поиска не было</Msg>
+    }
 
     // Загрузка
     if (responseSuccess === undefined) {

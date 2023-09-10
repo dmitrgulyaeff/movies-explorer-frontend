@@ -1,4 +1,5 @@
 import {
+  ButtonClickContext,
   CurrentUserContext,
   MoviesContext,
   PathnameContext,
@@ -8,6 +9,7 @@ import { useContext } from 'react';
 import fetchYaMovies from '../utils/fetchYaMovies';
 
 export default async function useNormalizedYaMovies() {
+  const { clickFrom, setClickFrom } = useContext(ButtonClickContext);
   const { savedMovies, yaMovies, setYaMovies } = useContext(MoviesContext);
   const { currentUser } = useContext(CurrentUserContext);
   const { pathname } = useContext(PathnameContext);
@@ -16,6 +18,7 @@ export default async function useNormalizedYaMovies() {
   );
 
   if (
+    ['/movies'].includes(clickFrom) &&
     ['/movies'].includes(pathname) &&
     !yaMovies &&
     savedMovies &&
@@ -50,5 +53,6 @@ export default async function useNormalizedYaMovies() {
     setApiMoviesResponses((prevState) => {
       return { ...prevState, ya: { success: true } };
     });
+    setClickFrom('')
   }
 }
