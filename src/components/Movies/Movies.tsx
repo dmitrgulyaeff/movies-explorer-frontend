@@ -14,6 +14,8 @@ import {
 import Preloader from '../Preloader/Preloader';
 import { WebMovie } from '../../utils/types';
 import filterMovie from '../../utils/filterMovie';
+import Message from '../Message/Message';
+import { beforeReqMsg, errServerMsg, notFoundMsg } from '../../utils/constants';
 
 export default function Movies() {
   const { clickFrom } = useContext(ButtonClickContext);
@@ -25,18 +27,13 @@ export default function Movies() {
   useSavedMovies();
   useNormalizedYaMovies();
 
-  //TODO: вынести в отдельный компонент
-  const Msg = ({ children }: { children: string }) => (
-    <p style={{ color: 'white' }}>{children}</p>
-  );
-
   const renderMovies = (
     movies: WebMovie[] | undefined,
     responseSuccess: boolean | undefined
   ) => {
     // Поиска не было
     if (!clickFrom && responseSuccess === undefined) {
-      return <Msg>Поиска не было</Msg>;
+      return <Message>{beforeReqMsg}</Message>;
     }
 
     // Загрузка
@@ -45,7 +42,7 @@ export default function Movies() {
     }
     // Ошибка
     if (!responseSuccess) {
-      return <Msg>Ошибка получения данных от сервера</Msg>;
+      return <Message>{errServerMsg}</Message>;
     }
 
     // Найдено
@@ -54,7 +51,7 @@ export default function Movies() {
         filterMovie(filter, movie)
       );
       if (filteredMovies.length === 0) {
-        return <Msg>По вашему запросу: Ничего не найдено</Msg>;
+        return <Message>{notFoundMsg}</Message>;
       }
       return <MoviesCardList movies={filteredMovies} />;
     }
