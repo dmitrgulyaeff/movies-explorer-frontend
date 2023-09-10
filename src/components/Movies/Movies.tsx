@@ -6,18 +6,21 @@ import useNormalizedYaMovies from '../../hooks/useNormalizedYaMovies';
 import { useContext } from 'react';
 import {
   ButtonClickContext,
+  FilterContext,
   MoviesContext,
   PathnameContext,
   ResponsesMoviesContext,
 } from '../../Contexts';
 import Preloader from '../Preloader/Preloader';
 import { WebMovie } from '../../utils/types';
+import filterMovie from '../../utils/filterMovie';
 
 export default function Movies() {
   const { clickFrom } = useContext(ButtonClickContext);
   const { pathname } = useContext(PathnameContext);
   const { savedMovies, yaMovies } = useContext(MoviesContext);
   const { apiMoviesResponses } = useContext(ResponsesMoviesContext);
+  const { filter } = useContext(FilterContext);
 
   useSavedMovies();
   useNormalizedYaMovies();
@@ -32,8 +35,8 @@ export default function Movies() {
     responseSuccess: boolean | undefined
   ) => {
     // Поиска не было
-    if (!clickFrom && responseSuccess === undefined){
-      return <Msg>Поиска не было</Msg>
+    if (!clickFrom && responseSuccess === undefined) {
+      return <Msg>Поиска не было</Msg>;
     }
 
     // Загрузка
@@ -47,10 +50,13 @@ export default function Movies() {
 
     // Найдено
     if (movies) {
-      if (movies.length === 0) {
+      const filteredMovies = movies.filter((movie) =>
+        filterMovie(filter, movie)
+      );
+      if (filteredMovies.length === 0) {
         return <Msg>По вашему запросу: Ничего не найдено</Msg>;
       }
-      return <MoviesCardList movies={movies} />;
+      return <MoviesCardList movies={filteredMovies} />;
     }
   };
 

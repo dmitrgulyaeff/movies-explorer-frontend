@@ -77,9 +77,9 @@ export default function MoviesCardList({movies}: {movies: WebMovie[]}) {
   const createMovieHelper = (movie: WebMovie) => {
     const isLiked = !!movie?.owner;
     const handleLike = isLiked ? dislikeCard : likeCard;
-    if (filterMovie(filter, movie)) {
+    // if (filterMovie(filter, movie)) {
       return MoviesCard({ movie, handleLike, isLiked, pathname });
-    }
+    // }
   };
 
   return (
