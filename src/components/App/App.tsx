@@ -29,13 +29,15 @@ import mainApi from '../../utils/MainApi';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 export default function App() {
   const { pathname, hash } = useLocation();
 
   const [isPopupOpened, setPopupOpened] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [isAuthorized, setAuthorized] = useState<boolean>(false);
+  const [isAuthorized, setAuthorized] = useState<boolean | undefined>();
   const [yaMovies, setYaMovies] = useState<WebMovie[]>();
   const [savedMovies, setSavedMovies] = useState<BdMovie[]>();
   const [currentUser, setCurrentUser] = useState<User>({
@@ -110,17 +112,38 @@ export default function App() {
                     >
                       <Navigation />
                       <Header />
-                      <Routes>
+                      {isAuthorized !== undefined && <Routes>
                         <Route path="/" element={<Main />} />
-                        <Route path="/movies" element={<Movies />} />
-                        <Route path="/saved-movies" element={<Movies />} />
+
+                        <Route
+                          path="/movies"
+                          element={
+                            <ProtectedRoute>
+                              <Movies />
+                            </ProtectedRoute>
+                          }
+                        />
+                        <Route
+                          path="/saved-movies"
+                          element={
+                            <ProtectedRoute>
+                              <Movies />
+                            </ProtectedRoute>
+                          }
+                        />
                         <Route path="/signup" element={<Register />} />
                         <Route path="/signin" element={<Login />} />
                         <Route
                           path="/profile"
-                          element={<Profile resetStates={resetStates} />}
+                          element={
+                            <ProtectedRoute>
+                              <Profile resetStates={resetStates} />
+                            </ProtectedRoute>
+                          }
                         />
-                      </Routes>
+
+                        <Route path="/*" element={<NotFoundPage />} />
+                      </Routes>}
                       <Footer />
                     </ButtonClickContext.Provider>
                   </ResponsesMoviesContext.Provider>
