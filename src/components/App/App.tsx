@@ -7,8 +7,15 @@ import {
   PathnameContext,
   TokenContext,
   FilterContext,
+  ResponsesMoviesContext,
 } from '../../Contexts';
-import { WebMovie, BdMovie, User, Filter } from '../../utils/types';
+import {
+  WebMovie,
+  BdMovie,
+  User,
+  Filter,
+  ApiMoviesResponses,
+} from '../../utils/types';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import { useState, useEffect } from 'react';
@@ -39,6 +46,8 @@ export default function App() {
     showOnlyShortFilms: localStorage.getItem('showOnlyShortFilms') === 'true',
     name: localStorage.getItem('name') || '',
   });
+  const [apiMoviesResponses, setApiMoviesResponses] =
+    useState<ApiMoviesResponses>({ main: undefined, ya: undefined });
 
   const resetStates = () => {
     setPopupOpened(false);
@@ -90,20 +99,24 @@ export default function App() {
             >
               <PathnameContext.Provider value={{ pathname, hash }}>
                 <FilterContext.Provider value={{ filter, setFilter }}>
-                  <Navigation />
-                  <Header />
-                  <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/movies" element={<Movies />} />
-                    <Route path="/saved-movies" element={<Movies />} />
-                    <Route path="/signup" element={<Register />} />
-                    <Route path="/signin" element={<Login />} />
-                    <Route
-                      path="/profile"
-                      element={<Profile resetStates={resetStates} />}
-                    />
-                  </Routes>
-                  <Footer />
+                  <ResponsesMoviesContext.Provider
+                    value={{ apiMoviesResponses, setApiMoviesResponses }}
+                  >
+                    <Navigation />
+                    <Header />
+                    <Routes>
+                      <Route path="/" element={<Main />} />
+                      <Route path="/movies" element={<Movies />} />
+                      <Route path="/saved-movies" element={<Movies />} />
+                      <Route path="/signup" element={<Register />} />
+                      <Route path="/signin" element={<Login />} />
+                      <Route
+                        path="/profile"
+                        element={<Profile resetStates={resetStates} />}
+                      />
+                    </Routes>
+                    <Footer />
+                  </ResponsesMoviesContext.Provider>
                 </FilterContext.Provider>
               </PathnameContext.Provider>
             </CurrentUserContext.Provider>

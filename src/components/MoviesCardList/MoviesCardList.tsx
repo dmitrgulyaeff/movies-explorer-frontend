@@ -14,7 +14,7 @@ import { WebMovie, BdMovie } from '../../utils/types';
 import mainApi from '../../utils/MainApi';
 import filterMovie from '../../utils/filterMovie';
 
-export default function MoviesCardList() {
+export default function MoviesCardList({movies}: {movies: WebMovie[]}) {
   const { currentUser } = useContext(CurrentUserContext);
   const { savedMovies, setSavedMovies, yaMovies, setYaMovies } =
     useContext(MoviesContext);
@@ -84,10 +84,11 @@ export default function MoviesCardList() {
 
   return (
     <section className="movies">
-      {pathname === '/movies' &&
+      {movies.map(createMovieHelper)}
+      {/* {pathname === '/movies' &&
         (yaMovies ? yaMovies.map(createMovieHelper) : <Preloader />)}
       {pathname === '/saved-movies' &&
-        (savedMovies ? savedMovies.map(createMovieHelper) : <Preloader />)}
+        (savedMovies ? savedMovies.map(createMovieHelper) : <Preloader />)} */}
     </section>
   );
 }

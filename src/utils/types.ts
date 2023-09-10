@@ -58,3 +58,13 @@ export interface Filter {
   showOnlyShortFilms: boolean;
   name: string; 
 }
+
+export interface Response {
+  success: boolean,
+  message?: string
+}
+
+export interface ApiMoviesResponses {
+  main: Response | undefined,
+  ya: Response | undefined
+}
