@@ -12,6 +12,7 @@ import { WebMovie, BdMovie } from '../../utils/types';
 import mainApi from '../../utils/MainApi';
 import { getInitialCardsCount } from '../../utils/getInitialCardsCount';
 import { getCardsCountForMore } from '../../utils/getCardsCountForMore';
+import { scrollToBottom } from '../../utils/scrollToBottom';
 
 export default function MoviesCardList({ movies }: { movies: WebMovie[] }) {
   const { currentUser } = useContext(CurrentUserContext);
@@ -113,6 +114,9 @@ export default function MoviesCardList({ movies }: { movies: WebMovie[] }) {
             setCount(
               (prevCount) => getCardsCountForMore(innerWidth) + prevCount!
             );
+            setTimeout(() => {
+              scrollToBottom();
+            }, 0);
           }}
         >
           Ещё
