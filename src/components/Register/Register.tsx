@@ -27,7 +27,9 @@ export default function Register() {
             data2 = await response2.json();
             const { token } = data2;
             setToken(token);
-            navigate('/movies');
+            setTimeout(() => {
+              navigate('/movies');
+            }, 100);
           } catch (error) {
             if (data) {
               const { message } = data;
