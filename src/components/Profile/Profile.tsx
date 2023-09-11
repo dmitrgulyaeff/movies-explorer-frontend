@@ -6,26 +6,33 @@ import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
 import { UserUpdate, User } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
-export default function Profile({resetStates} : {resetStates: () => void}) {
+export default function Profile({ resetStates }: { resetStates: () => void }) {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const navigation = useNavigate();
 
   return (
     <main className="profile">
-      <h1 className="profile__topic">{currentUser?.name ? 'Привет, ' + currentUser?.name + '!' : '...'}</h1>
+      <h1 className="profile__topic">
+        {currentUser?.name ? 'Привет, ' + currentUser?.name + '!' : '...'}
+      </h1>
       {currentUser.name ? (
         <ProfileForm
           onSubmit={async (stateProfileForm) => {
-            const response = await mainApi.updateUser(stateProfileForm as UserUpdate);
-            const data = await response.json();
-            if (response.ok) {
-              setCurrentUser(data as User)
-            } else {
-              const { message } = data;
-              if (message) {
-              throw new Error(message);
-            }
-            throw new Error('Неправильно заполнена форма');
+            let data;
+            try {
+              const response = await mainApi.updateUser(
+                stateProfileForm as UserUpdate
+              );
+              data = await response.json();
+              setCurrentUser(data as User);
+            } catch (error) {
+              if (data) {
+                const { message } = data;
+                if (message) {
+                  throw new Error(message);
+                }
+              }
+              throw new Error('Неправильно заполнена форма');
             }
           }}
         >
@@ -54,13 +61,19 @@ export default function Profile({resetStates} : {resetStates: () => void}) {
       ) : (
         <Preloader />
       )}
-      <button className='profile__button-exit' type='button' onClick={() => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('showOnlyShortFilms');
-        localStorage.removeItem('name');
-        navigation('/signin')
-        resetStates();
-      }}>Выйти из аккаунта</button>
+      <button
+        className="profile__button-exit"
+        type="button"
+        onClick={() => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('showOnlyShortFilms');
+          localStorage.removeItem('name');
+          navigation('/signin');
+          resetStates();
+        }}
+      >
+        Выйти из аккаунта
+      </button>
     </main>
   );
 }

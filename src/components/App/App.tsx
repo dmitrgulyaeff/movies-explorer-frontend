@@ -70,13 +70,15 @@ export default function App() {
   async function checkAuthorization(token: string) {
     await localStorage.setItem('token', token);
     // одним запросом два зайца, проверяю токен + получаю инфу о пользователе
-    const response = await mainApi.getUser();
-    if (response.ok) {
+    try {
+      const response = await mainApi.getUser();
       setAuthorized(true);
       const responseData = (await response.json()) as User;
       setCurrentUser(responseData);
-    } else {
+      
+    } catch (error) {
       setAuthorized(false);
+      
     }
   }
 

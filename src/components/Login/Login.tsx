@@ -9,30 +9,33 @@ import { useContext } from 'react';
 
 export default function Login() {
   const navigation = useNavigate();
-  const { setToken } = useContext(TokenContext)
+  const { setToken } = useContext(TokenContext);
   return (
     <main className="login">
       <MiniHeader hello="Рады видеть!" />
       <Form
         onSubmit={async (formState) => {
           const userAuthorization = formState as UserAuthorization;
-          const response = await mainApi.signin(userAuthorization);
-          const data = await response.json();
-          if (response.ok) {
+          let data;
+          try {
+            const response = await mainApi.signin(userAuthorization);
+            console.log(response.ok);
+            data = await response.json();
             const { token } = data;
             setToken(token);
             setTimeout(() => {
-              navigation('/movies')
-            }, 100)
-          } else {
-            const { message } = data;
-            if (message) {
-              throw new Error(message);
+              navigation('/movies');
+            }, 100);
+          } catch (error) {
+            if (data) {
+              const { message } = data;
+              if (message) {
+                throw new Error(message);
+              }
             }
             throw new Error('Неправильно заполнена форма');
           }
-        }
-      }
+        }}
       >
         <Form.Input
           stateKey="email"

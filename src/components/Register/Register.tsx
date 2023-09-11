@@ -16,28 +16,30 @@ export default function Register() {
       <Form
         onSubmit={async (stateForm) => {
           const userRegistration = stateForm as UserRegistration;
-          const response = await mainApi.signup(userRegistration);
-          const data = await response.json();
-          if (response.ok) {
+          let data;
+          let data2;
+          try {
+            const response = await mainApi.signup(userRegistration);
+            data = await response.json();
             const { password, email } = userRegistration;
             const userAuthorization = { email, password } as UserAuthorization;
             const response2 = await mainApi.signin(userAuthorization);
-            const data2 = await response2.json();
-            if (response2.ok) {
-              const { token } = data2;
-              await setToken(token);
-              navigate('/movies');
-            } else {
+            data2 = await response2.json();
+            const { token } = data2;
+            setToken(token);
+            navigate('/movies');
+          } catch (error) {
+            if (data) {
+              const { message } = data;
+              if (message) {
+                throw new Error(message);
+              }
+            }
+            if (data2) {
               const { message } = data2;
               if (message) {
                 throw new Error(message);
               }
-              throw new Error('Неправильно заполнена форма');
-            }
-          } else {
-            const { message } = data;
-            if (message) {
-              throw new Error(message);
             }
             throw new Error('Неправильно заполнена форма');
           }

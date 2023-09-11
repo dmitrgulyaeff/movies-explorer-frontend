@@ -45,8 +45,8 @@ export default function MoviesCardList({ movies }: { movies: WebMovie[] }) {
         (movieBd) => movieBd.movieId === movie.movieId
       );
       if (savedMovie) {
-        const response = await mainApi.deleteMovie(savedMovie._id.toString());
-        if (response.ok) {
+        try {
+          const response = await mainApi.deleteMovie(savedMovie._id.toString());
           const data = await response.json();
           const { _id, movieId } = data as BdMovie;
           const newSavedMovies = savedMovies.filter(
@@ -64,6 +64,8 @@ export default function MoviesCardList({ movies }: { movies: WebMovie[] }) {
               }
             }
           });
+        } catch (error) {
+          console.error('Ошибка удаления карточки');
         }
       }
     }
@@ -99,14 +101,14 @@ export default function MoviesCardList({ movies }: { movies: WebMovie[] }) {
   };
 
   return (
-    <section className='movies'>
+    <section className="movies">
       <ul className="movies__list">
         {movies.map(createMovieHelper).slice(0, count)}
       </ul>
 
       {count !== undefined && count < movies.length && (
         <button
-        className='movies__button-more'
+          className="movies__button-more"
           onClick={() => {
             setCount(
               (prevCount) => getCardsCountForMore(innerWidth) + prevCount!
