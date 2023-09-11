@@ -23,7 +23,7 @@ import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
+import Movies from '../MainMovies/MainMovies';
 import Footer from '../Footer/Footer';
 import mainApi from '../../utils/MainApi';
 import Register from '../Register/Register';

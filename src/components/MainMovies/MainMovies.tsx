@@ -1,4 +1,4 @@
-import './Movies.css';
+import './MainMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import useSavedMovies from '../../hooks/useSavedDataMovies';
