@@ -5,11 +5,12 @@ import mainApi from '../../utils/MainApi';
 import { UserRegistration, UserAuthorization } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { TokenContext } from '../../Contexts';
+import { AuthorizedContext, TokenContext } from '../../Contexts';
 
 export default function Register() {
   const navigate = useNavigate();
   const { setToken } = useContext(TokenContext);
+  const { setAuthorized } = useContext(AuthorizedContext);
   return (
     <main className="register">
       <MiniHeader hello="Добро пожаловать!" />
@@ -29,9 +30,10 @@ export default function Register() {
             const data = await response.json();
             const { token } = data;
             setToken(token);
+            setAuthorized(true);
             setTimeout(() => {
               navigate('/movies');
-            }, 100);
+            }, 0);
           } catch (error) {
             throw new Error('Ошибка авторизации');
           }

@@ -2,7 +2,7 @@ import './Login.css';
 import MiniHeader from '../MiniHeader/MiniHeader';
 import Form from '../Form/Form';
 import mainApi from '../../utils/MainApi';
-import { TokenContext } from '../../Contexts';
+import { AuthorizedContext, TokenContext } from '../../Contexts';
 import { UserAuthorization } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
@@ -10,6 +10,7 @@ import { useContext } from 'react';
 export default function Login() {
   const navigation = useNavigate();
   const { setToken } = useContext(TokenContext);
+  const { setAuthorized } = useContext(AuthorizedContext);
   return (
     <main className="login">
       <MiniHeader hello="Рады видеть!" />
@@ -22,9 +23,10 @@ export default function Login() {
             const data = await response.json();
             const { token } = data;
             setToken(token);
+            setAuthorized(true);
             setTimeout(() => {
               navigation('/movies');
-            }, 100);
+            }, 0);
           } catch (error) {
             throw new Error('Неправильно заполнена форма');
           }
