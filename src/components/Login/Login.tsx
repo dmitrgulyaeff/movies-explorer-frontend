@@ -23,7 +23,7 @@ export default function Login() {
             setToken(token);
             setTimeout(() => {
               navigation('/movies')
-            }, 0)
+            }, 100)
           } else {
             const { message } = data;
             if (message) {
