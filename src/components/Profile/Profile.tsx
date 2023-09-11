@@ -18,20 +18,13 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
       {currentUser.name ? (
         <ProfileForm
           onSubmit={async (stateProfileForm) => {
-            let data;
             try {
               const response = await mainApi.updateUser(
                 stateProfileForm as UserUpdate
               );
-              data = await response.json();
+              const data = await response.json();
               setCurrentUser(data as User);
             } catch (error) {
-              if (data) {
-                const { message } = data;
-                if (message) {
-                  throw new Error(message);
-                }
-              }
               throw new Error('Неправильно заполнена форма');
             }
           }}

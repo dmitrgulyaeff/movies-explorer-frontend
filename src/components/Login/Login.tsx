@@ -16,23 +16,16 @@ export default function Login() {
       <Form
         onSubmit={async (formState) => {
           const userAuthorization = formState as UserAuthorization;
-          let data;
           try {
             const response = await mainApi.signin(userAuthorization);
             console.log(response.ok);
-            data = await response.json();
+            const data = await response.json();
             const { token } = data;
             setToken(token);
             setTimeout(() => {
               navigation('/movies');
             }, 100);
           } catch (error) {
-            if (data) {
-              const { message } = data;
-              if (message) {
-                throw new Error(message);
-              }
-            }
             throw new Error('Неправильно заполнена форма');
           }
         }}
