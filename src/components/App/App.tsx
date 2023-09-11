@@ -99,69 +99,77 @@ export default function App() {
     );
   }, [filter]);
 
-  return (
-    <TokenContext.Provider value={{ setToken }}>
-      <PopupContext.Provider value={{ isPopupOpened, setPopupOpened }}>
-        <AuthorizedContext.Provider value={{ isAuthorized, setAuthorized }}>
-          <MoviesContext.Provider
-            value={{ yaMovies, setYaMovies, savedMovies, setSavedMovies }}
-          >
-            <CurrentUserContext.Provider
-              value={{ currentUser, setCurrentUser }}
+  const Contexts = ({ children }: { children: any }) => {
+    return (
+      <TokenContext.Provider value={{ setToken }}>
+        <PopupContext.Provider value={{ isPopupOpened, setPopupOpened }}>
+          <AuthorizedContext.Provider value={{ isAuthorized, setAuthorized }}>
+            <MoviesContext.Provider
+              value={{ yaMovies, setYaMovies, savedMovies, setSavedMovies }}
             >
-              <PathnameContext.Provider value={{ pathname, hash }}>
-                <FilterContext.Provider value={{ filter, setFilter }}>
-                  <ResponsesMoviesContext.Provider
-                    value={{ apiMoviesResponses, setApiMoviesResponses }}
-                  >
-                    <ButtonClickContext.Provider
-                      value={{ clickFrom, setClickFrom }}
+              <CurrentUserContext.Provider
+                value={{ currentUser, setCurrentUser }}
+              >
+                <PathnameContext.Provider value={{ pathname, hash }}>
+                  <FilterContext.Provider value={{ filter, setFilter }}>
+                    <ResponsesMoviesContext.Provider
+                      value={{ apiMoviesResponses, setApiMoviesResponses }}
                     >
-                      <Navigation />
-                      <Header />
-                      {isAuthorized !== undefined && (
-                        <Routes>
-                          <Route path="/" element={<Main />} />
+                      <ButtonClickContext.Provider
+                        value={{ clickFrom, setClickFrom }}
+                      >
+                        {children}
+                      </ButtonClickContext.Provider>
+                    </ResponsesMoviesContext.Provider>
+                  </FilterContext.Provider>
+                </PathnameContext.Provider>
+              </CurrentUserContext.Provider>
+            </MoviesContext.Provider>
+          </AuthorizedContext.Provider>
+        </PopupContext.Provider>
+      </TokenContext.Provider>
+    );
+  };
 
-                          <Route
-                            path="/movies"
-                            element={
-                              <ProtectedRoute>
-                                <Movies />
-                              </ProtectedRoute>
-                            }
-                          />
-                          <Route
-                            path="/saved-movies"
-                            element={
-                              <ProtectedRoute>
-                                <Movies />
-                              </ProtectedRoute>
-                            }
-                          />
-                          <Route path="/signup" element={<Register />} />
-                          <Route path="/signin" element={<Login />} />
-                          <Route
-                            path="/profile"
-                            element={
-                              <ProtectedRoute>
-                                <Profile resetStates={resetStates} />
-                              </ProtectedRoute>
-                            }
-                          />
+  return (
+    <Contexts>
+      <Navigation />
+      <Header />
+      {isAuthorized !== undefined && (
+        <Routes>
+          <Route path="/" element={<Main />} />
 
-                          <Route path="/*" element={<NotFoundPage />} />
-                        </Routes>
-                      )}
-                      <Footer />
-                    </ButtonClickContext.Provider>
-                  </ResponsesMoviesContext.Provider>
-                </FilterContext.Provider>
-              </PathnameContext.Provider>
-            </CurrentUserContext.Provider>
-          </MoviesContext.Provider>
-        </AuthorizedContext.Provider>
-      </PopupContext.Provider>
-    </TokenContext.Provider>
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute>
+                <Movies />
+              </ProtectedRoute>
+            }
+            />
+          <Route
+            path="/saved-movies"
+            element={
+              <ProtectedRoute>
+                <Movies />
+              </ProtectedRoute>
+            }
+            />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile resetStates={resetStates} />
+              </ProtectedRoute>
+            }
+            />
+
+          <Route path="/*" element={<NotFoundPage />} />
+        </Routes>
+      )}
+      <Footer />
+    </Contexts>
   );
 }
