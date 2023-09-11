@@ -54,8 +54,10 @@ export default function Profile({resetStates} : {resetStates: () => void}) {
       ) : (
         <Preloader />
       )}
-      <button className='profile__button-exit' type='button' onClick={async () => {
-        await localStorage.removeItem('token');
+      <button className='profile__button-exit' type='button' onClick={() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('showOnlyShortFilms');
+        localStorage.removeItem('name');
         navigation('/signin')
         resetStates();
       }}>Выйти из аккаунта</button>

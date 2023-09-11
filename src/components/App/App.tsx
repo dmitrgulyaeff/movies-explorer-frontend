@@ -61,6 +61,10 @@ export default function App() {
     setYaMovies(undefined);
     setSavedMovies(undefined);
     setCurrentUser({ _id: '', email: '', name: '' });
+    setFilter({
+      showOnlyShortFilms: false,
+      name: '',
+    })
   };
 
   async function checkAuthorization(token: string) {
