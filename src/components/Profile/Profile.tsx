@@ -38,7 +38,7 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
             maxLength={30}
             required={true}
           />
-          <hr className='profile__form-hr' />
+          <hr className="profile__form-hr" />
           <ProfileForm.Input
             defaultState={currentUser.email}
             stateKey="email"
@@ -59,11 +59,8 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
         className="profile__button-exit"
         type="button"
         onClick={() => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('showOnlyShortFilms');
-          localStorage.removeItem('name');
-          navigation('/signin');
           resetStates();
+          navigation('/signin');
         }}
       >
         Выйти из аккаунта
