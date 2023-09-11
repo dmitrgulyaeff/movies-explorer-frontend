@@ -45,6 +45,7 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
             maxLength={30}
             required={true}
           />
+          <hr className='profile__form-hr' />
           <ProfileForm.Input
             defaultState={currentUser.email}
             stateKey="email"
