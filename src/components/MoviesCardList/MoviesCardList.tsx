@@ -1,25 +1,43 @@
 import './MoviesCardList.css';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
-import Preloader from '../Preloader/Preloader';
 
 import {
   MoviesContext,
   PathnameContext,
   CurrentUserContext,
-  FilterContext,
 } from '../../Contexts';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { WebMovie, BdMovie } from '../../utils/types';
 import mainApi from '../../utils/MainApi';
-import filterMovie from '../../utils/filterMovie';
+import { getInitialCardsCount } from '../../utils/getInitialCardsCount';
+import { getCardsCountForMore } from '../../utils/getCardsCountForMore';
 
-export default function MoviesCardList({movies}: {movies: WebMovie[]}) {
+export default function MoviesCardList({ movies }: { movies: WebMovie[] }) {
   const { currentUser } = useContext(CurrentUserContext);
-  const { savedMovies, setSavedMovies, yaMovies, setYaMovies } =
+  const { savedMovies, setSavedMovies, setYaMovies } =
     useContext(MoviesContext);
   const { pathname } = useContext(PathnameContext);
-  const { filter } = useContext(FilterContext);
+
+  const [count, setCount] = useState<number | undefined>();
+
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    setCount(getInitialCardsCount(innerWidth));
+  }, [innerWidth]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setInnerWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
 
   const dislikeCard = async (movie: WebMovie) => {
     if (savedMovies) {
@@ -77,18 +95,27 @@ export default function MoviesCardList({movies}: {movies: WebMovie[]}) {
   const createMovieHelper = (movie: WebMovie) => {
     const isLiked = !!movie?.owner;
     const handleLike = isLiked ? dislikeCard : likeCard;
-    // if (filterMovie(filter, movie)) {
-      return MoviesCard({ movie, handleLike, isLiked, pathname });
-    // }
+    return MoviesCard({ movie, handleLike, isLiked, pathname });
   };
 
   return (
-    <section className="movies">
-      {movies.map(createMovieHelper)}
-      {/* {pathname === '/movies' &&
-        (yaMovies ? yaMovies.map(createMovieHelper) : <Preloader />)}
-      {pathname === '/saved-movies' &&
-        (savedMovies ? savedMovies.map(createMovieHelper) : <Preloader />)} */}
+    <section className='movies'>
+      <ul className="movies__list">
+        {movies.map(createMovieHelper).slice(0, count)}
+      </ul>
+
+      {count !== undefined && count < movies.length && (
+        <button
+        className='movies__button-more'
+          onClick={() => {
+            setCount(
+              (prevCount) => getCardsCountForMore(innerWidth) + prevCount!
+            );
+          }}
+        >
+          Ещё
+        </button>
+      )}
     </section>
   );
 }
