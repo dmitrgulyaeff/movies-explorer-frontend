@@ -16,7 +16,7 @@
 }
 
 .student__resume {
-  margin: 100px 0 0;
+  margin: 66px 0 0;
 
   display: grid;
 
@@ -67,10 +67,12 @@
 }
 
 .student__resume-avatar {
+  width: 270px;
   grid-area: avatar;
   justify-self: flex-end;
   margin-left: 50px;
   align-self: stretch;
+  object-fit: cover;
   height: 327px;
   border-radius: 10px;
 }
