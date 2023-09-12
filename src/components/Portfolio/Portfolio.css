@@ -64,6 +64,11 @@
 }
 
 @media screen and (max-width: 500px) {
+  .portfolio__topic {
+    color: #A0A0A0;
+    font-size: 14px;
+    line-height: 20px;
+  }
   .portfolio__link {
     font-size: 18px;
     line-height: 28px;
@@ -74,10 +79,10 @@
     width: 10px;
   }
   .portfolio__nav {
-    margin: 40px 0 0;
+    margin: 41px 0 0;
   }
 
   .portfolio {
-    padding: 0 14px 56px;
+    padding: 0 14px 49px;
   }
 }

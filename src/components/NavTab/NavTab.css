@@ -5,6 +5,7 @@
   align-items: center;
 
   margin: 20px 40px 0;
+  border-radius: 10px;
 }
 .navtab__topic {
   font-weight: 400;
@@ -70,6 +71,7 @@
 
 @media screen and (max-width: 500px) {
   .navtab__topic {
+    letter-spacing: -1.16px;
     margin: 220px 0 0;
     max-width: 100%;
     font-size: 29px;
@@ -77,6 +79,7 @@
   }
   .navtab__nav {
     margin-top: 212px;
+    margin-bottom: 18px;
   }
 
   .navtab {

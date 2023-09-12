@@ -108,7 +108,14 @@
 
 @media screen and (max-width: 500px) {
   .student {
-    padding: 70px 14px;
+    padding: 0 14px 70px;
+  }
+  .student__topic {
+    margin-bottom: 29px;
+
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: -0.72px;
   }
 
   .student__resume {
@@ -121,7 +128,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    height: auto;
+    min-height: 352px;
   }
 
   .student__resume-wrappper {

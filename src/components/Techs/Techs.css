@@ -102,11 +102,21 @@
 
 @media screen and (max-width: 500px) {
   .techs {
+    background: transparent;
     padding: 70px 18px;
   }
 
+  .techs__topic  {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .techs__line {
+    margin-top: 28px;
+    background-color: #000;
+  }
   .techs__description {
-    margin: 60px 0 0;
+    margin: 49px 0 0;
   }
   .techs__description-topic {
     color: #fff;
@@ -115,7 +125,7 @@
     letter-spacing: -1.2px;
   }
   .techs__description-text {
-    margin: 24px 0 0;
+    margin: 13px 0 0;
     font-size: 11px;
     line-height: 16px;
     letter-spacing: -0.44px;
@@ -130,10 +140,11 @@
   }
 
   .techs__link {
-    padding: 21px 0;
+    padding: 22px 0;
     width: 84px;
 
     font-size: 12px;
+    line-height: 13px;
     letter-spacing: -0.48px;
   }
 }
