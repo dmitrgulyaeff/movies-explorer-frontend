@@ -45,10 +45,20 @@ export default function App() {
     email: '',
     name: '',
   });
+
+  // TODO:  вернуть после level-2 <
+  // const [filter, setFilter] = useState<Filter>({
+  //   showOnlyShortFilms: localStorage.getItem('showOnlyShortFilms') === 'true',
+  //   name: localStorage.getItem('name') || '',
+  // });
+  // TODO >
+
+  // TODO:  снести после level-2 <
   const [filter, setFilter] = useState<Filter>({
-    showOnlyShortFilms: localStorage.getItem('showOnlyShortFilms') === 'true',
-    name: localStorage.getItem('name') || '',
+    showOnlyShortFilms: false,
+    name: 'о',
   });
+  // TODO >
   const [apiMoviesResponses, setApiMoviesResponses] =
     useState<ApiMoviesResponses>({ main: undefined, ya: undefined });
 
@@ -146,7 +156,7 @@ export default function App() {
                 <Movies />
               </ProtectedRoute>
             }
-            />
+          />
           <Route
             path="/saved-movies"
             element={
@@ -154,7 +164,7 @@ export default function App() {
                 <Movies />
               </ProtectedRoute>
             }
-            />
+          />
           <Route path="/signup" element={<Register />} />
           <Route path="/signin" element={<Login />} />
           <Route
@@ -164,7 +174,7 @@ export default function App() {
                 <Profile resetStates={resetStates} />
               </ProtectedRoute>
             }
-            />
+          />
 
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>

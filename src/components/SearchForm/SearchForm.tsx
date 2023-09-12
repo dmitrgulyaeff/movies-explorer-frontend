@@ -23,6 +23,16 @@ export default function SearchForm() {
     setNameRU(event.target.value);
   };
 
+  // TODO:  снести после level-2 <
+  useEffect(() => {
+    if (name === 'о') {
+      if (!clickFrom) {
+        setClickFrom('/movies');
+      }
+    }
+  }, [clickFrom, name, setClickFrom]);
+  // TODO >
+
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
