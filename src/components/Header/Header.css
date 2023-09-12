@@ -32,26 +32,7 @@
   color: #fff;
 }
 
-@media screen and (max-width: 768px) {
-  .navbar__li_to_movies,
-  .navbar__li_to_saved-movies,
-  .navbar__li_to_profile {
-    display: none;
-  }
-  .header {
-    padding: 0 30px;
-  }
-  .header_authorized {
-    display: flex;
-    justify-content: space-between;
-  }
-}
 
-@media screen and (max-width: 320px) {
-  .header {
-    padding: 0 14px;
-  }
-}
 
 .navbar__link_to_root {
   padding: 0;
@@ -69,6 +50,7 @@
   font-size: 12px;
   font-weight: 500;
 }
+
 .navbar__link_to_signup {
   margin-right: 10px;
 
@@ -98,4 +80,37 @@
 
   font-size: 14px;
   font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar__li_to_movies,
+  .navbar__li_to_saved-movies,
+  .navbar__li_to_profile {
+    display: none;
+  }
+  .header {
+    padding: 0 30px;
+  }
+  .header_authorized {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    padding: 0 14px;
+  }
+  .navbar__link {
+    padding: 0;
+  }
+  .navbar__link_to_signup {
+    margin-right: 14px;
+    font-size: 10px;
+  }
+  .navbar__link_to_signin {
+    font-size: 10px;
+    height: 26px;
+    width: 54px;
+  }
 }
