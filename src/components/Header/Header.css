@@ -29,27 +29,28 @@
   align-items: center;
   justify-content: center;
 
-  color: #FFF;
+  color: #fff;
 }
 
 @media screen and (max-width: 768px) {
-    .navbar__link {
-      display: none;
-    }
-    .navbar__link_to_root {
-      display: flex;
-    }
-    .header {
-      padding: 0 30px;
-      display: flex;
-      justify-content: space-between;
-    }
+  .navbar__li_to_movies,
+  .navbar__li_to_saved-movies,
+  .navbar__li_to_profile {
+    display: none;
+  }
+  .header {
+    padding: 0 30px;
+  }
+  .header_authorized {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 @media screen and (max-width: 320px) {
-    .header {
-      padding: 0 14px;
-    }
+  .header {
+    padding: 0 14px;
+  }
 }
 
 .navbar__link_to_root {
@@ -75,13 +76,15 @@
   font-weight: 500;
 }
 
-.navbar__link_to_movies, .navbar__link_to_saved-movies {
+.navbar__link_to_movies,
+.navbar__link_to_saved-movies {
   padding: 0 8px;
-  color: #FFF;
+  color: #fff;
   font-size: 13px;
 }
 
-.navbar__link_to_movies_active, .navbar__link_to_saved-movies_active {
+.navbar__link_to_movies_active,
+.navbar__link_to_saved-movies_active {
   font-weight: 500;
 }
 

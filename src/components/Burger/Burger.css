@@ -1,4 +1,5 @@
 .burger {
+  padding: 8px;
   z-index: 1;
   cursor: pointer;
   margin: auto 0;
@@ -8,7 +9,7 @@
 }
 
 .burger:hover .burger__slice {
-  background-color: #3DDC84;
+  background-color: #3ddc84;
 }
 
 .burger__menu {
@@ -20,7 +21,7 @@
 }
 
 .burger__slice {
-  background-color: #FFF;
+  background-color: #fff;
   width: 28px;
   height: 3px;
   transition: transform 0.3s ease, background-color 0.3s ease;
@@ -36,27 +37,26 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
   .burger {
     display: none;
   }
 }
 
 /* active cross */
-.burger__menu_active{
+.burger__menu_active {
   transform: rotateZ(135deg);
 }
-.burger__slice_pos_first_active{
+.burger__slice_pos_first_active {
   opacity: 0;
 }
 
 /* .burger__slice_pos_second_active{} */
 
-.burger__slice_pos_cross_active{
+.burger__slice_pos_cross_active {
   transform: rotateZ(90deg);
 }
 
-.burger__slice_pos_third_active{
+.burger__slice_pos_third_active {
   opacity: 0;
 }
-
