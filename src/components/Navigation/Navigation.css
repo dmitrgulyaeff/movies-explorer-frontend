@@ -2,7 +2,9 @@
   z-index: 1;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 250ms, opacity 250ms ease-in;
+  transition:
+    visibility 250ms,
+    opacity 250ms ease-in;
   display: flex;
   position: fixed;
   justify-content: flex-end;
@@ -15,7 +17,9 @@
 }
 
 .popup_opened {
-  transition: visibility 400ms, opacity 400ms ease-out;
+  transition:
+    visibility 400ms,
+    opacity 400ms ease-out;
   visibility: visible;
   opacity: 1;
 }
@@ -82,7 +86,7 @@
   pointer-events: none;
   position: absolute;
   display: flex;
-  content: '';
+  content: "";
   background-color: #fff;
   width: 72px;
   height: 2px;
@@ -106,13 +110,13 @@
 
 .aside__nav-link_to_profile::before {
   position: absolute;
-  content: 'Аккаунт';
+  content: "Аккаунт";
   border-radius: 20px;
   background: #313131;
   font-size: 14px;
   font-weight: 500;
   padding: 8px 22px;
-  line-height: 16px; 
+  line-height: 16px;
 }
 
 @media screen and (min-width: 769px) {
@@ -123,7 +127,9 @@
 
 @media screen and (max-width: 320px) {
   .aside__nav {
-    height: calc(100% - 114px - 46px);
-    margin: 114px 0 46px 0;
+    padding: 133px 0 39px 0;
+  }
+  .aside__li {
+    height: 46px;
   }
 }

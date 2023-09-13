@@ -23,7 +23,9 @@
   background-color: #fff;
   width: 28px;
   height: 3px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
 }
 
 /* active cross */
@@ -34,9 +36,12 @@
   opacity: 0;
 }
 
-/* .burger__slice_pos_second_active{} */
+.burger__slice_pos_second_active {
+  width: 22px;
+}
 
 .burger__slice_pos_cross_active {
+  width: 22px;
   transform: rotateZ(90deg);
 }
 
@@ -50,26 +55,14 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+.burger_active {
+  margin-top: 21px;
+  margin-right: -12px;
+}
+
+@media screen and (max-width: 500px) {
   .burger_active {
-    margin-top: 21px;
-    margin-right: -12px;
-  }
-  .burger__slice_pos_cross_active,
-  .burger__slice_pos_second_active {
-    width: 22px;
+    margin-top: 12px;
+    margin-right: -5px;
   }
 }
-
-@media screen and (max-width: 320px) {
-  .burger__menu {
-    gap: 6px;
-  }
-  .burger__slice {
-    width: 22px;
-    height: 2px;
-  }
-}
-
-
-
