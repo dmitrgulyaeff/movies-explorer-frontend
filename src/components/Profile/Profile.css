@@ -144,3 +144,21 @@
     margin-top: 97px;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .profile {
+    max-height: 706px;
+    width: 100%;
+    height: calc(100vh - 74px);
+    box-sizing: border-box;
+    padding: 70px 30px 38px;
+    margin: 0 auto;
+    max-width: 410px;
+  }
+  .profile__form {    
+    margin-top: 82px;
+  }
+  .profile__form-btn, .profile__button-exit {
+    font-size: 12px
+  }
+}
