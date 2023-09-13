@@ -32,8 +32,10 @@
 }
 
 .aside__nav {
-  height: calc(100% - 140px - 90px);
-  margin: 140px 0 90px 0;
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+  padding: 146px 0 82px 0;
 }
 
 .aside__ul {
@@ -104,21 +106,24 @@
 
 .aside__nav-link_to_profile::before {
   position: absolute;
-  padding: 8px 20px;
   content: 'Аккаунт';
   border-radius: 20px;
   background: #313131;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 22px;
+  line-height: 16px; 
+}
+
+@media screen and (min-width: 769px) {
+  .popup {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .aside__nav {
     height: calc(100% - 114px - 46px);
     margin: 114px 0 46px 0;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .popup {
-    display: none;
   }
 }

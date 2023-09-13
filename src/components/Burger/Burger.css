@@ -26,22 +26,6 @@
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-@media screen and (max-width: 320px) {
-  .burger__menu {
-    gap: 6px;
-  }
-  .burger__slice {
-    width: 22px;
-    height: 2px;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .burger {
-    display: none;
-  }
-}
-
 /* active cross */
 .burger__menu_active {
   transform: rotateZ(135deg);
@@ -59,3 +43,33 @@
 .burger__slice_pos_third_active {
   opacity: 0;
 }
+
+@media screen and (min-width: 769px) {
+  .burger {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .burger_active {
+    margin-top: 21px;
+    margin-right: -12px;
+  }
+  .burger__slice_pos_cross_active,
+  .burger__slice_pos_second_active {
+    width: 22px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .burger__menu {
+    gap: 6px;
+  }
+  .burger__slice {
+    width: 22px;
+    height: 2px;
+  }
+}
+
+
+

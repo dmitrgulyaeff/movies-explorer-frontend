@@ -20,7 +20,7 @@ export default function Burger() {
   }
 
   return (
-      <button className={'burger'} onClick={burgerHandler}>
+      <button className={classNames('burger', {'burger_active' : isActive})} onClick={burgerHandler}>
         <div className={burgerStylesClass}>
           <div className={firstStylesClass}></div>
           <div className={secondStylesClass}>
