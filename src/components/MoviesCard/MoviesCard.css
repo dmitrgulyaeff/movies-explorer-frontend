@@ -73,3 +73,9 @@
 .movie__btn-cross:hover {
   background-image: url('../../images/icons/cross-hover.svg');
 }
+
+@media screen and (max-width: 500px) {
+  .movie__image {
+    aspect-ratio: 1.78571428571;
+  }
+}

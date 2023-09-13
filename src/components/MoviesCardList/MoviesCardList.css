@@ -61,12 +61,14 @@
 /* 320 */
 @media screen and (max-width: 500px) {
   .movies__list {
-    margin-top: 44px;
+    margin-top: 34px;
     padding: 50px 0 30px;
     grid-template-columns: 1fr;
+    row-gap: 20px;
   }
 
   .movies__button-more {
+    margin-top: 48px;
     width: 240px;
     height: 36px;
   }

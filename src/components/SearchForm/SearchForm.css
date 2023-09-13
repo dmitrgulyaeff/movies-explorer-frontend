@@ -107,41 +107,6 @@
   line-height: 18px;
 }
 
-@media screen and (max-width: 700px) {
-  .search {
-    padding: 0;
-    background-color: transparent;
-    box-shadow: none;
-    display: grid;
-    grid-template-areas:
-      "form form"
-      "toggle shortfilms";
-  }
-
-  .search__form {
-    padding: 19px;
-    grid-area: form;
-    border-radius: 9px;
-    background: #222;
-    box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
-    margin-bottom: 45px;
-  }
-
-  .search__line,
-  .search__loupe-icon {
-    display: none;
-  }
-
-  .search__toggle {
-    grid-area: toggle;
-    justify-self: flex-end;
-  }
-
-  .search__shortfilms-text {
-    grid-area: shortfilms;
-    justify-self: start-end;
-  }
-}
 
 .search__shortfilms-text_invalid,
 .search__button_invalid,
@@ -157,5 +122,43 @@
   .search__shortfilms-text {
     margin-right: 0;
     margin-left: 16px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .search {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    display: grid;
+    grid-template-areas:
+      "form form"
+      "toggle shortfilms";
+  }
+
+  .search__form {
+    padding: 16px 19px 16px 9px;
+    grid-area: form;
+    border-radius: 9px;
+    background: #222;
+    box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+    margin-bottom: 35px;
+  }
+
+  .search__line,
+  .search__loupe-icon {
+    display: none;
+  }
+
+  .search__toggle {
+    grid-area: toggle;
+    justify-self: flex-end;
+  }
+
+  .search__shortfilms-text {
+    grid-area: shortfilms;
+    margin-left: 14px;
+    font-size: 11px;
+    line-height: 18px; 
   }
 }
