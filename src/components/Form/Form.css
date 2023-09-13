@@ -111,3 +111,12 @@
   margin: auto 0 10px;
   color: #EE3465
 }
+
+@media screen and (max-width: 500px) {
+  .form {
+    margin-top: 80px;
+  }
+  .form__redirect-offer, .form__btn-submit {
+    font-size: 12px;
+  }
+}
