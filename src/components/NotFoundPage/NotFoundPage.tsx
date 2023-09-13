@@ -10,7 +10,7 @@ export default function NotFoundPage() {
       <p className="not-found-page__description-code">Страница не найдена</p>
       <button className="not-found-page__back-button" onClick={() => {
         navigation('/')
-      }}>назад</button>
+      }}>Назад</button>
     </section>
   );
 }

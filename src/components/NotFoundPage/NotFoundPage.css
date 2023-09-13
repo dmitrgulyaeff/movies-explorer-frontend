@@ -7,33 +7,7 @@
   color: white;
   align-items: center;
   height: 100vh;
-  width: 100vw;
-}
-
-@media screen and (max-width: 1280px) {
-  .not-found-page {
-    padding-bottom: 200px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .not-found-page {
-    padding-bottom: 30px;
-  }
-
-  .not-found-page__topic-code {
-    margin-bottom: 10px;
-
-    font-size: 80px;
-  }
-
-  .not-found-page__description-code { 
-    font-size: 12px;
-  }
-
-  .not-found-page__back-button {
-    font-size: 12px;
-  }
+  width: 100%;
 }
 
 .not-found-page__topic-code {
@@ -64,4 +38,36 @@
 
   background: transparent;
   border: none;
+}
+
+@media screen and (max-width: 1280px) {
+  .not-found-page {
+    max-height: 1024px;
+    padding-top: 421px;
+    padding-bottom: 221px;
+  }
+
+  .not-found-page__topic-code {
+    margin-bottom: 22px
+  } 
+}
+
+@media screen and (max-width: 400px) {
+  .not-found-page {
+    max-height: 780px;
+    padding: 337px 0 29px 0;
+  }
+
+  .not-found-page__topic-code {
+    margin-bottom: 21px;
+    font-size: 80px;
+  }
+
+  .not-found-page__description-code { 
+    font-size: 12px;
+  }
+
+  .not-found-page__back-button {
+    font-size: 12px;
+  }
 }
