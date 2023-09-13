@@ -149,3 +149,13 @@
   pointer-events: none;
   opacity: 0.4;
 }
+
+@media screen and (max-width: 768px) {
+  .search__line {
+    margin: 0 19px;
+  } 
+  .search__shortfilms-text {
+    margin-right: 0;
+    margin-left: 16px;
+  }
+}

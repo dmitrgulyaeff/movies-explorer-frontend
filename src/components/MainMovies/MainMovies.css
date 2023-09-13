@@ -8,6 +8,7 @@
 
 @media screen and (max-width: 900px) {
   .main__movies {
+    margin-top: 78px;
     padding: 0 30px;
   }
 }
