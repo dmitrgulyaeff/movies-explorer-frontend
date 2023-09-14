@@ -93,7 +93,7 @@ export default function SearchForm() {
           <Loupe />
         </button>
       </form>
-      <div className="search__line" />
+      <hr className="search__separator" />
       <FilterCheckbox
         className={classNames('search__toggle', {
           search__toggle_invalid: !validForm,

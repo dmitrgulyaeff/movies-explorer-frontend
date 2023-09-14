@@ -10,12 +10,9 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.88px;
-}
 
-.techs__line {
-  margin: 23px 0 0;
-  height: 1px;
-  background-color: #dadada;
+  padding-bottom: 23px;
+  border-bottom: solid 1px #dadada;
 }
 
 .techs__description {
@@ -109,12 +106,10 @@
   .techs__topic  {
     font-size: 18px;
     letter-spacing: -0.72px;
+    padding-bottom: 28px;
+    border-color: #000;
   }
-
-  .techs__line {
-    margin-top: 28px;
-    background-color: #000;
-  }
+  
   .techs__description {
     margin: 49px 0 0;
   }

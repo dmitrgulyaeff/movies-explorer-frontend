@@ -7,7 +7,6 @@ export default function AboutMe() {
   return (
     <section id="student" className="student">
       <h2 className="student__topic">Студент</h2>
-      <div className="student__line" />
       <div className="student__resume">
         <div className="student__resume-wrappper">
           <h3 className="student__resume-name">Виталий</h3>

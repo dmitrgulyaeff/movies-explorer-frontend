@@ -7,13 +7,9 @@
   color: #fff;
   font-size: 22px;
   font-weight: 400;
-}
 
-.project__line {
-  margin-top: 23px;
-  width: 100%;
-  background-color: #dadada;
-  height: 1px;
+  padding-bottom: 23px;
+  border-bottom: 1ps solid #dadada;
 }
 
 .project__descriptions {
@@ -112,11 +108,9 @@
     font-size: 18px;
     line-height: normal;
     letter-spacing: -0.72px;
+    padding-bottom: 28px;
   }
-  .project__line {
-    margin-top: 28px;
-  }
-
+  
   .project__descriptions {
     margin-top: 61px;
     flex-direction: column;

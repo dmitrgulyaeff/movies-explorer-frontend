@@ -4,16 +4,13 @@
 }
 
 .student__topic {
-  margin: 0 0 23px;
+  margin: 0;
+  padding-bottom: 23px;
   font-size: 22px;
   font-style: normal;
   font-weight: 400;
   letter-spacing: -0.88px;
-}
-
-.student__line {
-  height: 1px;
-  background-color: #dadada;
+  border-bottom: 1px solid #dadada;
 }
 
 .student__resume {
@@ -111,7 +108,7 @@
     padding: 0 14px 70px;
   }
   .student__topic {
-    margin-bottom: 29px;
+    padding-bottom: 29px;
 
     font-size: 18px;
     line-height: 21px;
