@@ -50,6 +50,10 @@
   border: none;
 }
 
+.portfolio__link-arrow {
+  min-width: max-content;
+}
+
 @media screen and (max-width: 900px) {
   .portfolio {
     padding: 0 50px 70px;
