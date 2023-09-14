@@ -20,10 +20,10 @@ export default function AboutProject() {
         </li>
       </ul>
       <div className="project__timeline">
-        <div className="project__timeline_interval_first">1 неделя</div>
-        <div className="project__timeline_interval_second">4 недели</div>
-        <p className="project__timeline_interval-description_first">Back-end</p>
-        <p className="project__timeline_interval-description_second">Front-end</p>
+        <div className="project__timeline-interval project__timeline-interval_position_first">1 неделя</div>
+        <div className="project__timeline-interval project__timeline-interval_position_second">4 недели</div>
+        <p className="project__timeline-interval-description project__timeline-interval-description_position_first">Back-end</p>
+        <p className="project__timeline-interval-description project__timeline-interval-description_position_second">Front-end</p>
       </div>
     </section>
 

@@ -58,7 +58,7 @@ export default function Movies() {
   };
 
   return (
-    <main className="main__movies">
+    <main className="main-movies">
       <SearchForm />
       {pathname === '/saved-movies' &&
         renderMovies(savedMovies, apiMoviesResponses.main?.success)}

@@ -134,6 +134,16 @@
   margin: 6px 0 17px;
 }
 
+.profile__form-response-error {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #EE3465;
+  text-align: center;
+  font-size: 13px;
+  line-height: normal;
+}
+
 @media screen and (max-width: 768px) {
   .profile {
     padding: 0 0 33px;
@@ -158,7 +168,8 @@
   .profile__form {    
     margin-top: 82px;
   }
-  .profile__form-btn, .profile__button-exit {
+  .profile__form-btn, .profile__button-exit, .profile__form-response-error {
     font-size: 12px
   }
 }
+

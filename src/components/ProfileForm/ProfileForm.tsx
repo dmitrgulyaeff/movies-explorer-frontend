@@ -189,5 +189,5 @@ ProfileForm.EnableBottom = function EnableBottom({
 
 ProfileForm.ResponseError = function ResponseError() {
   const { error } = useContext(ProfileFormContext);
-  return <p className="profile__form__response-error">{error}</p>;
+  return <p className="profile__form-response-error">{error}</p>;
 };

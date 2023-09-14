@@ -84,7 +84,7 @@
   background: #9bb9e9;
 }
 
-.form__redirect-offer, .form__response-error {
+.form__redirect-offers, .form__response-error {
   margin-top: 16px;
   display: flex;
   align-items: center;
@@ -116,7 +116,7 @@
   .form {
     margin-top: 80px;
   }
-  .form__redirect-offer, .form__btn-submit {
+  .form__redirect-offers, .form__btn-submit {
     font-size: 12px;
   }
 }

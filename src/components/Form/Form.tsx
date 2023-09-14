@@ -144,9 +144,9 @@ interface RedirectOfferProps {
 
 Form.RedirectOffer  = function RedirectOffer({ offerText, linkText, linkTo }: RedirectOfferProps) {
   return (
-    <div className="form__redirect-offer">
-      <p className='form__redirect-offer_el_question'>{offerText}</p>
-      <Link className='form__redirect-offer_el_link' to={linkTo}>{linkText}</Link>
+    <div className="form__redirect-offers">
+      <p className='form__redirect-offer form__redirect-offer_el_question'>{offerText}</p>
+      <Link className='form__redirect-offer form__redirect-offer_el_link' to={linkTo}>{linkText}</Link>
     </div>
   );
 };
