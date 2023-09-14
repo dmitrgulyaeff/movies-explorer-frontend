@@ -1,0 +1,26 @@
+.mini-head {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.mini-head__logo {
+  width: 38px;
+  aspect-ratio: 1/1;
+}
+
+.mini-head__topic {
+  margin: 0;
+  color: #FFF;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+@media screen and (max-width: 500px) {
+  .mini-head  {
+    align-items: center;
+    gap: 47px;
+  }
+}

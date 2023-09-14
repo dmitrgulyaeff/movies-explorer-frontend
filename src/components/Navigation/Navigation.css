@@ -1,0 +1,135 @@
+.popup {
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 250ms,
+    opacity 250ms ease-in;
+  display: flex;
+  position: fixed;
+  justify-content: flex-end;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0, 0.3);
+}
+
+.popup_opened {
+  transition:
+    visibility 400ms,
+    opacity 400ms ease-out;
+  visibility: visible;
+  opacity: 1;
+}
+
+.aside {
+  transform: translateX(20%);
+  background-color: #202020;
+  width: min(100%, 520px);
+  height: 100%;
+  transition: transform 250ms;
+}
+.aside_opened {
+  transform: translateX(0);
+}
+
+.aside__nav {
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+  padding: 146px 0 82px 0;
+}
+
+.aside__ul {
+  height: 100%;
+  list-style-type: none;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.aside__li {
+  color: #fff;
+  height: 50px;
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.aside__li:hover {
+  background-color: #3ddc84;
+  color: #000;
+}
+
+.aside__nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.aside__li_to_profile {
+  margin-top: auto;
+}
+
+.aside__nav-link_active::before {
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  content: "";
+  background-color: #fff;
+  width: 72px;
+  height: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px;
+}
+
+.aside__li:hover .aside__nav-link_active::before {
+  background-color: #000;
+}
+
+.aside__li_to_profile:hover {
+  background-color: #313131;
+  position: relative;
+}
+
+.aside__li_to_profile:hover .aside__nav-link_to_profile::before {
+  background: #3ddc84;
+}
+
+.aside__nav-link_to_profile::before {
+  position: absolute;
+  content: "Аккаунт";
+  border-radius: 20px;
+  background: #313131;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 22px;
+  line-height: 16px;
+}
+
+@media screen and (min-width: 769px) {
+  .popup {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .aside__nav {
+    padding: 133px 0 39px 0;
+  }
+  .aside__li {
+    height: 46px;
+  }
+}

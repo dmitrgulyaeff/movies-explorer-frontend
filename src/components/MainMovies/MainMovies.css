@@ -1,0 +1,21 @@
+.main-movies {
+  margin-top: 68px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 70px;
+  flex: 1
+}
+
+@media screen and (max-width: 900px) {
+  .main-movies {
+    margin-top: 78px;
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .main-movies {
+    margin-top: 80px;
+    padding: 0 10px;
+  }
+}

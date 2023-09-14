@@ -1,0 +1,126 @@
+.header {
+  background: #202020;
+  padding: 0 70px;
+}
+
+.navbar__ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navbar__li_to_profile {
+  margin-left: auto;
+}
+
+.navbar__li_to_root {
+  width: 100px;
+  margin-right: auto;
+}
+
+.navbar__link {
+  line-height: 1;
+  padding: 0 20px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+  transition: color 0.2s ease;
+
+}
+
+.navbar__link:hover {
+  color: #3ddc84;
+}
+
+
+
+.navbar__link_to_root {
+  padding: 0;
+  margin-right: auto;
+  aspect-ratio: 1/1;
+  height: 38px;
+  background-image: url('../../images/icons/logo.svg');
+}
+
+.navbar__link_to_signin {
+  border-radius: 3px;
+  background: #3ddc84;
+
+  color: #000;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.navbar__link_to_signin:hover {
+  background: transparent;
+}
+.navbar__link_to_signup {
+  margin-right: 10px;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.navbar__link_to_movies,
+.navbar__link_to_saved-movies {
+  padding: 0 8px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.navbar__link_to_movies_active,
+.navbar__link_to_saved-movies_active {
+  font-weight: 500;
+}
+
+.navbar__link_to_profile {
+  box-sizing: border-box;
+  margin-left: auto;
+  width: 100px;
+
+  border-radius: 20px;
+  background: #313131;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar__li_to_movies,
+  .navbar__li_to_saved-movies,
+  .navbar__li_to_profile {
+    display: none;
+  }
+  .header {
+    padding: 0 30px;
+  }
+  .header_authorized {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    padding: 0 14px;
+  }
+  .navbar__link {
+    padding: 0;
+  }
+  .navbar__link_to_signup {
+    margin-right: 14px;
+    font-size: 10px;
+  }
+  .navbar__link_to_signin {
+    font-size: 10px;
+    height: 26px;
+    width: 54px;
+  }
+}

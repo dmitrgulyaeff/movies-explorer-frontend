@@ -1,0 +1,65 @@
+.burger {
+  padding: 8px;
+  z-index: 1;
+  cursor: pointer;
+  margin: auto 0;
+  background: transparent;
+  border: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  transition: transform 0.3s ease;
+}
+
+.burger:hover .burger__slice,
+.burger:hover .burger__sub-slice {
+  background-color: #3ddc84;
+}
+
+.burger__slice,
+.burger__sub-slice {
+  display: block;
+  background-color: #fff;
+  width: 28px;
+  height: 3px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* active cross */
+.burger__slice_pos_first_active {
+  opacity: 0;
+}
+
+.burger__slice_pos_second_active {
+  width: 22px;
+}
+
+.burger__sub-slice_pos_cross_active {
+  width: 22px;
+  transform: rotateZ(90deg);
+}
+
+.burger__slice_pos_third_active {
+  opacity: 0;
+}
+
+@media screen and (min-width: 769px) {
+  .burger {
+    display: none;
+  }
+}
+
+.burger_active {
+  margin-top: 21px;
+  margin-right: -12px;
+  transform: rotateZ(135deg);
+}
+
+@media screen and (max-width: 500px) {
+  .burger_active {
+    margin-top: 12px;
+    margin-right: -5px;
+  }
+}

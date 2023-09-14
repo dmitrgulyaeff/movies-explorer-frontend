@@ -1,0 +1,154 @@
+.student {
+  color: #fff;
+  padding: 110px 70px 100px;
+}
+
+.student__topic {
+  margin: 0;
+  padding-bottom: 23px;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid #dadada;
+}
+
+.student__resume {
+  margin: 66px 0 0;
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 599px) 1fr;
+  grid-template-areas: "wrapper avatar";
+}
+
+.student__resume-wrappper {
+  grid-area: wrapper;
+  display: flex;
+  flex-direction: column;
+}
+
+.student__resume-name {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+}
+
+.student__resume-description {
+  margin: 18px 0 0;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.student__resume-story {
+  margin: 26px 0 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.student__github-link {
+  margin: auto 0 0;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.student__github-link:hover {
+  color: #3DDC84;;
+}
+
+.student__resume-avatar {
+  width: 270px;
+  grid-area: avatar;
+  justify-self: flex-end;
+  margin-left: 50px;
+  align-self: stretch;
+  object-fit: cover;
+  height: 327px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .student {
+    padding: 90px 50px;
+  }
+  .student__resume-name {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+  }
+
+  .student__resume-description {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .student__resume-story {
+    margin: 20px 0 0;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .student__resume-avatar {
+    height: 307px;
+    width: 255px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .student {
+    padding: 0 14px 70px;
+  }
+  .student__topic {
+    padding-bottom: 29px;
+
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: -0.72px;
+  }
+
+  .student__resume {
+    margin-top: 60px;
+    grid-template-columns: auto;
+    grid-template-areas: "avatar" "wrapper" ;
+  }
+
+  .student__resume-avatar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 352px;
+  }
+
+  .student__resume-wrappper {
+    margin-top: 40px;
+  }
+
+  .student__resume-name {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+
+  .student__resume-description {
+    margin-top: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .student__resume-story {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .student__github-link {
+    margin-top: 40px;
+  }
+}

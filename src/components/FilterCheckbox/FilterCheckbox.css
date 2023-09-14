@@ -1,0 +1,30 @@
+.toggle{
+  background-color: #8B8B8B;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  min-width: 36px;
+  min-height: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.toggle:hover{
+  cursor: pointer;
+}
+.toggle_active{
+  background-color: #2BE080;
+}
+
+.toggle__circle {
+  margin: 2px;
+  height: 16px;
+  aspect-ratio: 1/1;
+  background-color: #FFF;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+
+.toggle__circle_active {
+  transform: translateX(16px);
+}

@@ -1,0 +1,124 @@
+.form {
+  flex-grow: 1;
+  margin: 40px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__input {
+  margin-bottom: 14px;
+}
+
+.form__input-name {
+  margin: 0;
+  color: #8B8B8B;
+  font-size: 10px;
+  line-height: normal;
+}
+
+.form__input-input {
+  width: 100%;
+  margin: 5px 0 0;
+  padding: 0 0 10px;
+  outline: 0;
+  border: none;
+  border-bottom: solid 1px #424242;
+  background-color: transparent;
+}
+.form__input-input::-ms-reveal {
+  filter: invert(100%);
+}
+
+.form__input-input {
+  color: #FFF;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.form__input-input::placeholder {
+  color: #424242;
+}
+
+.form__input-input:focus-visible {
+  border-bottom: solid 1px #4285F4;
+}
+
+.form__input-input__failed {
+  color: #EE3465;
+  border-bottom: solid 1px #EE3465;
+}
+
+.form__input-input__failed:focus-visible {
+  border-bottom: solid 1px #EE3465;
+}
+
+.form__input-error {
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.form__btn-submit {
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+  height: 45px;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  border-radius: 3px;
+  background: #4285F4;
+}
+
+.form__btn-submit:not(:disabled):hover {
+  cursor: pointer;
+  background: #4271f4;
+}
+
+.form__btn-submit:disabled {
+  background: #9bb9e9;
+}
+
+.form__redirect-offers, .form__response-error {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 6px;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.form__redirect-offer_el_question {
+  margin: 0;
+  color: #8B8B8B;
+}
+
+.form__redirect-offer_el_link{
+  color: #4285F4
+}
+
+.form__response-error {
+  margin: auto 0 10px;
+  color: #EE3465
+}
+
+@media screen and (max-width: 500px) {
+  .form {
+    margin-top: 80px;
+  }
+  .form__redirect-offers, .form__btn-submit {
+    font-size: 12px;
+  }
+}

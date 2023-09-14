@@ -1,0 +1,90 @@
+.movie {
+  display: grid;
+  background-color: #222;
+  filter: drop-shadow(0px 16px 24px rgba(0, 0, 0, 0.05));
+  grid-template-columns: 1fr min-content;
+  grid-template-areas: 'link link'
+  'name like'
+  'duration like';
+}
+
+.movie__link {
+  grid-area: link;
+}
+
+.movie__image {
+  width: 100%;
+  aspect-ratio: 270/151;
+}
+
+.movie__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 10px 0 0 12px ;
+  grid-area: name;
+  color: #FFF;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.movie__duration {
+  margin: 10px 0 14px 12px;
+  grid-area: duration;
+  color: #8B8B8B;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.movie__btn-like {
+  margin: 10px 11px 0 12px;
+  grid-area: like;
+  cursor: pointer;
+  box-sizing: border-box;
+  max-width: 16px;
+  aspect-ratio: 1/1;
+  border: solid 2px #FFF;
+  border-radius: 50%;
+  background-color: #313131;
+  transition: background-color 0.1s;
+}
+
+.movie__btn-like:hover {
+  background-color: rgb(43, 224, 128, 0.3);
+}
+
+.movie__btn-like_active {
+  background-color: #2BE080;
+}
+
+.movie__btn-like_active:hover {
+  background-color: rgb(43, 224, 128, 0.8);
+}
+
+.movie__btn-cross {
+  border: none;
+  background-image: url('../../images/icons/cross.svg');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position-x: center;
+  background-position-y: bottom;
+  width: 16px;
+  aspect-ratio: 1/1;
+  padding: 14px 12px 0 12px;
+  grid-area: like;
+  cursor: pointer;
+}
+
+.movie__btn-cross:hover {
+  background-image: url('../../images/icons/cross-hover.svg');
+}
+
+@media screen and (max-width: 500px) {
+  .movie__image {
+    aspect-ratio: 300/168;
+  }
+}
