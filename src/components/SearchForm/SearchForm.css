@@ -33,6 +33,10 @@
   box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
 }
 
+.search:focus {
+  outline: 1px solid green;
+}
+
 .search_invalid {
   outline: 1px solid rgba(156, 45, 74, 0.4);
   animation: shake 0.5s;
@@ -86,6 +90,12 @@
   border-radius: 17px;
   background-color: #4285f4;
   border: none;
+  transition: background-color 0.3s ease;
+}
+
+.search__button:hover {
+  cursor: pointer;
+  background-color: #3876da;
 }
 
 .search__button * {

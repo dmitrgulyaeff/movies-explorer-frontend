@@ -38,6 +38,11 @@
 
   background: transparent;
   border: none;
+  transition: color 0.3 ease;
+}
+
+.not-found-page__back-button:hover {
+  color: #98b4e1;
 }
 
 @media screen and (max-width: 1280px) {

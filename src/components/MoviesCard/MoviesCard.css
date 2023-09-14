@@ -50,10 +50,19 @@
   border: solid 2px #FFF;
   border-radius: 50%;
   background-color: #313131;
+  transition: background-color 0.1s;
+}
+
+.movie__btn-like:hover {
+  background-color: rgb(43, 224, 128, 0.3);
 }
 
 .movie__btn-like_active {
   background-color: #2BE080;
+}
+
+.movie__btn-like_active:hover {
+  background-color: rgb(43, 224, 128, 0.8);
 }
 
 .movie__btn-cross {

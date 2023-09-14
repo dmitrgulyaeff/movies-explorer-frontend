@@ -6,7 +6,10 @@
   min-width: 36px;
   min-height: 20px;
   transition: background-color 0.3s ease;
+}
 
+.toggle:hover{
+  cursor: pointer;
 }
 .toggle_active{
   background-color: #2BE080;

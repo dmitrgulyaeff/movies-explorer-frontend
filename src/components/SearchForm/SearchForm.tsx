@@ -66,7 +66,6 @@ export default function SearchForm() {
   }, [filter, setFilter, showOnlyShortFilms]);
 
   return (
-    // TODO: form.action ??
     <section
       className={classNames('search', {
         search_invalid: !validForm,

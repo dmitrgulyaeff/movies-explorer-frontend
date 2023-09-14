@@ -30,6 +30,12 @@
   justify-content: center;
 
   color: #fff;
+  transition: color 0.2s ease;
+
+}
+
+.navbar__link:hover {
+  color: #3ddc84;
 }
 
 
@@ -49,8 +55,12 @@
   color: #000;
   font-size: 12px;
   font-weight: 500;
+  transition: background-color 0.2s ease;
 }
 
+.navbar__link_to_signin:hover {
+  background: transparent;
+}
 .navbar__link_to_signup {
   margin-right: 10px;
 
