@@ -38,7 +38,7 @@ export default function MoviesCard({
         <Link className="movie__link" to={trailerLink} target="_blank">
           <img className="movie__image" src={image} alt={nameRU} />
         </Link>
-        <h4 className="movie__name">{nameRU}</h4>
+        <h2 className="movie__name">{nameRU}</h2>
         <p className="movie__duration">{minutesToString(duration)}</p>
         <button className={btnClass} onClick={() => handleLike(movie)} />
       </article>
