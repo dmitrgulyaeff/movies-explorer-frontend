@@ -72,7 +72,7 @@ export default function SearchForm() {
         search_invalid: !validForm,
       })}
     >
-      <form className="search__form" action="" onSubmit={onSubmit}>
+      <form className="search__form" onSubmit={onSubmit}>
         <Loupe className="search__loupe-icon" />
         <input
           className={classNames('search__input', {

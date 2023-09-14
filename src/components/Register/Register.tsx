@@ -42,7 +42,7 @@ export default function Register() {
         <Form.Input
           stateKey="name"
           name="Имя"
-          type="username"
+          type="text"
           minLength={2}
           maxLength={30}
           required={true}

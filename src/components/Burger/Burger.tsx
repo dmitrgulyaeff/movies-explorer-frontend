@@ -21,11 +21,11 @@ export default function Burger() {
 
   return (
       <button className={classNames('burger', {'burger_active' : isActive})} onClick={burgerHandler}>
-          <div className={firstStylesClass} />
-          <div className={secondStylesClass}>
-            <div className={crossStylesClass} />
-          </div>
-          <div className={thirdStylesClass} />
+          <span className={firstStylesClass} />
+          <span className={secondStylesClass}>
+            <span className={crossStylesClass} />
+          </span>
+          <span className={thirdStylesClass} />
       </button>
   );
 }

@@ -15,7 +15,7 @@
 .toggle__circle {
   margin: 2px;
   height: 16px;
-  aspect-ratio: 1;
+  aspect-ratio: 1/1;
   background-color: #FFF;
   border-radius: 50%;
   transition: transform 0.3s ease;

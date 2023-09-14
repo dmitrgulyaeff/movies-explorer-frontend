@@ -52,7 +52,7 @@
 .search__loupe-icon {
   width: 34px;
   min-width: 34px;
-  aspect-ratio: 1;
+  aspect-ratio: 1/1;
 }
 
 .search__loupe-icon * {

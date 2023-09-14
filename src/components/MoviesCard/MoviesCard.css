@@ -14,7 +14,7 @@
 
 .movie__image {
   width: 100%;
-  aspect-ratio: 1.8;
+  aspect-ratio: 270/151;
 }
 
 .movie__name {
@@ -46,7 +46,7 @@
   cursor: pointer;
   box-sizing: border-box;
   max-width: 16px;
-  aspect-ratio: 1;
+  aspect-ratio: 1/1;
   border: solid 2px #FFF;
   border-radius: 50%;
   background-color: #313131;
@@ -64,7 +64,7 @@
   background-position-x: center;
   background-position-y: bottom;
   width: 16px;
-  aspect-ratio: 1;
+  aspect-ratio: 1/1;
   padding: 14px 12px 0 12px;
   grid-area: like;
   cursor: pointer;
@@ -76,6 +76,6 @@
 
 @media screen and (max-width: 500px) {
   .movie__image {
-    aspect-ratio: 1.78571428571;
+    aspect-ratio: 300/168;
   }
 }

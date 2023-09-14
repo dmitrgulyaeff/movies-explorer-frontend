@@ -37,7 +37,7 @@
 .navbar__link_to_root {
   padding: 0;
   margin-right: auto;
-  aspect-ratio: 1;
+  aspect-ratio: 1/1;
   height: 38px;
   background-image: url('../../images/icons/logo.svg');
 }
