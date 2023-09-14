@@ -54,6 +54,10 @@
     "label input"
     "error error";
 }
+
+.profile__form-input::placeholder {
+  color: #424242;
+}
 .profile__form-input-name,
 .profile__form-input-input {
   margin: 0;
@@ -92,6 +96,8 @@
 }
 
 .profile__form-input-error {
+  display: flex;
+  justify-content: flex-end;
   margin: 0;
   height: 10px;
   grid-area: error;

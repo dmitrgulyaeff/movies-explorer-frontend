@@ -32,21 +32,23 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
           <ProfileForm.Input
             defaultState={currentUser.name}
             stateKey="name"
-            name="Имя"
+            labelName="Имя"
             type="text"
             minLength={2}
             maxLength={30}
             required={true}
+            placeholder='Ваше имя'
           />
           <hr className="profile__form-hr" />
           <ProfileForm.Input
             defaultState={currentUser.email}
             stateKey="email"
-            name="E-mail"
+            labelName="E-mail"
             type="email"
             minLength={4}
             maxLength={30}
             required={true}
+            placeholder='Ваша почта'
           />
           <ProfileForm.ResponseError />
           <ProfileForm.SubmitBottom text="Сохранить" />

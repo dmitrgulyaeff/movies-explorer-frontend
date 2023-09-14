@@ -77,24 +77,26 @@ export default function ProfileForm({ children, onSubmit }: ProfileFormProps) {
 
 interface ProfileFormInputProps {
   stateKey: string;
-  name: string;
+  labelName: string;
   type: string;
   minLength: number;
   maxLength: number;
   required: boolean;
   autoComplete?: string;
   defaultState: string;
+  placeholder: string;
 }
 
 ProfileForm.Input = function ProfileFormInput({
   stateKey,
-  name,
+  labelName,
   type,
   minLength,
   maxLength,
   required,
   autoComplete,
   defaultState,
+  placeholder,
 }: ProfileFormInputProps) {
   const { isActive, setProfileFormState, validState, setValidState } =
     React.useContext(ProfileFormContext);
@@ -125,7 +127,7 @@ ProfileForm.Input = function ProfileFormInput({
 
   return (
     <div className="profile__form-input">
-      <p className="profile__form-input-name">{name}</p>
+      <p className="profile__form-input-name">{labelName}</p>
       <input
         value={value}
         className={inputStylesClass}
@@ -137,6 +139,8 @@ ProfileForm.Input = function ProfileFormInput({
         maxLength={maxLength}
         autoComplete={autoComplete}
         disabled={!isActive}
+        placeholder={placeholder}
+        name={stateKey}
       />
       <p className="profile__form-input-error">{error}</p>
     </div>

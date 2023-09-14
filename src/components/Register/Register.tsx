@@ -41,27 +41,30 @@ export default function Register() {
       >
         <Form.Input
           stateKey="name"
-          name="Имя"
+          labelName="Имя"
           type="text"
           minLength={2}
           maxLength={30}
           required={true}
+          placeholder='Ваше имя'
         />
         <Form.Input
           stateKey="email"
-          name="E-mail"
+          labelName="E-mail"
           type="email"
           minLength={4}
           maxLength={30}
           required={true}
+          placeholder='Ваша почта'
         />
         <Form.Input
           stateKey="password"
-          name="Пароль"
+          labelName="Пароль"
           type="password"
           minLength={8}
           maxLength={30}
           required={true}
+          placeholder='Ваш пароль'
         />
         <Form.ResponseError />
         <Form.SubmitBottom text="Зарегистрироваться" />

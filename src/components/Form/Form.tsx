@@ -63,22 +63,24 @@ export default function Form({ children, onSubmit }: FormProps) {
 
 interface FormInputProps {
   stateKey: string;
-  name: string;
+  labelName: string;
   type: string;
   minLength: number;
   maxLength: number;
   required: boolean;
   autoComplete? : string;
+  placeholder: string;
 }
 
 Form.Input = function FormInput({
   stateKey,
-  name,
+  labelName,
   type,
   minLength,
   maxLength,
   required,
-  autoComplete
+  autoComplete,
+  placeholder,
 }: FormInputProps) {
   const { formState, setFormState, validState, setValidState } =
     React.useContext(FormContext);
@@ -103,7 +105,7 @@ Form.Input = function FormInput({
 
   return (
     <div className="form__input">
-      <p className="form__input-name">{name}</p>
+      <p className="form__input-name">{labelName}</p>
       <input
         className={inputStylesClass}
         type={type}
@@ -113,6 +115,8 @@ Form.Input = function FormInput({
         minLength={minLength}
         maxLength={maxLength}
         autoComplete={autoComplete}
+        placeholder={placeholder}
+        name={stateKey}
       />
       <p className="form__input-error">{error}</p>
     </div>

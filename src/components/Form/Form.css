@@ -29,10 +29,14 @@
   filter: invert(100%);
 }
 
-.form__input-input,  .form__input-input::placeholder {
+.form__input-input {
   color: #FFF;
   font-size: 14px;
   line-height: normal;
+}
+
+.form__input-input::placeholder {
+  color: #424242;
 }
 
 .form__input-input:focus-visible {
