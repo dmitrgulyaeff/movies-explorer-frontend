@@ -4,5 +4,7 @@
 [ссылка на pull request 2](https://github.com/dmitrgulyaeff/movies-explorer-frontend/pull/2)
 
 login: reviewer@mail.ru
+
 password: reviewer@mail.ru
-Функционал на JS реализован, работает добавление и удаления в сохраненные фильмы.
+
+Функционал на JS реализован.
