@@ -93,13 +93,12 @@ export default function App() {
     }
   }, [token]);
 
+  // получить сохр. фильмы при переходе на страницу сохр.-фильмы
   useEffect(() => {
-    localStorage.setItem('name', filter['name']);
-    localStorage.setItem(
-      'showOnlyShortFilms',
-      filter['showOnlyShortFilms'].toString()
-    );
-  }, [filter]);
+    if (pathname === '/saved-movies') {
+      if (!savedMovies) setClickFrom(pathname);
+    }
+  }, [pathname, savedMovies]);
 
   return (
     <TokenContext.Provider value={{ setToken }}>

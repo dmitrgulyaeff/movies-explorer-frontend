@@ -16,7 +16,7 @@ export default function SearchForm() {
   const [showOnlyShortFilms, setShowShortFilms] = useState(
     filter.showOnlyShortFilms
   );
-  const [name, setNameRU] = useState(filter.name || '');
+  const [nameRu, setNameRU] = useState(filter.name || '');
   const [validForm, setValidForm] = useState(true);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ export default function SearchForm() {
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    if (name === '') {
+    if (nameRu === '') {
       setValidForm(false);
     } else {
       // get Data
@@ -35,26 +35,38 @@ export default function SearchForm() {
       }
 
       // filter
-      if (name.length !== 0) {
-        setFilter({ ...filter, name });
-      } else {
-        setFilter({ ...filter, name: '' });
-      }
+      setFilter({ ...filter, name: nameRu });
+      if (pathname === '/movies') localStorage.setItem('name', nameRu);
     }
   };
-  useEffect(() => {
-    if (name || validForm) {
-      setValidForm(true);
-    } else {
-      setValidForm(false);
-    }
-  }, [name, validForm]);
-  useEffect(() => {
-    if (filter.showOnlyShortFilms !== showOnlyShortFilms) {
-      setFilter({ ...filter, showOnlyShortFilms: showOnlyShortFilms });
-    }
-  }, [filter, setFilter, showOnlyShortFilms]);
 
+  useEffect(() => {
+    setValidForm(!!(nameRu || validForm));
+  }, [nameRu, validForm]);
+
+  useEffect(() => {
+    if (pathname === '/movies') {
+      const name = localStorage.getItem('name') || '';
+      const showOnlyShortFilms =
+        localStorage.getItem('showOnlyShortFilms') === 'true';
+      setShowShortFilms(showOnlyShortFilms);
+      setNameRU(name);
+      setFilter({ showOnlyShortFilms, name });
+    } else if (pathname === '/saved-movies') {
+      setValidForm(true);
+      setShowShortFilms(false);
+      setNameRU('');
+      setFilter({ showOnlyShortFilms: false, name: '' });
+    }
+  }, [pathname, setFilter]);
+
+  useEffect(() => {
+    if (pathname === '/movies') {
+      localStorage.setItem('showOnlyShortFilms', String(showOnlyShortFilms));
+    }
+  }, [showOnlyShortFilms, pathname]);
+
+  // TODO: FilterCheckbox исправить
   return (
     <section
       className={classNames('search', {
@@ -69,7 +81,7 @@ export default function SearchForm() {
           })}
           type="text"
           placeholder={validForm ? 'Фильм' : 'Нужно ввести ключевое слово'}
-          value={name}
+          value={nameRu}
           onChange={handleInputChange}
         ></input>
         <button

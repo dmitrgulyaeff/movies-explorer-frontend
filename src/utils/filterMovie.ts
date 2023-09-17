@@ -8,6 +8,8 @@ export default function filterMovie(filterObj: Filter, movie: WebMovie) {
     return false;
   }
 
+  if (name === '') return true;
+
   if (name.length !== 0) {
     const { nameEN, nameRU } = movie;
     const filterNames = name.toLowerCase().match(/[a-z0-9а-я]+/gi);
