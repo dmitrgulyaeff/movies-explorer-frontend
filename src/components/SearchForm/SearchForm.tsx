@@ -1,7 +1,7 @@
 import './SearchForm.css';
 import { ReactComponent as Loupe } from '../../images/icons/loupe.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { useState, ChangeEvent, useContext, FormEvent, useEffect, useCallback } from 'react';
+import { useState, ChangeEvent, useContext, useEffect, useCallback } from 'react';
 import {
   ButtonClickContext,
   FilterContext,
@@ -10,7 +10,7 @@ import {
 import classNames from 'classnames';
 
 export default function SearchForm() {
-  const { clickFrom, setClickFrom } = useContext(ButtonClickContext);
+  const { setClickFrom } = useContext(ButtonClickContext);
   const { pathname } = useContext(PathnameContext);
   const { filter, setFilter } = useContext(FilterContext);
   const [showOnlyShortFilms, setShowShortFilms] = useState(
@@ -23,20 +23,20 @@ export default function SearchForm() {
     setNameRU(event.target.value);
   };
 
-  const onSubmit = useCallback(() => {
-    if (nameRu === '') {
+  const onSubmit = useCallback(
+    () => {
+    if (pathname === '/movies' && nameRu === '') {
+      setFilter({ name: '', showOnlyShortFilms});
       setValidForm(false);
     } else {
       // get Data
-      if (!clickFrom) {
-        setClickFrom(pathname);
-      }
+      setClickFrom(pathname);
 
       // filter
       setFilter({ showOnlyShortFilms, name: nameRu });
       if (pathname === '/movies') localStorage.setItem('name', nameRu);
     }
-  }, [clickFrom, nameRu, pathname, setClickFrom, setFilter, showOnlyShortFilms]);
+  }, [nameRu, pathname, setClickFrom, setFilter, showOnlyShortFilms]);
 
   useEffect(() => {
     setValidForm(!!(nameRu || validForm));
@@ -69,6 +69,7 @@ export default function SearchForm() {
       onSubmit()
     }
   }, [filter.showOnlyShortFilms, onSubmit, showOnlyShortFilms])
+
   return (
     <section
       className={classNames('search', {

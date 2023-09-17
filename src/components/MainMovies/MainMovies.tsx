@@ -48,7 +48,7 @@ export default function Movies() {
     // Найдено
     if (movies) {
       const filteredMovies = movies.filter((movie) =>
-        filterMovie(filter, movie)
+        filterMovie(filter, movie, pathname === '/movies')
       );
       if (filteredMovies.length === 0) {
         return <Message>{notFoundMsg}</Message>;
