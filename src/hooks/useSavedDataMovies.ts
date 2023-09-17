@@ -15,7 +15,6 @@ export default async function useSavedMovies() {
     ResponsesMoviesContext
   );
 
-  // TODO: добавить клик
   if (
     ['/saved-movies', '/movies'].includes(clickFrom) &&
     ['/saved-movies', '/movies'].includes(pathname) &&

@@ -46,19 +46,11 @@ export default function App() {
     name: '',
   });
 
-  // TODO:  вернуть после level-2 <
-  // const [filter, setFilter] = useState<Filter>({
-  //   showOnlyShortFilms: localStorage.getItem('showOnlyShortFilms') === 'true',
-  //   name: localStorage.getItem('name') || '',
-  // });
-  // TODO >
-
-  // TODO:  снести после level-2 <
   const [filter, setFilter] = useState<Filter>({
-    showOnlyShortFilms: false,
-    name: 'о',
+    showOnlyShortFilms: localStorage.getItem('showOnlyShortFilms') === 'true',
+    name: localStorage.getItem('name') || '',
   });
-  // TODO >
+
   const [apiMoviesResponses, setApiMoviesResponses] =
     useState<ApiMoviesResponses>({ main: undefined, ya: undefined });
 
