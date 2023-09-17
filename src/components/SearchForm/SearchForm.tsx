@@ -1,7 +1,7 @@
 import './SearchForm.css';
 import { ReactComponent as Loupe } from '../../images/icons/loupe.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { useState, ChangeEvent, useContext, FormEvent, useEffect } from 'react';
+import { useState, ChangeEvent, useContext, FormEvent, useEffect, useCallback } from 'react';
 import {
   ButtonClickContext,
   FilterContext,
@@ -16,16 +16,14 @@ export default function SearchForm() {
   const [showOnlyShortFilms, setShowShortFilms] = useState(
     filter.showOnlyShortFilms
   );
-  const [nameRu, setNameRU] = useState(filter.name || '');
+  const [nameRu, setNameRU] = useState(filter.name);
   const [validForm, setValidForm] = useState(true);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNameRU(event.target.value);
   };
 
-  const onSubmit = (event: FormEvent) => {
-    event.preventDefault();
-
+  const onSubmit = useCallback(() => {
     if (nameRu === '') {
       setValidForm(false);
     } else {
@@ -35,10 +33,10 @@ export default function SearchForm() {
       }
 
       // filter
-      setFilter({ ...filter, name: nameRu });
+      setFilter({ showOnlyShortFilms, name: nameRu });
       if (pathname === '/movies') localStorage.setItem('name', nameRu);
     }
-  };
+  }, [clickFrom, nameRu, pathname, setClickFrom, setFilter, showOnlyShortFilms]);
 
   useEffect(() => {
     setValidForm(!!(nameRu || validForm));
@@ -66,14 +64,24 @@ export default function SearchForm() {
     }
   }, [showOnlyShortFilms, pathname]);
 
-  // TODO: FilterCheckbox исправить
+  useEffect(() => {
+    if (filter.showOnlyShortFilms !== showOnlyShortFilms) {
+      onSubmit()
+    }
+  }, [filter.showOnlyShortFilms, onSubmit, showOnlyShortFilms])
   return (
     <section
       className={classNames('search', {
         search_invalid: !validForm,
       })}
     >
-      <form className="search__form" onSubmit={onSubmit}>
+      <form
+        className="search__form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSubmit();
+        }}
+      >
         <Loupe className="search__loupe-icon" />
         <input
           className={classNames('search__input', {
@@ -100,7 +108,7 @@ export default function SearchForm() {
           search__toggle_invalid: !validForm,
         })}
         enabled={showOnlyShortFilms}
-        toggle={() => setShowShortFilms(!showOnlyShortFilms)}
+        toggle={() => {setShowShortFilms((prev) => !prev)}}
       />
       <p
         className={classNames('search__shortfilms-text', {
