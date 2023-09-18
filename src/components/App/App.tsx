@@ -70,6 +70,7 @@ export default function App() {
       showOnlyShortFilms: false,
       name: '',
     });
+    setApiMoviesResponses({ main: undefined, ya: undefined })
   };
 
   useEffect(() => {
