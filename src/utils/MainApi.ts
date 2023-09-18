@@ -1,4 +1,4 @@
-import { baseUrlMyApi } from './constants';
+import { BASE_URL_MY_API } from './constants';
 import {
   UserRegistration,
   UserAuthorization,
@@ -63,6 +63,6 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi(baseUrlMyApi);
+const mainApi = new MainApi(BASE_URL_MY_API);
 
 export default mainApi;

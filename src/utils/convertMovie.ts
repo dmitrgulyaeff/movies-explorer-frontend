@@ -1,5 +1,5 @@
 import { YaApiMovie, WebMovie } from './types';
-import { baseUrlYaApi } from './constants';
+import { BASE_URL_YA_API } from './constants';
 
 export default function convertMovie(movie: YaApiMovie): WebMovie {
   return {
@@ -11,8 +11,8 @@ export default function convertMovie(movie: YaApiMovie): WebMovie {
     trailerLink: movie.trailerLink,
     nameRU: movie.nameRU,
     nameEN: movie.nameEN,
-    image: baseUrlYaApi + movie.image.url,
-    thumbnail: baseUrlYaApi + movie.image.formats.thumbnail.url,
+    image: BASE_URL_YA_API + movie.image.url,
+    thumbnail: BASE_URL_YA_API + movie.image.formats.thumbnail.url,
     movieId: movie.id,
   };
 }

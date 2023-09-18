@@ -15,7 +15,7 @@ import Preloader from '../Preloader/Preloader';
 import { WebMovie } from '../../utils/types';
 import filterMovie from '../../utils/filterMovie';
 import Message from '../Message/Message';
-import { beforeReqMsg, errServerMsg, notFoundMsg } from '../../utils/constants';
+import { BEFORE_REQ_MSG, ERR_SERVER_MSG, NOT_FOUND_MSG } from '../../utils/constants';
 
 export default function Movies() {
   const { clickFrom } = useContext(ButtonClickContext);
@@ -33,7 +33,7 @@ export default function Movies() {
   ) => {
     // Поиска не было
     if (!clickFrom && responseSuccess === undefined) {
-      return <Message>{beforeReqMsg}</Message>;
+      return <Message>{BEFORE_REQ_MSG}</Message>;
     }
 
     // Загрузка
@@ -42,7 +42,7 @@ export default function Movies() {
     }
     // Ошибка
     if (!responseSuccess) {
-      return <Message>{errServerMsg}</Message>;
+      return <Message>{ERR_SERVER_MSG}</Message>;
     }
 
     // Найдено
@@ -51,7 +51,7 @@ export default function Movies() {
         filterMovie(filter, movie, pathname === '/movies')
       );
       if (filteredMovies.length === 0) {
-        return <Message>{notFoundMsg}</Message>;
+        return <Message>{NOT_FOUND_MSG}</Message>;
       }
       return <MoviesCardList movies={filteredMovies} />;
     }
