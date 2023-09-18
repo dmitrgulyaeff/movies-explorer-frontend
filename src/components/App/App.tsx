@@ -127,7 +127,7 @@ export default function App() {
                           <Route
                             path="/movies"
                             element={
-                              <ProtectedRoute>
+                              <ProtectedRoute AuthRequired={true}>
                                 <Movies />
                               </ProtectedRoute>
                             }
@@ -135,17 +135,31 @@ export default function App() {
                           <Route
                             path="/saved-movies"
                             element={
-                              <ProtectedRoute>
+                              <ProtectedRoute AuthRequired={true}>
                                 <Movies />
                               </ProtectedRoute>
                             }
                           />
-                          <Route path="/signup" element={<Register />} />
-                          <Route path="/signin" element={<Login />} />
+                          <Route
+                            path="/signup"
+                            element={
+                              <ProtectedRoute AuthRequired={false}>
+                                <Register />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/signin"
+                            element={
+                              <ProtectedRoute AuthRequired={false}>
+                                <Login />
+                              </ProtectedRoute>
+                            }
+                          />
                           <Route
                             path="/profile"
                             element={
-                              <ProtectedRoute>
+                              <ProtectedRoute AuthRequired={true}>
                                 <Profile resetStates={resetStates} />
                               </ProtectedRoute>
                             }
