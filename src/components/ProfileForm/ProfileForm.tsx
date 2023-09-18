@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useEffect, useContext } from 'react';
+import { UserUpdate } from '../../utils/types';
 
 interface ProfileFormProps {
   children: JSX.Element[];
-  onSubmit: (formState: object) => void;
+  onSubmit: (formState: UserUpdate) => void;
 }
 
 interface ProfileFormContextType {
@@ -47,7 +48,7 @@ export default function ProfileForm({ children, onSubmit }: ProfileFormProps) {
     setIsActive(false);
     if (isValid) {
       try {
-        await onSubmit(formState);
+        await onSubmit(formState as UserUpdate);
       } catch (err) {
         if (err instanceof Error) {
           setError(String(err.message));

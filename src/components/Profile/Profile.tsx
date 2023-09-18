@@ -20,11 +20,18 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
         <ProfileForm
           onSubmit={async (stateProfileForm) => {
             try {
-              const response = await mainApi.updateUser(
-                stateProfileForm as UserUpdate
-              );
-              const data = await response.json();
-              setCurrentUser(data as User);
+              if (
+                !(
+                  stateProfileForm.email === currentUser.email &&
+                  stateProfileForm.name === currentUser.name
+                )
+              ) {
+                const response = await mainApi.updateUser(
+                  stateProfileForm as UserUpdate
+                );
+                const data = await response.json();
+                setCurrentUser(data as User);
+              }
             } catch (error) {
               throw new Error('Неправильно заполнена форма');
             }
@@ -38,7 +45,7 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
             minLength={2}
             maxLength={30}
             required={true}
-            placeholder='Ваше имя'
+            placeholder="Ваше имя"
           />
           <hr className="profile__form-hr" />
           <ProfileForm.Input
@@ -49,8 +56,11 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
             minLength={4}
             maxLength={30}
             required={true}
-            placeholder='Ваша почта'
-            regexTest={{regex: EMAIL_REGEX, errorMessage: MESSAGE_ERROR_EMAIL}}
+            placeholder="Ваша почта"
+            regexTest={{
+              regex: EMAIL_REGEX,
+              errorMessage: MESSAGE_ERROR_EMAIL,
+            }}
           />
           <ProfileForm.ResponseError />
           <ProfileForm.SubmitBottom text="Сохранить" />
