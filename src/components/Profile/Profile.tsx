@@ -74,7 +74,7 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
         type="button"
         onClick={() => {
           resetStates();
-          navigation('/signin');
+          navigation('/');
         }}
       >
         Выйти из аккаунта
