@@ -6,6 +6,7 @@ import { AuthorizedContext, TokenContext } from '../../Contexts';
 import { UserAuthorization } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+import { EMAIL_REGEX, MESSAGE_ERROR_EMAIL } from '../../utils/constants';
 
 export default function Login() {
   const navigation = useNavigate();
@@ -41,6 +42,7 @@ export default function Login() {
           maxLength={30}
           required={true}
           placeholder='Ваша почта'
+          regexTest={{regex: EMAIL_REGEX, errorMessage: MESSAGE_ERROR_EMAIL}}
         />
         <Form.Input
           stateKey="password"

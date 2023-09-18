@@ -85,6 +85,7 @@ interface ProfileFormInputProps {
   autoComplete?: string;
   defaultState: string;
   placeholder: string;
+  regexTest?: { regex: RegExp; errorMessage: string };
 }
 
 ProfileForm.Input = function ProfileFormInput({
@@ -97,6 +98,7 @@ ProfileForm.Input = function ProfileFormInput({
   autoComplete,
   defaultState,
   placeholder,
+  regexTest
 }: ProfileFormInputProps) {
   const { isActive, setProfileFormState, validState, setValidState } =
     React.useContext(ProfileFormContext);
@@ -120,9 +122,16 @@ ProfileForm.Input = function ProfileFormInput({
     event.preventDefault();
     const input = event.target;
     const value = input.value;
+    let error = input.validationMessage;
+    if (regexTest && !error) {
+      const { regex, errorMessage } = regexTest;
+      if (!regex.test(value)) {
+        error = errorMessage;
+      }
+    }
     setValue(value);
-    setError(input.validationMessage);
-    setValidState({ ...validState, [stateKey]: !input.validationMessage });
+    setError(error);
+    setValidState({ ...validState, [stateKey]: !error });
   };
 
   return (

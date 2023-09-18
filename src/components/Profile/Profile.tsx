@@ -6,6 +6,7 @@ import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
 import { UserUpdate, User } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
+import { EMAIL_REGEX, MESSAGE_ERROR_EMAIL } from '../../utils/constants';
 export default function Profile({ resetStates }: { resetStates: () => void }) {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const navigation = useNavigate();
@@ -49,6 +50,7 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
             maxLength={30}
             required={true}
             placeholder='Ваша почта'
+            regexTest={{regex: EMAIL_REGEX, errorMessage: MESSAGE_ERROR_EMAIL}}
           />
           <ProfileForm.ResponseError />
           <ProfileForm.SubmitBottom text="Сохранить" />

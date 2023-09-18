@@ -44,7 +44,7 @@ export default function Form({ children, onSubmit }: FormProps) {
         await onSubmit(formState);
       } catch (err) {
         if (err instanceof Error) {
-          setError(String(err.message))
+          setError(String(err.message));
         }
       }
     }
@@ -52,7 +52,14 @@ export default function Form({ children, onSubmit }: FormProps) {
 
   return (
     <FormContext.Provider
-      value={{ error, formState, setFormState, validState, setValidState, isValid }}
+      value={{
+        error,
+        formState,
+        setFormState,
+        validState,
+        setValidState,
+        isValid,
+      }}
     >
       <form className="form" onSubmit={handleSubmit}>
         {children}
@@ -68,8 +75,9 @@ interface FormInputProps {
   minLength: number;
   maxLength: number;
   required: boolean;
-  autoComplete? : string;
+  autoComplete?: string;
   placeholder: string;
+  regexTest?: { regex: RegExp; errorMessage: string };
 }
 
 Form.Input = function FormInput({
@@ -81,6 +89,7 @@ Form.Input = function FormInput({
   required,
   autoComplete,
   placeholder,
+  regexTest,
 }: FormInputProps) {
   const { formState, setFormState, validState, setValidState } =
     React.useContext(FormContext);
@@ -98,9 +107,16 @@ Form.Input = function FormInput({
     event.preventDefault();
     const input = event.target;
     const value = input.value;
-    setError(input.validationMessage);
+    let error = input.validationMessage;
+    if (regexTest && !error) {
+      const { regex, errorMessage } = regexTest;
+      if (!regex.test(value)) {
+        error = errorMessage;
+      }
+    }
+    setError(error);
     setFormState({ ...formState, [stateKey]: value });
-    setValidState({ ...validState, [stateKey]: !input.validationMessage });
+    setValidState({ ...validState, [stateKey]: !error });
   };
 
   return (
@@ -135,9 +151,9 @@ Form.SubmitBottom = function SubmitBottom({ text }: FormSubmitBottomProps) {
     </button>
   );
 };
-Form.ResponseError  = function ResponseError() {
+Form.ResponseError = function ResponseError() {
   const { error } = useContext(FormContext);
-    return (<p className="form__response-error">{error}</p> )
+  return <p className="form__response-error">{error}</p>;
 };
 
 interface RedirectOfferProps {
@@ -146,11 +162,22 @@ interface RedirectOfferProps {
   linkTo: string;
 }
 
-Form.RedirectOffer  = function RedirectOffer({ offerText, linkText, linkTo }: RedirectOfferProps) {
+Form.RedirectOffer = function RedirectOffer({
+  offerText,
+  linkText,
+  linkTo,
+}: RedirectOfferProps) {
   return (
     <div className="form__redirect-offers">
-      <p className='form__redirect-offer form__redirect-offer_el_question'>{offerText}</p>
-      <Link className='form__redirect-offer form__redirect-offer_el_link' to={linkTo}>{linkText}</Link>
+      <p className="form__redirect-offer form__redirect-offer_el_question">
+        {offerText}
+      </p>
+      <Link
+        className="form__redirect-offer form__redirect-offer_el_link"
+        to={linkTo}
+      >
+        {linkText}
+      </Link>
     </div>
   );
 };
