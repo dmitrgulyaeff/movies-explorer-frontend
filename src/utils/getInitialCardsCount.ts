@@ -1,6 +1,14 @@
-export  const getInitialCardsCount = (width: number) => {
-  if (width < 500) return 5;
-  if (width < 900) return 2 * 4;
-  if (width < 1100) return 3 * 4;
-  return 4 * 4;
+import {
+  INITIAL_CARDS_COUNT_EXTRA_LARGE_SCREEN,
+  INITIAL_CARDS_COUNT_LARGE_SCREEN,
+  INITIAL_CARDS_COUNT_MEDIUM_SCREEN,
+  INITIAL_CARDS_COUNT_SMALL_SCREEN,
+} from './constants';
+
+export const getInitialCardsCount = (width: number) => {
+  if (width < 500) return INITIAL_CARDS_COUNT_SMALL_SCREEN;
+  if (width < 900) return INITIAL_CARDS_COUNT_MEDIUM_SCREEN;
+  if (width < 1100) return INITIAL_CARDS_COUNT_LARGE_SCREEN;
+  return INITIAL_CARDS_COUNT_EXTRA_LARGE_SCREEN;
 };
+
