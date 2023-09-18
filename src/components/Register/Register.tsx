@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthorizedContext, TokenContext } from '../../Contexts';
 import { EMAIL_REGEX, MESSAGE_ERROR_EMAIL } from '../../utils/constants';
+import launchConfetti from '../../utils/launchConfetti';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function Register() {
             setAuthorized(true);
             setTimeout(() => {
               navigate('/movies');
+              launchConfetti()
             }, 0);
           } catch (error) {
             throw new Error('Ошибка авторизации');
