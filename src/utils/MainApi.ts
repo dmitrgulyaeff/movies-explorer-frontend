@@ -1,4 +1,4 @@
-import { baseUrlMyApi } from './constants';
+import { BASE_URL_MY_API, TOKEN_STORAGE_KEY } from './constants';
 import {
   UserRegistration,
   UserAuthorization,
@@ -16,7 +16,7 @@ class MainApi {
   private async sendRequest(url: string, method: string, body?: object) {
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Authorization: `Bearer ${localStorage.getItem(TOKEN_STORAGE_KEY)}`,
     };
 
     const options: RequestInit = {
@@ -63,6 +63,6 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi(baseUrlMyApi);
+const mainApi = new MainApi(BASE_URL_MY_API);
 
 export default mainApi;

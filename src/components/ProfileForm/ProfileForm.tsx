@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useEffect, useContext } from 'react';
+import { UserUpdate } from '../../utils/types';
 
 interface ProfileFormProps {
   children: JSX.Element[];
-  onSubmit: (formState: object) => void;
+  onSubmit: (formState: UserUpdate) => void;
 }
 
 interface ProfileFormContextType {
@@ -47,7 +48,7 @@ export default function ProfileForm({ children, onSubmit }: ProfileFormProps) {
     setIsActive(false);
     if (isValid) {
       try {
-        await onSubmit(formState);
+        await onSubmit(formState as UserUpdate);
       } catch (err) {
         if (err instanceof Error) {
           setError(String(err.message));
@@ -85,6 +86,7 @@ interface ProfileFormInputProps {
   autoComplete?: string;
   defaultState: string;
   placeholder: string;
+  regexTest?: { regex: RegExp; errorMessage: string };
 }
 
 ProfileForm.Input = function ProfileFormInput({
@@ -97,6 +99,7 @@ ProfileForm.Input = function ProfileFormInput({
   autoComplete,
   defaultState,
   placeholder,
+  regexTest
 }: ProfileFormInputProps) {
   const { isActive, setProfileFormState, validState, setValidState } =
     React.useContext(ProfileFormContext);
@@ -120,9 +123,16 @@ ProfileForm.Input = function ProfileFormInput({
     event.preventDefault();
     const input = event.target;
     const value = input.value;
+    let error = input.validationMessage;
+    if (regexTest && !error) {
+      const { regex, errorMessage } = regexTest;
+      if (!regex.test(value)) {
+        error = errorMessage;
+      }
+    }
     setValue(value);
-    setError(input.validationMessage);
-    setValidState({ ...validState, [stateKey]: !input.validationMessage });
+    setError(error);
+    setValidState({ ...validState, [stateKey]: !error });
   };
 
   return (

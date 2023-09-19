@@ -1,6 +1,13 @@
+import {
+  CARDS_COUNT_TO_ADD_SMALL_SCREEN,
+  CARDS_COUNT_TO_ADD_MEDIUM_SCREEN,
+  CARDS_COUNT_TO_ADD_LARGE_SCREEN,
+  CARDS_COUNT_TO_ADD_EXTRA_LARGE_SCREEN,
+} from './constants';
+
 export const getCardsCountForMore = (width: number) => {
-  if (width < 500) return 2;
-  if (width < 900) return 2;
-  if (width < 1100) return 3;
-  return 4;
+  if (width < 500) return CARDS_COUNT_TO_ADD_SMALL_SCREEN;
+  if (width < 900) return CARDS_COUNT_TO_ADD_MEDIUM_SCREEN;
+  if (width < 1100) return CARDS_COUNT_TO_ADD_LARGE_SCREEN;
+  return CARDS_COUNT_TO_ADD_EXTRA_LARGE_SCREEN;
 };

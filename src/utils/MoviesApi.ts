@@ -1,4 +1,4 @@
-import { baseUrlYaApi } from './constants';
+import { BASE_URL_YA_API } from './constants';
 
 class MoviesApi {
   private baseUrl: string;
@@ -16,5 +16,5 @@ class MoviesApi {
   }
 }
 
-const moviesApi = new MoviesApi(baseUrlYaApi);
+const moviesApi = new MoviesApi(BASE_URL_YA_API);
 export default moviesApi;

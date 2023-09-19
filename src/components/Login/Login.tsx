@@ -6,6 +6,8 @@ import { AuthorizedContext, TokenContext } from '../../Contexts';
 import { UserAuthorization } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+import { EMAIL_REGEX, MESSAGE_ERROR_EMAIL } from '../../utils/constants';
+import launchConfetti from '../../utils/launchConfetti';
 
 export default function Login() {
   const navigation = useNavigate();
@@ -26,6 +28,7 @@ export default function Login() {
             setAuthorized(true);
             setTimeout(() => {
               navigation('/movies');
+              launchConfetti()
             }, 0);
           } catch (error) {
             throw new Error('Неправильно заполнена форма');
@@ -41,6 +44,7 @@ export default function Login() {
           maxLength={30}
           required={true}
           placeholder='Ваша почта'
+          regexTest={{regex: EMAIL_REGEX, errorMessage: MESSAGE_ERROR_EMAIL}}
         />
         <Form.Input
           stateKey="password"

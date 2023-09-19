@@ -1,12 +1,16 @@
+import { MAX_SHORT_FILM_DURATION } from './constants';
 import getSimilarity from './getSimilarity';
 import { Filter, WebMovie } from './types';
 
-export default function filterMovie(filterObj: Filter, movie: WebMovie) {
+export default function filterMovie(filterObj: Filter, movie: WebMovie, isStrict: boolean) {
   const { showOnlyShortFilms, name } = filterObj;
 
-  if (showOnlyShortFilms && movie.duration >= 40) {
+  if (showOnlyShortFilms && movie.duration >= MAX_SHORT_FILM_DURATION) {
     return false;
   }
+
+  if (name === '' && !isStrict) return true;
+  if (name === '' && isStrict) return false;
 
   if (name.length !== 0) {
     const { nameEN, nameRU } = movie;

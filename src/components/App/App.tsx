@@ -31,12 +31,17 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import {
+  ONLY_SHORT_FILMS_STORAGE_KEY,
+  SEARCH_FILM_STORAGE_KEY,
+  TOKEN_STORAGE_KEY,
+} from '../../utils/constants';
 
 export default function App() {
   const { pathname, hash } = useLocation();
 
   const [isPopupOpened, setPopupOpened] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(localStorage.getItem(TOKEN_STORAGE_KEY));
   const [isAuthorized, setAuthorized] = useState<boolean | undefined>();
   const [yaMovies, setYaMovies] = useState<WebMovie[]>();
   const [savedMovies, setSavedMovies] = useState<BdMovie[]>();
@@ -46,28 +51,19 @@ export default function App() {
     name: '',
   });
 
-  // TODO:  вернуть после level-2 <
-  // const [filter, setFilter] = useState<Filter>({
-  //   showOnlyShortFilms: localStorage.getItem('showOnlyShortFilms') === 'true',
-  //   name: localStorage.getItem('name') || '',
-  // });
-  // TODO >
-
-  // TODO:  снести после level-2 <
   const [filter, setFilter] = useState<Filter>({
-    showOnlyShortFilms: false,
-    name: 'о',
+    showOnlyShortFilms:
+      localStorage.getItem(ONLY_SHORT_FILMS_STORAGE_KEY) === 'true',
+    name: localStorage.getItem(SEARCH_FILM_STORAGE_KEY) || '',
   });
-  // TODO >
+
   const [apiMoviesResponses, setApiMoviesResponses] =
     useState<ApiMoviesResponses>({ main: undefined, ya: undefined });
 
   const [clickFrom, setClickFrom] = useState<string>('');
 
   const resetStates = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('showOnlyShortFilms');
-    localStorage.removeItem('name');
+    localStorage.clear();
     setPopupOpened(false);
     setToken(null);
     setAuthorized(false);
@@ -78,6 +74,7 @@ export default function App() {
       showOnlyShortFilms: false,
       name: '',
     });
+    setApiMoviesResponses({ main: undefined, ya: undefined });
   };
 
   useEffect(() => {
@@ -92,7 +89,7 @@ export default function App() {
       }
     };
     if (token) {
-      localStorage.setItem('token', token);
+      localStorage.setItem(TOKEN_STORAGE_KEY, token);
       setTimeout(() => {
         checkAuthorization();
       }, 0);
@@ -100,14 +97,6 @@ export default function App() {
       setAuthorized(false);
     }
   }, [token]);
-
-  useEffect(() => {
-    localStorage.setItem('name', filter['name']);
-    localStorage.setItem(
-      'showOnlyShortFilms',
-      filter['showOnlyShortFilms'].toString()
-    );
-  }, [filter]);
 
   return (
     <TokenContext.Provider value={{ setToken }}>
@@ -136,7 +125,7 @@ export default function App() {
                           <Route
                             path="/movies"
                             element={
-                              <ProtectedRoute>
+                              <ProtectedRoute AuthRequired={true}>
                                 <Movies />
                               </ProtectedRoute>
                             }
@@ -144,17 +133,31 @@ export default function App() {
                           <Route
                             path="/saved-movies"
                             element={
-                              <ProtectedRoute>
+                              <ProtectedRoute AuthRequired={true}>
                                 <Movies />
                               </ProtectedRoute>
                             }
                           />
-                          <Route path="/signup" element={<Register />} />
-                          <Route path="/signin" element={<Login />} />
+                          <Route
+                            path="/signup"
+                            element={
+                              <ProtectedRoute AuthRequired={false}>
+                                <Register />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/signin"
+                            element={
+                              <ProtectedRoute AuthRequired={false}>
+                                <Login />
+                              </ProtectedRoute>
+                            }
+                          />
                           <Route
                             path="/profile"
                             element={
-                              <ProtectedRoute>
+                              <ProtectedRoute AuthRequired={true}>
                                 <Profile resetStates={resetStates} />
                               </ProtectedRoute>
                             }

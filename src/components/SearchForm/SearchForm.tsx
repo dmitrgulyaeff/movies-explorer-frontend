@@ -1,69 +1,75 @@
 import './SearchForm.css';
 import { ReactComponent as Loupe } from '../../images/icons/loupe.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { useState, ChangeEvent, useContext, FormEvent, useEffect } from 'react';
+import { useState, ChangeEvent, useContext, useEffect, useCallback } from 'react';
 import {
   ButtonClickContext,
   FilterContext,
   PathnameContext,
 } from '../../Contexts';
 import classNames from 'classnames';
+import { ONLY_SHORT_FILMS_STORAGE_KEY, SEARCH_FILM_STORAGE_KEY } from '../../utils/constants';
 
 export default function SearchForm() {
-  const { clickFrom, setClickFrom } = useContext(ButtonClickContext);
+  const { setClickFrom } = useContext(ButtonClickContext);
   const { pathname } = useContext(PathnameContext);
   const { filter, setFilter } = useContext(FilterContext);
   const [showOnlyShortFilms, setShowShortFilms] = useState(
     filter.showOnlyShortFilms
   );
-  const [name, setNameRU] = useState(filter.name || '');
+  const [nameRu, setNameRU] = useState(filter.name);
   const [validForm, setValidForm] = useState(true);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNameRU(event.target.value);
   };
 
-  // TODO:  снести после level-2 <
-  useEffect(() => {
-    if (name === 'о') {
-      if (!clickFrom) {
-        setClickFrom('/movies');
-      }
-    }
-  }, [clickFrom, name, setClickFrom]);
-  // TODO >
-
-  const onSubmit = (event: FormEvent) => {
-    event.preventDefault();
-
-    if (name === '') {
+  const onSubmit = useCallback(
+    () => {
+    if (pathname === '/movies' && nameRu === '') {
+      setFilter({ name: '', showOnlyShortFilms});
       setValidForm(false);
     } else {
       // get Data
-      if (!clickFrom) {
-        setClickFrom(pathname);
-      }
+      setClickFrom(pathname);
 
       // filter
-      if (name.length !== 0) {
-        setFilter({ ...filter, name });
-      } else {
-        setFilter({ ...filter, name: '' });
-      }
+      setFilter({ showOnlyShortFilms, name: nameRu });
+      if (pathname === '/movies') localStorage.setItem(SEARCH_FILM_STORAGE_KEY, nameRu);
     }
-  };
+  }, [nameRu, pathname, setClickFrom, setFilter, showOnlyShortFilms]);
+
   useEffect(() => {
-    if (name || validForm) {
+    setValidForm(!!(nameRu || validForm));
+  }, [nameRu, validForm]);
+
+  useEffect(() => {
+    if (pathname === '/movies') {
+      const name = localStorage.getItem(SEARCH_FILM_STORAGE_KEY) || '';
+      const showOnlyShortFilms =
+        localStorage.getItem(ONLY_SHORT_FILMS_STORAGE_KEY) === 'true';
+      setShowShortFilms(showOnlyShortFilms);
+      setNameRU(name);
+      setFilter({ showOnlyShortFilms, name });
+    } else if (pathname === '/saved-movies') {
       setValidForm(true);
-    } else {
-      setValidForm(false);
+      setShowShortFilms(false);
+      setNameRU('');
+      setFilter({ showOnlyShortFilms: false, name: '' });
     }
-  }, [name, validForm]);
+  }, [pathname, setFilter]);
+
+  useEffect(() => {
+    if (pathname === '/movies') {
+      localStorage.setItem(ONLY_SHORT_FILMS_STORAGE_KEY, String(showOnlyShortFilms));
+    }
+  }, [showOnlyShortFilms, pathname]);
+
   useEffect(() => {
     if (filter.showOnlyShortFilms !== showOnlyShortFilms) {
-      setFilter({ ...filter, showOnlyShortFilms: showOnlyShortFilms });
+      onSubmit()
     }
-  }, [filter, setFilter, showOnlyShortFilms]);
+  }, [filter.showOnlyShortFilms, onSubmit, showOnlyShortFilms])
 
   return (
     <section
@@ -71,7 +77,13 @@ export default function SearchForm() {
         search_invalid: !validForm,
       })}
     >
-      <form className="search__form" onSubmit={onSubmit}>
+      <form
+        className="search__form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSubmit();
+        }}
+      >
         <Loupe className="search__loupe-icon" />
         <input
           className={classNames('search__input', {
@@ -79,7 +91,7 @@ export default function SearchForm() {
           })}
           type="text"
           placeholder={validForm ? 'Фильм' : 'Нужно ввести ключевое слово'}
-          value={name}
+          value={nameRu}
           onChange={handleInputChange}
         ></input>
         <button
@@ -98,7 +110,7 @@ export default function SearchForm() {
           search__toggle_invalid: !validForm,
         })}
         enabled={showOnlyShortFilms}
-        toggle={() => setShowShortFilms(!showOnlyShortFilms)}
+        toggle={() => {setShowShortFilms((prev) => !prev)}}
       />
       <p
         className={classNames('search__shortfilms-text', {
