@@ -31,12 +31,17 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import {
+  ONLY_SHORT_FILMS_STORAGE_KEY,
+  SEARCH_FILM_STORAGE_KEY,
+  TOKEN_STORAGE_KEY,
+} from '../../utils/constants';
 
 export default function App() {
   const { pathname, hash } = useLocation();
 
   const [isPopupOpened, setPopupOpened] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(localStorage.getItem(TOKEN_STORAGE_KEY));
   const [isAuthorized, setAuthorized] = useState<boolean | undefined>();
   const [yaMovies, setYaMovies] = useState<WebMovie[]>();
   const [savedMovies, setSavedMovies] = useState<BdMovie[]>();
@@ -47,8 +52,9 @@ export default function App() {
   });
 
   const [filter, setFilter] = useState<Filter>({
-    showOnlyShortFilms: localStorage.getItem('showOnlyShortFilms') === 'true',
-    name: localStorage.getItem('name') || '',
+    showOnlyShortFilms:
+      localStorage.getItem(ONLY_SHORT_FILMS_STORAGE_KEY) === 'true',
+    name: localStorage.getItem(SEARCH_FILM_STORAGE_KEY) || '',
   });
 
   const [apiMoviesResponses, setApiMoviesResponses] =
@@ -57,9 +63,7 @@ export default function App() {
   const [clickFrom, setClickFrom] = useState<string>('');
 
   const resetStates = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('showOnlyShortFilms');
-    localStorage.removeItem('name');
+    localStorage.clear();
     setPopupOpened(false);
     setToken(null);
     setAuthorized(false);
@@ -70,7 +74,7 @@ export default function App() {
       showOnlyShortFilms: false,
       name: '',
     });
-    setApiMoviesResponses({ main: undefined, ya: undefined })
+    setApiMoviesResponses({ main: undefined, ya: undefined });
   };
 
   useEffect(() => {
@@ -85,7 +89,7 @@ export default function App() {
       }
     };
     if (token) {
-      localStorage.setItem('token', token);
+      localStorage.setItem(TOKEN_STORAGE_KEY, token);
       setTimeout(() => {
         checkAuthorization();
       }, 0);
@@ -93,13 +97,6 @@ export default function App() {
       setAuthorized(false);
     }
   }, [token]);
-
-  // получить сохр. фильмы при переходе на страницу сохр.-фильмы
-  useEffect(() => {
-    if (pathname === '/saved-movies') {
-      if (!savedMovies) setClickFrom(pathname);
-    }
-  }, [pathname, savedMovies]);
 
   return (
     <TokenContext.Provider value={{ setToken }}>

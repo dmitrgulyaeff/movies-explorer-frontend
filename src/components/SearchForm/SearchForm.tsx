@@ -8,6 +8,7 @@ import {
   PathnameContext,
 } from '../../Contexts';
 import classNames from 'classnames';
+import { ONLY_SHORT_FILMS_STORAGE_KEY, SEARCH_FILM_STORAGE_KEY } from '../../utils/constants';
 
 export default function SearchForm() {
   const { setClickFrom } = useContext(ButtonClickContext);
@@ -34,7 +35,7 @@ export default function SearchForm() {
 
       // filter
       setFilter({ showOnlyShortFilms, name: nameRu });
-      if (pathname === '/movies') localStorage.setItem('name', nameRu);
+      if (pathname === '/movies') localStorage.setItem(SEARCH_FILM_STORAGE_KEY, nameRu);
     }
   }, [nameRu, pathname, setClickFrom, setFilter, showOnlyShortFilms]);
 
@@ -44,9 +45,9 @@ export default function SearchForm() {
 
   useEffect(() => {
     if (pathname === '/movies') {
-      const name = localStorage.getItem('name') || '';
+      const name = localStorage.getItem(SEARCH_FILM_STORAGE_KEY) || '';
       const showOnlyShortFilms =
-        localStorage.getItem('showOnlyShortFilms') === 'true';
+        localStorage.getItem(ONLY_SHORT_FILMS_STORAGE_KEY) === 'true';
       setShowShortFilms(showOnlyShortFilms);
       setNameRU(name);
       setFilter({ showOnlyShortFilms, name });
@@ -60,7 +61,7 @@ export default function SearchForm() {
 
   useEffect(() => {
     if (pathname === '/movies') {
-      localStorage.setItem('showOnlyShortFilms', String(showOnlyShortFilms));
+      localStorage.setItem(ONLY_SHORT_FILMS_STORAGE_KEY, String(showOnlyShortFilms));
     }
   }, [showOnlyShortFilms, pathname]);
 

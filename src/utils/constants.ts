@@ -23,3 +23,8 @@ export const CARDS_COUNT_TO_ADD_LARGE_SCREEN = 3;
 export const CARDS_COUNT_TO_ADD_EXTRA_LARGE_SCREEN = 4;
 
 export const MAX_SHORT_FILM_DURATION = 40;
+
+export const TOKEN_STORAGE_KEY = 'token'
+export const ONLY_SHORT_FILMS_STORAGE_KEY = 'showOnlyShortFilms'
+export const SEARCH_FILM_STORAGE_KEY = 'name'
+export const SAVED_YA_FILMS_STORAGE_KEY = 'movies'
