@@ -7,6 +7,8 @@ import mainApi from '../../utils/MainApi';
 import { UserUpdate, User } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { EMAIL_REGEX, MESSAGE_ERROR_EMAIL } from '../../utils/constants';
+import launchConfetti from '../../utils/launchConfetti';
+
 export default function Profile({ resetStates }: { resetStates: () => void }) {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const navigation = useNavigate();
@@ -31,6 +33,7 @@ export default function Profile({ resetStates }: { resetStates: () => void }) {
                 );
                 const data = await response.json();
                 setCurrentUser(data as User);
+                launchConfetti();
               }
             } catch (error) {
               throw new Error('Неправильно заполнена форма');
